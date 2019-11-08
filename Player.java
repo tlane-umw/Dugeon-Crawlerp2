@@ -1,6 +1,6 @@
 import java.util.Scanner;
 import java.util.Hashtable;
-class Player{
+class Player extends Creature{
 	//instance variables
 	Scanner s = new Scanner(System.in);
 	String answer;
@@ -12,21 +12,10 @@ class Player{
 
 	//default constructor
 	public Player(String name, int health){
-		this.name = name;
-		this.health = health;
-	}
-	//standard get and set methods
-	public String getName(){
-		return name;
+		super(name, health);
 	}
 	public Inventory getInventory(){
 		return userInventory;
-	}
-	public int getHealth(){
-		return health;
-	}
-	public void setHealth(int newHealth){
-		this.health = newHealth;
 	}
 
 	//method asking the user if they want to pick up the item they stepped on

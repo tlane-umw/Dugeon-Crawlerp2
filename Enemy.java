@@ -1,5 +1,5 @@
 //This class sets up the enemy object in order for use in the Dungeon class.
-public class Enemy{
+public class Enemy extends Creature{
 	private String name;
 	private int health;
 	private int damage;
@@ -7,17 +7,12 @@ public class Enemy{
 	private Item drop;
 
 	Enemy(EnemyType type, String name, int health, int damage, Item drop){
+		super(name, health);
 		this.type = type;
-		this.name = name;
-		this.health = health;
 		this.damage = damage;
 		this.drop = drop;
 	}
 
-	//This returns the name of the enemy.
-	public String getName(){
-		return name;
-	}
 	//This returns the type of enemy.
 	public EnemyType getType(){
 		return type;
@@ -28,15 +23,8 @@ public class Enemy{
 	public Item getDrop(){
 		return drop;
 	}
-	//standard getter and setters
-	public int getHealth(){
-		return this.health;
-	}
 	public int getDamage(){
 		return this.damage;
-	}
-	public void setHealth(int newHealth){
-		this.health = newHealth;
 	}
 
 }
