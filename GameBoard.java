@@ -92,6 +92,9 @@ public class GameBoard{
 			this.gameBoard = gameBoard2;
 		}
 	}
+	public char[][] getGameBoard(){
+		return this.gameBoard;
+	}
 
 
 }

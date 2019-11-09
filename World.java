@@ -15,6 +15,13 @@ public class World{
 
 		GameBoard gameBoard2 = new GameBoard(2);
 		world.add(gameBoard2);
+	
+	}
+	public char[][] getCurrentBoard(int num){
+		if (num == 1){
+			return world.get(1).getGameBoard();
+		}
+		return world.get(0).getGameBoard();
 	}
 
 }

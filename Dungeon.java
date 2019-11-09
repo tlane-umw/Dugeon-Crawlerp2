@@ -13,7 +13,8 @@ class Dungeon{
 	int enemyRow;
 	int enemyColumn2;
 	int enemyRow2;
-	char[][] dungeonGameBoard;
+	private static int currentBoard = 1;
+	private World world;
 	private boolean alreadyExecuted = false;
 	private boolean alreadyExecuted2 = false;
 	private boolean onItem = false;
@@ -30,10 +31,10 @@ class Dungeon{
 	Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
 
 	//constructor with a 2D char array and a new player 
-	Dungeon(char[][] gameBoard, Player dungeonPlayer, char playerSymbol){
-		this.dungeonGameBoard = gameBoard;
+	Dungeon(Player dungeonPlayer, char playerSymbol){
 		this.dungeonPlayer = dungeonPlayer;
 		this.playerSymbol = playerSymbol;
+		world = new World();
 		playerColumn = 8;
 		playerRow = 1;
 		enemyColumn = 2;
@@ -51,22 +52,23 @@ class Dungeon{
 			for(int i = 0; i < number; i++){
 				value.add(random.nextInt(17) + 2);				
 				value2.add(random.nextInt(17) + 2);
-				if(this.dungeonGameBoard[value.get(i)][value2.get(i)] == ' '){
-					this.dungeonGameBoard[value.get(i)][value2.get(i)] = 'I';
+				if(world.getCurrentBoard(currentBoard)[value.get(i)][value2.get(i)] == ' ');
+					world.getCurrentBoard(currentBoard)[value.get(i)][value2.get(i)] = 'I';
 					placement = new Integer[]{value.get(i), value2.get(i)};
 					location.put(count, placement);
 					count++;
-				}
+				
 			}
 			alreadyExecuted = true;
-			return location;		
+			return location;	
 		}
+		
 		for (int i = 0; i < 20; i++){
 			for (int j = 0; j < 20; j++){
-				if (this.dungeonGameBoard[i][j] == ' '){
+				if (world.getCurrentBoard(currentBoard)[i][j] == ' '){
 					System.out.print('*');
 				} else {
-					System.out.print(this.dungeonGameBoard[i][j]);
+					System.out.print(world.getCurrentBoard(currentBoard)[i][j]);
 				}
 			}
 			System.out.println();
@@ -81,34 +83,34 @@ class Dungeon{
 		int number2 = random.nextInt(4);
 		boolean validMove = false;
 		boolean validMove2 = false;
-		if (((doesEnemyMove % 2) == 0) && (dungeonGameBoard[enemyRow][enemyColumn] == 'E')) {
+		if (((doesEnemyMove % 2) == 0) && (world.getCurrentBoard(currentBoard)[enemyRow][enemyColumn] == 'E')) {
 			while(validMove == false) {
 				int number = random.nextInt(4);
-				if((number == 0) && (dungeonGameBoard[(enemyRow - 1)][enemyColumn] == ' ')){
-					dungeonGameBoard[enemyRow][enemyColumn] = ' ';
+				if((number == 0) && (world.getCurrentBoard(currentBoard)[enemyRow - 1][enemyColumn] == ' ')){
+					world.getCurrentBoard(currentBoard)[enemyRow][enemyColumn] = ' ';
 					enemyRow--;
-					dungeonGameBoard[enemyRow][enemyColumn] = 'E';
+					world.getCurrentBoard(currentBoard)[enemyRow][enemyColumn] = 'E';
 					//System.out.println("Enemy Row = " + enemyRow);
 					//System.out.println("Enemy column = " + enemyColumn);
 					validMove = true;
-				} else if ((number == 1) && (dungeonGameBoard[enemyRow][(enemyColumn - 1)] == ' ')) {
-					dungeonGameBoard[enemyRow][enemyColumn] = ' ';
+				} else if ((number == 1) && (world.getCurrentBoard(currentBoard)[enemyRow][(enemyColumn - 1)] == ' ')) {
+					world.getCurrentBoard(currentBoard)[enemyRow][enemyColumn] = ' ';
 					enemyColumn--;
-					dungeonGameBoard[enemyRow][enemyColumn] = 'E';
+					world.getCurrentBoard(currentBoard)[enemyRow][enemyColumn] = 'E';
 					//System.out.println("Enemy Row = " + enemyRow);
 					//System.out.println("Enemy column = " + enemyColumn);
 					validMove = true;
-				} else if ((number == 2) && (dungeonGameBoard[(enemyRow + 1)][enemyColumn] == ' ')) {
-					dungeonGameBoard[enemyRow][enemyColumn] = ' ';
+				} else if ((number == 2) && (world.getCurrentBoard(currentBoard)[(enemyRow + 1)][enemyColumn] == ' ')) {
+					world.getCurrentBoard(currentBoard)[enemyRow][enemyColumn] = ' ';
 					enemyRow++;
-					dungeonGameBoard[enemyRow][enemyColumn] = 'E';
+					world.getCurrentBoard(currentBoard)[enemyRow][enemyColumn] = 'E';
 					//System.out.println("Enemy Row = " + enemyRow);
 					//System.out.println("Enemy column = " + enemyColumn);
 					validMove = true;
-				} else if ((number == 3) && (dungeonGameBoard[enemyRow][(enemyColumn + 1)] == ' ')) {
-					dungeonGameBoard[enemyRow][enemyColumn] = ' ';
+				} else if ((number == 3) && (world.getCurrentBoard(currentBoard)[enemyRow][(enemyColumn + 1)] == ' ')) {
+					world.getCurrentBoard(currentBoard)[enemyRow][enemyColumn] = ' ';
 					enemyColumn++;
-					dungeonGameBoard[enemyRow][enemyColumn] = 'E';
+					world.getCurrentBoard(currentBoard)[enemyRow][enemyColumn] = 'E';
 					//System.out.println("Enemy Row = " + enemyRow);
 					//System.out.println("Enemy column = " + enemyColumn);
 					validMove = true;
@@ -121,34 +123,34 @@ class Dungeon{
 			}
 
 		}
-		if (((doesEnemyMove % 2) == 0) && (dungeonGameBoard[enemyRow2][enemyColumn2] == 'E')){
+		if (((doesEnemyMove % 2) == 0) && (world.getCurrentBoard(currentBoard)[enemyRow2][enemyColumn2] == 'E')){
 			while(validMove2 == false) {
 				number2 = random.nextInt(4);
-				if((number2 == 0) && (dungeonGameBoard[(enemyRow2 - 1)][enemyColumn2] == ' ')){
-					dungeonGameBoard[enemyRow2][enemyColumn2] = ' ';
+				if((number2 == 0) && (world.getCurrentBoard(currentBoard)[(enemyRow2 - 1)][enemyColumn2] == ' ')){
+					world.getCurrentBoard(currentBoard)[enemyRow2][enemyColumn2] = ' ';
 					enemyRow2--;
-					dungeonGameBoard[enemyRow2][enemyColumn2] = 'E';
+					world.getCurrentBoard(currentBoard)[enemyRow2][enemyColumn2] = 'E';
 					//System.out.println("Enemy Row = " + enemyRow2);
 					//System.out.println("Enemy column = " + enemyColumn2);
 					validMove2 = true;
-				} else if ((number2 == 1) && (dungeonGameBoard[enemyRow2][(enemyColumn2 - 1)] == ' ')) {
-					dungeonGameBoard[enemyRow2][enemyColumn2] = ' ';
+				} else if ((number2 == 1) && (world.getCurrentBoard(currentBoard)[enemyRow2][(enemyColumn2 - 1)] == ' ')) {
+					world.getCurrentBoard(currentBoard)[enemyRow2][enemyColumn2] = ' ';
 					enemyColumn2--;
-					dungeonGameBoard[enemyRow2][enemyColumn2] = 'E';
+					world.getCurrentBoard(currentBoard)[enemyRow2][enemyColumn2] = 'E';
 					//System.out.println("Enemy Row = " + enemyRow2);
 					//System.out.println("Enemy column = " + enemyColumn2);
 					validMove2 = true;
-				} else if ((number2 == 2) && (dungeonGameBoard[(enemyRow2 + 1)][enemyColumn2] == ' ')) {
-					dungeonGameBoard[enemyRow2][enemyColumn2] = ' ';
+				} else if ((number2 == 2) && (world.getCurrentBoard(currentBoard)[(enemyRow2 + 1)][enemyColumn2] == ' ')) {
+					world.getCurrentBoard(currentBoard)[enemyRow2][enemyColumn2] = ' ';
 					enemyRow2++;
-					dungeonGameBoard[enemyRow2][enemyColumn2] = 'E';
+					world.getCurrentBoard(currentBoard)[enemyRow2][enemyColumn2] = 'E';
 					//System.out.println("Enemy Row = " + enemyRow2);
 					//System.out.println("Enemy column = " + enemyColumn2);
 					validMove2 = true;
-				} else if ((number2 == 3) && (dungeonGameBoard[enemyRow2][(enemyColumn2 + 1)] == ' ')) {
-					dungeonGameBoard[enemyRow2][enemyColumn2] = ' ';
+				} else if ((number2 == 3) && (world.getCurrentBoard(currentBoard)[enemyRow2][(enemyColumn2 + 1)] == ' ')) {
+					world.getCurrentBoard(currentBoard)[enemyRow2][enemyColumn2] = ' ';
 					enemyColumn2++;
-					dungeonGameBoard[enemyRow2][enemyColumn2] = 'E';
+					world.getCurrentBoard(currentBoard)[enemyRow2][enemyColumn2] = 'E';
 					//System.out.println("Enemy Row = " + enemyRow2);
 					//System.out.println("Enemy column = " + enemyColumn2);
 					validMove2 = true;
@@ -175,21 +177,21 @@ class Dungeon{
 			}
 
 			//seeing if the user landed on an item
-			else if (dungeonGameBoard[playerRow - 1][playerColumn] == 'I') {
-				dungeonGameBoard[playerRow][playerColumn] = ' ';
+			else if (world.getCurrentBoard(currentBoard)[playerRow - 1][playerColumn] == 'I') {
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerRow--;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 				itemExistence = true;
 				onItem = true;
 			}
 			//seeing if the user landed on an enemy
-			else if (dungeonGameBoard[playerRow - 1][playerColumn] == 'E') {
+			else if (world.getCurrentBoard(currentBoard)[playerRow - 1][playerColumn] == 'E') {
 				boolean didPlayerWin = false;
 				didPlayerWin = fight();
 				if (didPlayerWin == true){
-					dungeonGameBoard[playerRow][playerColumn] = ' ';
+					world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 					playerRow--;
-					dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+					world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 					numEnemiesDefeated = numEnemiesDefeated + 1;
 
 					//checking if the player has beat both enemies
@@ -217,33 +219,33 @@ class Dungeon{
 
 
 			else if (onItem == true) {
-				dungeonGameBoard[playerRow][playerColumn] = 'I';
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = 'I';
 				playerRow--;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 				onItem = false;
 			} else {
-				dungeonGameBoard[playerRow][playerColumn] = ' ';
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerRow--;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 			}
 		}
 
 		else if (userMove == 'A'){
 			if ((playerColumn - 1) <= 0){
 				System.out.println("Invalid move, player would hit the wall!");
-			} else if (dungeonGameBoard[playerRow][playerColumn - 1] == 'I') {
-				dungeonGameBoard[playerRow][playerColumn] = ' ';
+			} else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn - 1] == 'I') {
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerColumn--;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 				itemExistence = true;
 				onItem = true;
-			} else if (dungeonGameBoard[playerRow][playerColumn - 1] == 'E') {
+			} else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn - 1] == 'E') {
 				boolean didPlayerWin = false;
 				didPlayerWin = fight();
 				if (didPlayerWin == true){
-					dungeonGameBoard[playerRow][playerColumn] = ' ';
+					world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 					playerColumn--;
-					dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+					world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 					numEnemiesDefeated = numEnemiesDefeated + 1;
 					if (numEnemiesDefeated == 2){
 						System.out.println("Congratulations!! You beat the game!!!");
@@ -266,32 +268,32 @@ class Dungeon{
 
 			}
 			else if (onItem == true) {
-				dungeonGameBoard[playerRow][playerColumn] = 'I';
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = 'I';
 				playerColumn--;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 				onItem = false;
 			} else {
-				dungeonGameBoard[playerRow][playerColumn] = ' ';
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerColumn--;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 			}
 		}
 		else if (userMove == 'S'){
 			if ((playerRow + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
-			} else if (dungeonGameBoard[playerRow + 1][playerColumn] == 'I') {
-				dungeonGameBoard[playerRow][playerColumn] = ' ';
+			} else if (world.getCurrentBoard(currentBoard)[playerRow + 1][playerColumn] == 'I') {
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerRow++;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 				itemExistence = true;
 				onItem = true;
-			} else if (dungeonGameBoard[playerRow + 1][playerColumn] == 'E') {
+			} else if (world.getCurrentBoard(currentBoard)[playerRow + 1][playerColumn] == 'E') {
 				boolean didPlayerWin = false;
 				didPlayerWin = fight();
 				if (didPlayerWin == true){
-					dungeonGameBoard[playerRow][playerColumn] = ' ';
+					world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 					playerRow++;
-					dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+					world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 					numEnemiesDefeated = numEnemiesDefeated + 1;
 					if (numEnemiesDefeated == 2){
 						System.out.println("Congratulations!! You beat the game!!!");
@@ -314,33 +316,33 @@ class Dungeon{
 				}
 
 			} else if (onItem == true) {
-				dungeonGameBoard[playerRow][playerColumn] = 'I';
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = 'I';
 				playerRow++;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 				onItem = false;
 			} else {
-				dungeonGameBoard[playerRow][playerColumn] = ' ';
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerRow++;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 				//System.out.println("Success! You have moved your player down a space!");
 			}
 		}
 		else{
 			if ((playerColumn + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
-			} else if (dungeonGameBoard[playerRow][playerColumn + 1] == 'I') {
-				dungeonGameBoard[playerRow][playerColumn] = ' ';
+			} else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn + 1] == 'I') {
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerColumn++;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 				itemExistence = true;
 				onItem = true;
-			} else if (dungeonGameBoard[playerRow][playerColumn + 1] == 'E') {
+			} else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn + 1] == 'E') {
 				boolean didPlayerWin = false;
 				didPlayerWin = fight();
 				if (didPlayerWin == true){
-					dungeonGameBoard[playerRow][playerColumn] = ' ';
+					world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 					playerColumn++;
-					dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+					world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 					numEnemiesDefeated = numEnemiesDefeated + 1;
 					if (numEnemiesDefeated == 2){
 						System.out.println("Congratulations!! You beat the game!!!");
@@ -360,14 +362,14 @@ class Dungeon{
 					System.exit(0);
 				}
 			} else if (onItem == true) {
-				dungeonGameBoard[playerRow][playerColumn] = 'I';
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = 'I';
 				playerColumn++;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 				onItem = false;
 			} else {
-				dungeonGameBoard[playerRow][playerColumn] = ' ';
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerColumn++;
-				dungeonGameBoard[playerRow][playerColumn] = playerSymbol;
+				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
 			}
 		}
 		//calling the move enemy after every user turn
