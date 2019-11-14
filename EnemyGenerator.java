@@ -21,32 +21,32 @@ public class EnemyGenerator{
 		if(types == 0){
 			type = EnemyType.SLIME;
 			name = "Slime";
-			health = rng.nextInt(8);
-			damage = rng.nextInt(8);
+			health = rng.nextInt(((8-3)+1)+3);
+			damage = rng.nextInt(((8-3)+1)+3);
 			drop = ItemGenerator.generate();
 		}else if(types == 1){
 			type = EnemyType.GOBLIN;
 			name = "Goblin";
-			health = rng.nextInt(((15-5)+1)+5);	
-			damage = rng.nextInt(((15-5)+1)+5);
+			health = rng.nextInt(((25-10)+1)+10);	
+			damage = rng.nextInt(((25-10)+1)+10);
 			drop = ItemGenerator.generate();
 		}else if(types == 2){	
 			type = EnemyType.CRAZIEDWOLF;
 			name = "Crazied Wolf";
-			health = rng.nextInt(((20-10)+1)+10);
-			damage = rng.nextInt(((20-10)+1)+10);
+			health = rng.nextInt(((30-20)+1)+20);
+			damage = rng.nextInt(((30-20)+1)+20);
 			drop = ItemGenerator.generate();
 		}else if(types == 3){
 			type = EnemyType.CRAZIEDHIPPIE;
 			name = "Crazied Hippie";
-			health = rng.nextInt(((15-5)+1)+5);
-			damage = rng.nextInt(((15-5)+1)+5);
+			health = rng.nextInt(((35-25)+1)+25);
+			damage = rng.nextInt(((35-25)+1)+25);
 			drop = ItemGenerator.generate();
 		}else if(types == 4){
 			type = EnemyType.ZOMBIE;
 			name = "Zombie";
-			health = rng.nextInt(((35-20)+1)+20);
-			damage = rng.nextInt(((35-20)+1)+20);
+			health = rng.nextInt(((45-25)+1)+25);
+			damage = rng.nextInt(((45-35)+1)+35);
 			drop = ItemGenerator.generate();
 		}
 		newOne = new Enemy(type, name, health, damage, drop);
