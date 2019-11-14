@@ -53,16 +53,16 @@ class Dungeon{
 				value.add(random.nextInt(17) + 2);				
 				value2.add(random.nextInt(17) + 2);
 				if(world.getCurrentBoard(currentBoard)[value.get(i)][value2.get(i)] == ' ');
-					world.getCurrentBoard(currentBoard)[value.get(i)][value2.get(i)] = 'I';
-					placement = new Integer[]{value.get(i), value2.get(i)};
-					location.put(count, placement);
-					count++;
-				
+				world.getCurrentBoard(currentBoard)[value.get(i)][value2.get(i)] = 'I';
+				placement = new Integer[]{value.get(i), value2.get(i)};
+				location.put(count, placement);
+				count++;
+
 			}
 			alreadyExecuted = true;
 			return location;	
 		}
-		
+
 		for (int i = 0; i < 20; i++){
 			for (int j = 0; j < 20; j++){
 				if (world.getCurrentBoard(currentBoard)[i][j] == ' '){
@@ -176,6 +176,48 @@ class Dungeon{
 				System.out.println("Invalid move, player would hit the wall!");
 			}
 
+
+			else if (world.getCurrentBoard(currentBoard)[playerRow + 1][playerColumn] == 'D'){
+				if (currentBoard == 1){
+					if ((playerColumn <  10)){
+						System.out.println("You entered a door into a new room!");
+						world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+						currentBoard = 0;
+						playerColumn = 17;
+						playerRow = 10;
+						world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
+					}
+
+					else{
+						System.out.println("You entered a door through a new room!");
+						world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+						currentBoard = 2;
+						playerColumn = 2;
+						playerRow = 10;
+						world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
+					}
+				}
+
+				else if (currentBoard == 2){
+					System.out.println("You entered a door into a new room!");
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+					currentBoard = 1;
+					playerColumn = 17;
+					playerRow = 10;
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = playerSymbol;
+				}
+				else{
+					System.out.println("You entered a door into a new room!");
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+					currentBoard = 1;
+					playerColumn = 2;
+					playerRow = 10;
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = playerSymbol;
+
+				}
+			}
+
+
 			//seeing if the user landed on an item
 			else if (world.getCurrentBoard(currentBoard)[playerRow - 1][playerColumn] == 'I') {
 				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
@@ -233,7 +275,50 @@ class Dungeon{
 		else if (userMove == 'A'){
 			if ((playerColumn - 1) <= 0){
 				System.out.println("Invalid move, player would hit the wall!");
-			} else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn - 1] == 'I') {
+			} 
+			else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn - 1] == 'D'){
+				if (currentBoard == 1){
+					if ((playerColumn <  10)){
+						System.out.println("You entered a door into a new room!");
+						world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+						currentBoard = 0;
+						playerColumn = 17;
+						playerRow = 10;
+						world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
+					}
+
+					else{
+						System.out.println("You entered a door through a new room!");
+						world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+						currentBoard = 2;
+						playerColumn = 2;
+						playerRow = 10;
+						world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
+					}
+				}
+
+				else if (currentBoard == 2){
+					System.out.println("You entered a door into a new room!");
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+					currentBoard = 1;
+					playerColumn = 17;
+					playerRow = 10;
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = playerSymbol;
+				}
+				else{
+					System.out.println("You entered a door into a new room!");
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+					currentBoard = 1;
+					playerColumn = 2;
+					playerRow = 10;
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = playerSymbol;
+
+				}
+			}
+			
+			
+			
+			else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn - 1] == 'I') {
 				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerColumn--;
 				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
@@ -281,7 +366,51 @@ class Dungeon{
 		else if (userMove == 'S'){
 			if ((playerRow + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
-			} else if (world.getCurrentBoard(currentBoard)[playerRow + 1][playerColumn] == 'I') {
+			} 
+
+			else if (world.getCurrentBoard(currentBoard)[playerRow + 1][playerColumn] == 'D'){
+				if (currentBoard == 1){
+					if ((playerColumn <  10)){
+						System.out.println("You entered a door into a new room!");
+						world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+						currentBoard = 0;
+						playerColumn = 17;
+						playerRow = 10;
+						world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
+					}
+
+					else{
+						System.out.println("You entered a door through a new room!");
+						world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+						currentBoard = 2;
+						playerColumn = 2;
+						playerRow = 10;
+						world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
+					}
+				}
+
+				else if (currentBoard == 2){
+					System.out.println("You entered a door into a new room!");
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+					currentBoard = 1;
+					playerColumn = 17;
+					playerRow = 10;
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = playerSymbol;
+				}
+				else{
+					System.out.println("You entered a door into a new room!");
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+					currentBoard = 1;
+					playerColumn = 2;
+					playerRow = 10;
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = playerSymbol;
+
+				}
+			}
+
+
+
+			else if (world.getCurrentBoard(currentBoard)[playerRow + 1][playerColumn] == 'I') {
 				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerRow++;
 				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
@@ -330,7 +459,53 @@ class Dungeon{
 		else{
 			if ((playerColumn + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
-			} else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn + 1] == 'I') {
+
+			} 
+			
+			else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn + 1] == 'D'){
+				if (currentBoard == 1){
+					if ((playerColumn <  10)){
+						System.out.println("You entered a door into a new room!");
+						world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+						currentBoard = 0;
+						playerColumn = 17;
+						playerRow = 10;
+						world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
+					}
+
+					else{
+						System.out.println("You entered a door through a new room!");
+						world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+						currentBoard = 2;
+						playerColumn = 2;
+						playerRow = 10;
+						world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
+					}
+				}
+
+				else if (currentBoard == 2){
+					System.out.println("You entered a door into a new room!");
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+					currentBoard = 1;
+					playerColumn = 17;
+					playerRow = 10;
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = playerSymbol;
+				}
+				else{
+					System.out.println("You entered a door into a new room!");
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = ' ';
+					currentBoard = 1;
+					playerColumn = 2;
+					playerRow = 10;
+					world.getCurrentBoard(currentBoard) [playerRow][playerColumn] = playerSymbol;
+
+				}
+			}
+			
+			
+			
+			
+			else if (world.getCurrentBoard(currentBoard)[playerRow][playerColumn + 1] == 'I') {
 				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = ' ';
 				playerColumn++;
 				world.getCurrentBoard(currentBoard)[playerRow][playerColumn] = playerSymbol;
@@ -405,7 +580,7 @@ class Dungeon{
 			dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
 			System.out.println("Enemy took " + enemyDamage + " damage from the players " + dungeonPlayer.getInventory().getEquippedWeapon().getName());
 			System.out.println();
-			
+
 			//checking if the players attack killed the enemy
 			if (dungeonEnemy.getHealth() <= 0){
 				didUserWin = true;

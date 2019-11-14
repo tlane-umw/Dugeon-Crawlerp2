@@ -21,7 +21,12 @@ public class World{
 		if (num == 1){
 			return world.get(1).getGameBoard();
 		}
-		return world.get(0).getGameBoard();
+		else if (num == 0){
+			return world.get(0).getGameBoard();
+		}
+		else{
+			return world.get(2).getGameBoard();
+		}
 	}
 
 }
