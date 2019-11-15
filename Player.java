@@ -15,8 +15,11 @@ class Player extends Creature{
 	public Player(String name, int health, char PlayerSymbol){
 		super(name, health);
 		this.playerSymbol = playerSymbol;
-		playerRow = 1;
-		playerColumn = 8;
+		
+	}
+	public Player(){
+		this.row = 1;
+		this.column = 8;
 	}
 	public Inventory getInventory(){
 		return userInventory;
@@ -55,11 +58,7 @@ class Player extends Creature{
 		}
 		return groundItems;
 	}
-<<<<<<< HEAD
-
-
-=======
-	public boolean move(char userMove, char[][] playerBoard){
+	public char[][] move(char userMove, char[][] playerBoard){
 		itemExistence = false;
 		if (userMove == 'W'){
 			//if (this.dungeonGameBoard(playerRow - 1)
@@ -247,7 +246,8 @@ class Player extends Creature{
 			}
 		}
 		//calling the move enemy after every user turn
-		return itemExistence;
+		
+		return playerBoard;
 	}
 	//keeping track of where the user is
 	public boolean fight(){
@@ -268,58 +268,6 @@ class Player extends Creature{
 			System.out.println("Enemy took " + enemyDamage + " damage from the players " + getInventory().getEquippedWeapon().getName());
 			System.out.println();
 
-			//checking if the players attack killed the enemy
-			if (dungeonEnemy.getHealth() <= 0){
-				didUserWin = true;
-				enemyAlive = false;
-				return true;
-			}
-
-			//printing the new enemy health if they are still alive
-			else{
-				System.out.println("The new enemy health is " + dungeonEnemy.getHealth());
-				System.out.println();
-			}
-			//enemy attacking the player
-
-			//getting players current health
-			System.out.println("The player currently has a health of " + getHealth());
-			System.out.println();
-
-			//getting the amount of damage the enemy caused based off the players current equipped armor
-			int playerDamage = ((dungeonEnemy.getDamage()) - (getInventory().getEquippedArmor().getStrength()));
-			//checking if the players current weapon is stronger than the enemies attack
-			if (playerDamage <= 0){
-				System.out.println("The players " + getInventory().getEquippedArmor().getName() + " completely negated the enemy's attack!");
-				System.out.println();
-			}
-			//setting the players new health based on the enemy damage
-			else{
-				int currentPlayerHealth = getHealth();
-				int newPlayerHealth = currentPlayerHealth - playerDamage;
-				setHealth(newPlayerHealth);
-
-				System.out.println("Player took " + playerDamage + " damage from the enemy!");
-				System.out.println();
-				if (getHealth() <=0){
-					didUserWin = false;
-					System.out.println("The enemy brutally murdered you!");
-					System.out.println();
-					playerAlive = false;
-					return false;
-
-				}
-				else{
-					System.out.println("After the enemy's latest attack, the player's health is  " + getHealth());
-					System.out.println();
-				}
-			}
-
-			//updating the round number
-			roundNumber = roundNumber + 1;
-		}
-		return didUserWin;
-	}
->>>>>>> 10ec0639aa3399c27275a8c7c2615d2d63e0c65e
+			//checking
 
 }
