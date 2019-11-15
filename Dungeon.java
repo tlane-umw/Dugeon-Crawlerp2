@@ -41,8 +41,7 @@ class Dungeon{
 		enemyRow = 15;
 		enemyColumn2 = 17;
 		enemyRow2 = 15;
-	}
-
+}
 	//printing the gameboard showing the players location, enemies location, and items locations
 	public Hashtable<Integer, Integer[]>  printBoard(){
 		//System.out.println("About to print the board!");
