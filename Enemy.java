@@ -17,7 +17,10 @@ public class Enemy extends Creature{
 	public EnemyType getType(){
 		return type;
 	}
+	public String getName(){
+		return name;
 
+	}
 	//a method to return an item after the player defeats an enemy
 	//did not have enough time to implement this into our program
 	public Item getDrop(){
