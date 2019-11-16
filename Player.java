@@ -344,19 +344,19 @@ class Player extends Creature{
 						System.exit(0);
 					}
 
-				} 
-				else if (onItem == true) {
+				}
+			}	
+			else if (onItem == true) {
 					newBoard[row][column] = 'I';
 					this.row++;
 					newBoard[row][column] = playerSymbol;
 					onItem = false;
-				}
-				else {
+			}
+			else {
 					newBoard[row][column] = ' ';
 					this.row++;
 					newBoard[row][column] = playerSymbol;
 					//System.out.println("Success! You have moved your player down a space!");
-				}
 			}
 		}
 		else {
@@ -412,6 +412,8 @@ class Player extends Creature{
 				this.column++;
 				newBoard[row][column] = playerSymbol;
 				numEnemiesDefeated = numEnemiesDefeated + 1;
+				itemExistence = true;
+				onItem = true;
 			} 
 			else if (newBoard[row][column + 1] == 'E') {
 				boolean didPlayerWin = false;
@@ -449,13 +451,6 @@ class Player extends Creature{
 			}	
 			//calling the move enemy after every user turn
 		}
-		/*for (int i = 0; i < 20; i++){
-		  for (int j = 0; j < 20; j++){
-		  System.out.print(newBoard[i][j]);
-		  }
-		  System.out.println();
-		}
-		*/
 		return newBoard;
 	}
 	//keeping track of where the user is
@@ -488,6 +483,17 @@ class Player extends Creature{
 	}
 	public int getRow(){
 		return this.row;
+	}
+	public boolean getItemExistence(){
+		return itemExistence;
+	}
+	public void makeFalse(){
+		onItem = false;
+		itemExistence = false;
+	}
+	public Integer[] playerLocation(){
+		Integer[] position = new Integer[]{row, column};
+		return position;
 	}
 
 	public int getCurrentPlayerBoard(){
