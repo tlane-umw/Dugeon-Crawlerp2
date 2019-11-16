@@ -58,6 +58,8 @@ class Player extends Creature{
 		return groundItems;
 	}
 	public char[][] move(char userMove, char[][] playerBoard){
+		
+		char[][] newBoard = playerBoard;
 		itemExistence = false;
 		if (userMove == 'W'){
 			//if (this.dungeonGameBoard(row - 1)
@@ -66,21 +68,21 @@ class Player extends Creature{
 			}
 
 			//seeing if the user landed on an item
-			else if (playerBoard[row - 1][column] == 'I') {
-				playerBoard[row][column] = ' ';
+			else if (newBoard[row - 1][column] == 'I') {
+				newBoard[row][column] = ' ';
 				row--;
-				playerBoard[row][column] = playerSymbol;
+				newBoard[row][column] = playerSymbol;
 				itemExistence = true;
 				onItem = true;
 			}
 			//seeing if the user landed on an enemy
-			else if (playerBoard[row - 1][column] == 'E') {
+			else if (newBoard[row - 1][column] == 'E') {
 				boolean didPlayerWin = false;
 				didPlayerWin = fight();
 				if (didPlayerWin == true){
-					playerBoard[row][column] = ' ';
+					newBoard[row][column] = ' ';
 					row--;
-					playerBoard[row][column] = playerSymbol;
+					newBoard[row][column] = playerSymbol;
 					numEnemiesDefeated = numEnemiesDefeated + 1;
 
 					//checking if the player has beat both enemies
@@ -102,14 +104,14 @@ class Player extends Creature{
 
 			//seeing if the user landed on an enemy
 			else if (onItem == true) {
-				playerBoard[row][column] = 'I';
+				newBoard[row][column] = 'I';
 				row--;
-				playerBoard[row][column] = playerSymbol;
+				newBoard[row][column] = playerSymbol;
 				onItem = false;
 			} else {
-				playerBoard[row][column] = ' ';
+				newBoard[row][column] = ' ';
 				row--;
-				playerBoard[row][column] = playerSymbol;
+				newBoard[row][column] = playerSymbol;
 			}
 		}
 
@@ -118,20 +120,20 @@ class Player extends Creature{
 				System.out.println("Invalid move, player would hit the wall!");
 			} 
 			
-			else if (playerBoard[row][column - 1] == 'I') {
-				playerBoard[row][column] = ' ';
+			else if (newBoard[row][column - 1] == 'I') {
+				newBoard[row][column] = ' ';
 				column--;
-				playerBoard[row][column] = playerSymbol;
+				newBoard[row][column] = playerSymbol;
 				itemExistence = true;
 				onItem = true;
 			}
-		       	else if (playerBoard[row][column - 1] == 'E') {
+		       	else if (newBoard[row][column - 1] == 'E') {
 				boolean didPlayerWin = false;
 				didPlayerWin = fight();
 				if (didPlayerWin == true){
-					playerBoard[row][column] = ' ';
+					newBoard[row][column] = ' ';
 					column--;
-					playerBoard[row][column] = playerSymbol;
+					newBoard[row][column] = playerSymbol;
 					numEnemiesDefeated = numEnemiesDefeated + 1;
 					if (numEnemiesDefeated == 2){
 						System.out.println("Congratulations!! You beat the game!!!");
@@ -148,34 +150,45 @@ class Player extends Creature{
 				}
 			}
 			else if (onItem == true) {
-				playerBoard[row][column] = 'I';
+				newBoard[row][column] = 'I';
 				column--;
-				playerBoard[row][column] = playerSymbol;
+				newBoard[row][column] = playerSymbol;
 				onItem = false;
 				} 
 			else {
-					playerBoard[row][column] = ' ';
+					newBoard[row][column] = ' ';
 					column--;
-					playerBoard[row][column] = playerSymbol;
+					newBoard[row][column] = playerSymbol;
 				}
 			
 		} 
 		else if (userMove == 'S'){
 			if ((row + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
-			} else if (playerBoard[row + 1][column] == 'I') {
-				playerBoard[row][column] = ' ';
+			} 
+			else if (newBoard[row+1][column] == ' '){
+				newBoard[row][column] = ' ';
+				row++;
+				newBoard[row][column] = playerSymbol;
+			}
+			
+			
+			
+			else if (newBoard[row + 1][column] == 'I') {
+				newBoard[row][column] = ' ';
 				this.row++;
-				playerBoard[row][column] = playerSymbol;
+				newBoard[row][column] = playerSymbol;
 				itemExistence = true;
 				onItem = true;
-			} else if (playerBoard[row + 1][column] == 'E') {
+			} 
+			
+			else if (newBoard[row + 1][column] == 'E') {
 				boolean didPlayerWin = false;
 				didPlayerWin = fight();
 				if (didPlayerWin == true){
-					playerBoard[row][column] = ' ';
+					newBoard[row][column] = ' ';
 					this.row++;
-					playerBoard[row][column] = playerSymbol;
+					newBoard[row][column] = playerSymbol;
 					numEnemiesDefeated = numEnemiesDefeated + 1;
 					if (numEnemiesDefeated == 2){
 						System.out.println("Congratulations!! You beat the game!!!");
@@ -190,70 +203,75 @@ class Player extends Creature{
 					}
 
 
-				}
-				else{
-					System.out.println("Better luck next time");
-					System.exit(0);
-				}
-
-			} else if (onItem == true) {
-				playerBoard[row][column] = 'I';
-				this.row++;
-				playerBoard[row][column] = playerSymbol;
-				onItem = false;
-			} else {
-				playerBoard[row][column] = ' ';
-				this.row++;
-				playerBoard[row][column] = playerSymbol;
-				//System.out.println("Success! You have moved your player down a space!");
-			}
-		}
-		else{
-			if ((column + 1) >= 19){
-				System.out.println("Invalid move, player would hit the wall!");
-			} else if (playerBoard[row][column + 1] == 'I') {
-				playerBoard[row][column] = ' ';
-				this.column++;
-				playerBoard[row][column] = playerSymbol;
-				numEnemiesDefeated = numEnemiesDefeated + 1;
-			} else if (playerBoard[row][column + 1] == 'E') {
-				boolean didPlayerWin = false;
-				didPlayerWin = fight();
-				if(didPlayerWin == true){	
-					if (numEnemiesDefeated == 2){
-						System.out.println("Congratulations!! You beat the game!!!");
-						System.out.println();
-						System.out.println("All the best from the creators - Chris, Toby, & Tyler!");
-						System.out.println();
+				
+					else{
+						System.out.println("Better luck next time");
 						System.exit(0);
 					}
-					else if (numEnemiesDefeated == 1){
-						System.out.println("You defeated the enemy! Keep going!!");
-						System.out.println();
+
+				} 
+				else if (onItem == true) {
+					newBoard[row][column] = 'I';
+					this.row++;
+					newBoard[row][column] = playerSymbol;
+					onItem = false;
+				}
+		       		else {
+					newBoard[row][column] = ' ';
+					this.row++;
+					newBoard[row][column] = playerSymbol;
+				//System.out.println("Success! You have moved your player down a space!");
+				}
+			}
+			else{
+				if ((column + 1) >= 19){
+					System.out.println("Invalid move, player would hit the wall!");
+				}
+			       	else if (newBoard[row][column + 1] == 'I') {
+					newBoard[row][column] = ' ';
+					this.column++;
+					newBoard[row][column] = playerSymbol;
+					numEnemiesDefeated = numEnemiesDefeated + 1;
+				} 
+				else if (newBoard[row][column + 1] == 'E') {
+					boolean didPlayerWin = false;
+					didPlayerWin = fight();
+					if(didPlayerWin == true){	
+						if (numEnemiesDefeated == 2){
+							System.out.println("Congratulations!! You beat the game!!!");
+							System.out.println();
+							System.out.println("All the best from the creators - Chris, Toby, & Tyler!");
+							System.out.println();
+							System.exit(0);
+						}
+						else if (numEnemiesDefeated == 1){
+							System.out.println("You defeated the enemy! Keep going!!");
+							System.out.println();
+						}
+					}
+
+
+					else{
+						System.out.println("Better luck next time!");
+						System.exit(0);
 					}
 				}
-
-
-				else{
-					System.out.println("Better luck next time!");
-					System.exit(0);
+				else if (onItem == true) {
+					newBoard[row][column] = 'I';
+					this.column++;
+					newBoard[row][column] = playerSymbol;
+					onItem = false;
+				} 
+				else {
+					newBoard[row][column] = ' ';
+					this.column++;
+					newBoard[row][column] = playerSymbol;
 				}
-			}
-			else if (onItem == true) {
-				playerBoard[row][column] = 'I';
-				this.column++;
-				playerBoard[row][column] = playerSymbol;
-				onItem = false;
-			} 
-			else {
-				playerBoard[row][column] = ' ';
-				this.column++;
-				playerBoard[row][column] = playerSymbol;
-			}
-		}
+			}	
 		//calling the move enemy after every user turn
+		}
 
-		return playerBoard;
+		return newBoard;
 	}
 	//keeping track of where the user is
 	public boolean fight(){

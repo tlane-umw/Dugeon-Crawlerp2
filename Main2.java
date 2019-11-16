@@ -66,7 +66,8 @@ public class Main2{
 		//loop to keep playing until user quits, player dies, or player wins
 		//allows the user to move, print the commands again, equip a weapon or armor, drop an item, or quit
 		while(keepPlaying == true){
-			location = gameDungeon.printBoard();
+			//location = gameDungeon.printBoard();
+			gameDungeon.printBoard();
 			System.out.println("P : Print the commands of the game again");
 
 			String userOption = input.nextLine();
@@ -128,7 +129,8 @@ public class Main2{
 
 				char[][] newBoard = gameDungeon.dungeonPlayer.move(userLetter, oldBoard);
 
-				gameDungeon.getWorld().setCurrentBoard(currentBoardNum, newBoard);
+				gameDungeon.getWorld().setNewBoard(currentBoardNum, newBoard);
+
 
 				String str = "";
 

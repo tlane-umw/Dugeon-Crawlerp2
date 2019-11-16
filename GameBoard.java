@@ -77,7 +77,8 @@ public class GameBoard{
 	};
 
 
-	public GameBoard(){
+	public GameBoard(char [][] updatedGameBoard){
+		this.gameBoard = updatedGameBoard;
 
 	}
 

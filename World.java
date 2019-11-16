@@ -28,15 +28,17 @@ public class World{
 			return world.get(2).getGameBoard();
 		}
 	}
-	public void setCurrentBoard(int num, char [][] newGameBoard){
+	public void setNewBoard(int num, char [][] newBoard){
+
+		GameBoard newGameBoard = new GameBoard(newBoard);
 		if (num == 1){
-			world.get(1).setGameBoard(newGameBoard);
+			world.set(1, newGameBoard);
 		}
 		else if (num == 0){
-			world.get(0).setGameBoard(newGameBoard);
+			world.set(0, newGameBoard);
 		}
 		else{
-			world.get(2).setGameBoard(newGameBoard);
+			world.set(2, newGameBoard);
 		}
 	}
 
