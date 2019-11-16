@@ -130,6 +130,10 @@ public class Main2{
 				char[][] newBoard = gameDungeon.dungeonPlayer.move(userLetter, oldBoard);
 
 				gameDungeon.getWorld().setNewBoard(currentBoardNum, newBoard);
+				
+				gameDungeon.setCurrentBoardNum(gameDungeon.getPlayer().getCurrentPlayerBoard());
+
+				System.out.println("The current gameboard number is - " + gameDungeon.getCurrentBoardNum());
 
 
 				String str = "";

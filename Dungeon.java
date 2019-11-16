@@ -95,6 +95,10 @@ class Dungeon{
 	
 	}
 
+	public void setCurrentBoardNum(int newBoard){
+		this.currentBoard = newBoard;
+	}
+
 	public World getWorld(){
 		return this.world;
 	}

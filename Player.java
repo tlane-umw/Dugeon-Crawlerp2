@@ -4,6 +4,7 @@ class Player extends Creature{
 	//instance variables
 	Scanner s = new Scanner(System.in);
 	private String answer;
+	private static int currentPlayerBoard = 1;
 	private static int numEnemiesDefeated = 0;
 	private boolean itemExistence, onItem;
 	private String name;
@@ -165,7 +166,39 @@ class Player extends Creature{
 		else if (userMove == 'S'){
 			if ((row + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
-			} 
+			}
+
+			else if (newBoard[(row + 1)][column] == 'D'){
+				if (currentPlayerBoard == 1){
+					System.out.println("You have found a door! Do you want to go into the new room?");
+					System.out.println("Enter 'Y' for yes and 'N' for no.");
+					String userDoor = s.nextLine();
+					while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
+						System.out.println("You did not enter a 'Y' or 'N'.");
+						System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
+						userDoor = s.nextLine();
+					}
+					if (userDoor.equals("N")){
+						return newBoard;
+					}
+					else{
+						if ((column < 10)){
+							System.out.println("You entered a door into a new room!");
+							newBoard[row][column] = ' ';
+							currentPlayerBoard = 0;
+							row = 10;
+							column = 17;
+						}
+						else{
+							System.out.println("You entered a door into a new room!");
+							newBoard[row][column] = ' ';
+							currentPlayerBoard = 2;
+							row = 10;
+							column = 2;
+						}
+					}
+				}
+			}	
 			else if (newBoard[(row + 1)][column] == ' '){
 				newBoard[row][column] = ' ';
 				row++;
@@ -309,5 +342,12 @@ class Player extends Creature{
 	}
 	public int getRow(){
 		return this.row;
+	}
+
+	public int getCurrentPlayerBoard(){
+		return this.currentPlayerBoard;
+	}
+	public void setCurrentPlayerBoard(int newPlayerBoard){
+		this.currentPlayerBoard = newPlayerBoard;
 	}
 }
