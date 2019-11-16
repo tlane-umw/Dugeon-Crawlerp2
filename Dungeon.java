@@ -29,18 +29,26 @@ class Dungeon{
 	Integer[] placement = new Integer[]{0, 0};
 	Player dungeonPlayer;
 	Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
+	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+	
 
 	//constructor with a 2D char array and a new player 
 	Dungeon(Player dungeonPlayer, char playerSymbol){
 		this.dungeonPlayer = dungeonPlayer;
 		this.playerSymbol = playerSymbol;
 		world = new World();
-		playerColumn = 8;
-		playerRow = 1;
-		enemyColumn = 2;
-		enemyRow = 15;
-		enemyColumn2 = 17;
-		enemyRow2 = 15;
+		Enemy enemy0 = new Enemy("enemy 0", 15, 2, 0);
+		Enemy enemy1 = new Enemy("enemy 1", 15, 17, 0);
+		Enemy enemy2 = new Enemy("enemy 2", 15, 2, 1);
+		Enemy enemy3 = new Enemy("enemy 3", 15, 17, 1);
+		Enemy enemy4 = new Enemy("enemy 4", 15, 2, 2);
+		Enemy enemy5 = new Enemy("enemy 5", 15, 17, 2);
+		enemyList.add(enemy0);
+		enemyList.add(enemy1);
+		enemyList.add(enemy2);
+		enemyList.add(enemy3);
+		enemyList.add(enemy4);
+		enemyList.add(enemy5);
 }
 	//printing the gameboard showing the players location, enemies location, and items locations
 	public Hashtable<Integer, Integer[]>  printBoard(){
@@ -71,6 +79,13 @@ class Dungeon{
 				}
 			}
 			System.out.println();
+		}
+		
+		for (int i = 0; i < enemyList.size(); i++){
+			int currentEnemyBoard = enemyList.get(i).getEnemyBoardNum();
+			char[][] oldBoard = world.getCurrentBoard(currentEnemyBoard);
+			char [][] newBoard = enemyList.get(i).moveEnemy(oldBoard);
+			world.setNewBoard(currentEnemyBoard, newBoard);
 		}
 		return location;
 		//System.out.println("Done printing board!");

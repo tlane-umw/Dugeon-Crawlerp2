@@ -68,6 +68,51 @@ class Player extends Creature{
 				System.out.println("Invalid move, player would hit the wall!");
 			}
 
+			else if (newBoard[(row - 1)][column] == 'D'){
+
+				System.out.println("You have found a door! Do you want to go into the new room?");
+				System.out.println("Enter 'Y' for yes and 'N' for no.");
+				String userDoor = s.nextLine();
+				while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
+					System.out.println("You did not enter a 'Y' or 'N'.");
+					System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
+					userDoor = s.nextLine();
+				}
+				if (userDoor.equals("N")){
+					return newBoard;
+				}
+				else{
+					System.out.println("You entered a door into a new room!");
+					if (currentPlayerBoard == 1){
+						if ((column < 10)){
+							newBoard[row][column] = ' ';
+							currentPlayerBoard = 0;
+							row = 10;
+							column = 17;
+						}
+						else{
+							newBoard[row][column] = ' ';
+							currentPlayerBoard = 2;
+							row = 10;
+							column = 2;
+						}
+					}
+					else if (currentPlayerBoard == 2){
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 1;
+						row = 10;
+						column = 17;
+					}
+					else{
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 1;
+						row = 10;
+						column = 2;
+
+					}
+				}
+			}
+
 			//seeing if the user landed on an item
 			else if (newBoard[row - 1][column] == 'I') {
 				newBoard[row][column] = ' ';
@@ -119,6 +164,50 @@ class Player extends Creature{
 		else if (userMove == 'A'){
 			if ((column - 1) <= 0){
 				System.out.println("Invalid move, player would hit the wall!");
+			}	
+			else if (newBoard[row][(column - 1)] == 'D'){
+
+				System.out.println("You have found a door! Do you want to go into the new room?");
+				System.out.println("Enter 'Y' for yes and 'N' for no.");
+				String userDoor = s.nextLine();
+				while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
+					System.out.println("You did not enter a 'Y' or 'N'.");
+					System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
+					userDoor = s.nextLine();
+				}
+				if (userDoor.equals("N")){
+					return newBoard;
+				}
+				else{
+					System.out.println("You entered a door into a new room!");
+					if (currentPlayerBoard == 1){
+						if ((column < 10)){
+							newBoard[row][column] = ' ';
+							currentPlayerBoard = 0;
+							row = 10;
+							column = 17;
+						}
+						else{
+							newBoard[row][column] = ' ';
+							currentPlayerBoard = 2;
+							row = 10;
+							column = 2;
+						}
+					}
+					else if (currentPlayerBoard == 2){
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 1;
+						row = 10;
+						column = 17;
+					}
+					else{
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 1;
+						row = 10;
+						column = 2;
+
+					}
+				}
 			} 
 
 			else if (newBoard[row][column - 1] == 'I') {
@@ -169,33 +258,46 @@ class Player extends Creature{
 			}
 
 			else if (newBoard[(row + 1)][column] == 'D'){
-				if (currentPlayerBoard == 1){
-					System.out.println("You have found a door! Do you want to go into the new room?");
-					System.out.println("Enter 'Y' for yes and 'N' for no.");
-					String userDoor = s.nextLine();
-					while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
-						System.out.println("You did not enter a 'Y' or 'N'.");
-						System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
-						userDoor = s.nextLine();
-					}
-					if (userDoor.equals("N")){
-						return newBoard;
-					}
-					else{
+
+				System.out.println("You have found a door! Do you want to go into the new room?");
+				System.out.println("Enter 'Y' for yes and 'N' for no.");
+				String userDoor = s.nextLine();
+				while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
+					System.out.println("You did not enter a 'Y' or 'N'.");
+					System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
+					userDoor = s.nextLine();
+				}
+				if (userDoor.equals("N")){
+					return newBoard;
+				}
+				else{
+					System.out.println("You entered a door into a new room!");
+					if (currentPlayerBoard == 1){
 						if ((column < 10)){
-							System.out.println("You entered a door into a new room!");
 							newBoard[row][column] = ' ';
 							currentPlayerBoard = 0;
 							row = 10;
 							column = 17;
 						}
 						else{
-							System.out.println("You entered a door into a new room!");
 							newBoard[row][column] = ' ';
 							currentPlayerBoard = 2;
 							row = 10;
 							column = 2;
 						}
+					}
+					else if (currentPlayerBoard == 2){
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 1;
+						row = 10;
+						column = 17;
+					}
+					else{
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 1;
+						row = 10;
+						column = 2;
+
 					}
 				}
 			}	
@@ -260,6 +362,50 @@ class Player extends Creature{
 		else {
 			if ((column + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
+			}
+			else if (newBoard[row][(column + 1)] == 'D'){
+
+				System.out.println("You have found a door! Do you want to go into the new room?");
+				System.out.println("Enter 'Y' for yes and 'N' for no.");
+				String userDoor = s.nextLine();
+				while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
+					System.out.println("You did not enter a 'Y' or 'N'.");
+					System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
+					userDoor = s.nextLine();
+				}
+				if (userDoor.equals("N")){
+					return newBoard;
+				}
+				else{
+					System.out.println("You entered a door into a new room!");
+					if (currentPlayerBoard == 1){
+						if ((column < 10)){
+							newBoard[row][column] = ' ';
+							currentPlayerBoard = 0;
+							row = 10;
+							column = 17;
+						}
+						else{
+							newBoard[row][column] = ' ';
+							currentPlayerBoard = 2;
+							row = 10;
+							column = 2;
+						}
+					}
+					else if (currentPlayerBoard == 2){
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 1;
+						row = 10;
+						column = 17;
+					}
+					else{
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 1;
+						row = 10;
+						column = 2;
+
+					}
+				}
 			}
 			else if (newBoard[row][column + 1] == 'I') {
 				newBoard[row][column] = ' ';
