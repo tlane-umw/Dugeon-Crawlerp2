@@ -98,6 +98,9 @@ class Dungeon{
 	public World getWorld(){
 		return this.world;
 	}
+	public Player getPlayer(){
+		return this.dungeonPlayer;
+	}
 
 	
 

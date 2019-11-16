@@ -95,6 +95,9 @@ public class GameBoard{
 	public char[][] getGameBoard(){
 		return this.gameBoard;
 	}
+	public void setGameBoard(char[][] newGameBoard){
+		this.gameBoard = newGameBoard;
+	}
 
 
 }

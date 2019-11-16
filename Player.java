@@ -116,13 +116,16 @@ class Player extends Creature{
 		else if (userMove == 'A'){
 			if ((column - 1) <= 0){
 				System.out.println("Invalid move, player would hit the wall!");
-			} else if (playerBoard[row][column - 1] == 'I') {
+			} 
+			
+			else if (playerBoard[row][column - 1] == 'I') {
 				playerBoard[row][column] = ' ';
 				column--;
 				playerBoard[row][column] = playerSymbol;
 				itemExistence = true;
 				onItem = true;
-			} else if (playerBoard[row][column - 1] == 'E') {
+			}
+		       	else if (playerBoard[row][column - 1] == 'E') {
 				boolean didPlayerWin = false;
 				didPlayerWin = fight();
 				if (didPlayerWin == true){
@@ -143,23 +146,26 @@ class Player extends Creature{
 					}
 
 				}
-				else if (onItem == true) {
-					playerBoard[row][column] = 'I';
-					column--;
-					playerBoard[row][column] = playerSymbol;
-					onItem = false;
-				} else {
+			}
+			else if (onItem == true) {
+				playerBoard[row][column] = 'I';
+				column--;
+				playerBoard[row][column] = playerSymbol;
+				onItem = false;
+				} 
+			else {
 					playerBoard[row][column] = ' ';
 					column--;
 					playerBoard[row][column] = playerSymbol;
 				}
-			}
-		} else if (userMove == 'S'){
+			
+		} 
+		else if (userMove == 'S'){
 			if ((row + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
 			} else if (playerBoard[row + 1][column] == 'I') {
 				playerBoard[row][column] = ' ';
-				row++;
+				this.row++;
 				playerBoard[row][column] = playerSymbol;
 				itemExistence = true;
 				onItem = true;
@@ -168,7 +174,7 @@ class Player extends Creature{
 				didPlayerWin = fight();
 				if (didPlayerWin == true){
 					playerBoard[row][column] = ' ';
-					row++;
+					this.row++;
 					playerBoard[row][column] = playerSymbol;
 					numEnemiesDefeated = numEnemiesDefeated + 1;
 					if (numEnemiesDefeated == 2){
@@ -192,21 +198,22 @@ class Player extends Creature{
 
 			} else if (onItem == true) {
 				playerBoard[row][column] = 'I';
-				row++;
+				this.row++;
 				playerBoard[row][column] = playerSymbol;
 				onItem = false;
 			} else {
 				playerBoard[row][column] = ' ';
-				row++;
+				this.row++;
 				playerBoard[row][column] = playerSymbol;
 				//System.out.println("Success! You have moved your player down a space!");
 			}
-		}else{
+		}
+		else{
 			if ((column + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
 			} else if (playerBoard[row][column + 1] == 'I') {
 				playerBoard[row][column] = ' ';
-				column++;
+				this.column++;
 				playerBoard[row][column] = playerSymbol;
 				numEnemiesDefeated = numEnemiesDefeated + 1;
 			} else if (playerBoard[row][column + 1] == 'E') {
@@ -234,13 +241,13 @@ class Player extends Creature{
 			}
 			else if (onItem == true) {
 				playerBoard[row][column] = 'I';
-				column++;
+				this.column++;
 				playerBoard[row][column] = playerSymbol;
 				onItem = false;
 			} 
 			else {
 				playerBoard[row][column] = ' ';
-				column++;
+				this.column++;
 				playerBoard[row][column] = playerSymbol;
 			}
 		}
@@ -271,5 +278,12 @@ class Player extends Creature{
 
 		}
 		return didUserWin;
+	}
+
+	public int getColumn(){
+		return this.column;
+	}
+	public int getRow(){
+		return this.row;
 	}
 }

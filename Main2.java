@@ -113,10 +113,23 @@ public class Main2{
 				gameDungeon.dungeonPlayer.getInventory().drop();
 			}
 			else if ((userLetter == 'W') || (userLetter == 'A') || (userLetter == 'S') || (userLetter == 'D')){
-				int mainBoard = gameDungeon.getCurrentBoardNum();
+				System.out.println("The players column = " + gameDungeon.getPlayer().getColumn());
+				System.out.println();
+				System.out.println("The players row = " + gameDungeon.getPlayer().getRow());
+				System.out.println();
 
-				System.out.println("the main board num is " + mainBoard);
-				gameDungeon.getWorld().getCurrentBoard(mainBoard) = gameDungeon.getDungeonPlayer().move(userLetter, gameDungeon.getWorld().getCurrentBoard(gameDungeon.getCurrentBoardNum()));
+				System.out.println(playerSymbol);
+
+				System.out.println();
+
+				int currentBoardNum = gameDungeon.getCurrentBoardNum();
+
+				char[][] oldBoard = gameDungeon.getWorld().getCurrentBoard(currentBoardNum);
+
+				char[][] newBoard = gameDungeon.dungeonPlayer.move(userLetter, oldBoard);
+
+				gameDungeon.getWorld().setCurrentBoard(currentBoardNum, newBoard);
+
 				String str = "";
 
 				String str2 = "";
@@ -141,15 +154,17 @@ public class Main2{
 				   str2 = "";
 				   }
 				   }
+			}*/
 			}
 			else{
 			System.out.println("Your command was not recognized, enter 'P' to print the list of commands again.");
 			keepPlaying = true;
-			}*/
+			}
+			
 		}
-
 	}
-
-}	
-
 }
+
+
+
+

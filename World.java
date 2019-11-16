@@ -15,7 +15,7 @@ public class World{
 
 		GameBoard gameBoard2 = new GameBoard(2);
 		world.add(gameBoard2);
-	
+
 	}
 	public char[][] getCurrentBoard(int num){
 		if (num == 1){
@@ -28,7 +28,17 @@ public class World{
 			return world.get(2).getGameBoard();
 		}
 	}
+	public void setCurrentBoard(int num, char [][] newGameBoard){
+		if (num == 1){
+			world.get(1).setGameBoard(newGameBoard);
+		}
+		else if (num == 0){
+			world.get(0).setGameBoard(newGameBoard);
+		}
+		else{
+			world.get(2).setGameBoard(newGameBoard);
+		}
+	}
+
 	
-
 }
-
