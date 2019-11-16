@@ -32,7 +32,7 @@ public class Main2{
 		System.out.println("You have accidentally stumbled into a cave, and it locks shut behind you.");
 		System.out.println("You must defeat all the enemies to free yourself from the dungeon.");
 		System.out.println("Your character is marked by the the first letter of your name on the map, starting in the top center.");
-	       	System.out.println("While items are marked as 'I' and the enemies are marked with 'E'");
+		System.out.println("While items are marked as 'I' and the enemies are marked with 'E'");
 		System.out.println();
 
 		//creating new gameboard
@@ -40,7 +40,7 @@ public class Main2{
 
 		//seting up the game
 		boolean keepPlaying = true;
-		Player player = new Player(signature, 10);
+		Player player = new Player(signature, playerSymbol);
 		Dungeon gameDungeon = new Dungeon(player, playerSymbol);
 		Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
 		location = gameDungeon.printBoard();
@@ -113,36 +113,43 @@ public class Main2{
 				gameDungeon.dungeonPlayer.getInventory().drop();
 			}
 			else if ((userLetter == 'W') || (userLetter == 'A') || (userLetter == 'S') || (userLetter == 'D')){
+				int mainBoard = gameDungeon.getCurrentBoardNum();
+
+				System.out.println("the main board num is " + mainBoard);
+				gameDungeon.getWorld().getCurrentBoard(mainBoard) = gameDungeon.getDungeonPlayer().move(userLetter, gameDungeon.getWorld().getCurrentBoard(gameDungeon.getCurrentBoardNum()));
 				String str = "";
+
 				String str2 = "";
-				if (gameDungeon.movePlayer(userLetter) == true){
-					for(int i = 1; i < size + 1; i++){
-						for (int place : location.get(i)){
-							str = str + place;
-						}
-						for (int place2 : gameDungeon.playerLocation()){
-							str2 = str2 + place2;
-						}
-						if(str.equals(str2)){
-							if(player.itemQuestion(groundItems.get(i)) == true){
-								gameDungeon.makeFalse();
-								keepPlaying = true;
-							} else {
-								keepPlaying = true;
-							}
-						}
-						str = "";
-						str2 = "";
-					}
-				}
+				/*
+				   if (gameDungeon.dungeonPlayer.move(userLetter) == true){
+				   for(int i = 1; i < size + 1; i++){
+				   for (int place : location.get(i)){
+				   str = str + place;
+				   }
+				   for (int place2 : gameDungeon.playerLocation()){
+				   str2 = str2 + place2;
+				   }
+				   if(str.equals(str2)){
+				   if(player.itemQuestion(groundItems.get(i)) == true){
+				   gameDungeon.makeFalse();
+				   keepPlaying = true;
+				   } else {
+				   keepPlaying = true;
+				   }
+				   }
+				   str = "";
+				   str2 = "";
+				   }
+				   }
 			}
 			else{
-				System.out.println("Your command was not recognized, enter 'P' to print the list of commands again.");
-				keepPlaying = true;
-			}
-
+			System.out.println("Your command was not recognized, enter 'P' to print the list of commands again.");
+			keepPlaying = true;
+			}*/
 		}
 
-	}	
+	}
+
+}	
 
 }

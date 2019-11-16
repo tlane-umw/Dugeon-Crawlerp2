@@ -21,7 +21,8 @@ public class Enemy extends Creature{
 		return enemyLocation;
 	}
 	Enemy(EnemyType type, String name, int health, int damage, Item drop){
-		super(name, health);
+		super(name);
+		this.health = health;
 		this.type = type;
 		this.damage = damage;
 		this.drop = drop;

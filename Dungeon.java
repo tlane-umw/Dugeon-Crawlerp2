@@ -86,6 +86,18 @@ class Dungeon{
 		onItem = false;
 		itemExistence = false;
 	}
+	public Player getDungeonPlayer(){
+		return this.dungeonPlayer;
+	}
+	
+	public int getCurrentBoardNum(){
+		return this.currentBoard;
+	
+	}
+
+	public World getWorld(){
+		return this.world;
+	}
 
 	
 

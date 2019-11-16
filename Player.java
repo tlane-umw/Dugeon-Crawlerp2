@@ -16,11 +16,9 @@ class Player extends Creature{
 		super(name);
 		this.playerSymbol = playerSymbol;
 		this.health = 100;
-		
-	}
-	public Player(){
 		this.row = 1;
 		this.column = 8;
+
 	}
 	public Inventory getInventory(){
 		return userInventory;
@@ -247,7 +245,7 @@ class Player extends Creature{
 			}
 		}
 		//calling the move enemy after every user turn
-		
+
 		return playerBoard;
 	}
 	//keeping track of where the user is
@@ -271,4 +269,7 @@ class Player extends Creature{
 
 			//checking
 
+		}
+		return didUserWin;
+	}
 }

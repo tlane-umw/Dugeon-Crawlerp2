@@ -6,9 +6,10 @@ public class Creature{
 	private int column;
 	private int board;
         private int health;
-        protected Creature(){
- 
-        }
+	Creature (String name){
+		this.name = name;
+
+	}
         public String getName(){
                 return name;
         }
