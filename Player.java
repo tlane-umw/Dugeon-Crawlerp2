@@ -301,11 +301,6 @@ class Player extends Creature{
 					}
 				}
 			}	
-			else if (newBoard[(row + 1)][column] == ' '){
-				newBoard[row][column] = ' ';
-				row++;
-				newBoard[row][column] = playerSymbol;
-			}
 
 
 
@@ -347,16 +342,16 @@ class Player extends Creature{
 				}
 			}	
 			else if (onItem == true) {
-					newBoard[row][column] = 'I';
-					this.row++;
-					newBoard[row][column] = playerSymbol;
-					onItem = false;
+				newBoard[row][column] = 'I';
+				this.row++;
+				newBoard[row][column] = playerSymbol;
+				onItem = false;
 			}
 			else {
-					newBoard[row][column] = ' ';
-					this.row++;
-					newBoard[row][column] = playerSymbol;
-					//System.out.println("Success! You have moved your player down a space!");
+				newBoard[row][column] = ' ';
+				this.row++;
+				newBoard[row][column] = playerSymbol;
+				//System.out.println("Success! You have moved your player down a space!");
 			}
 		}
 		else {
