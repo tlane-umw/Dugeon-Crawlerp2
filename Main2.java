@@ -142,11 +142,11 @@ public class Main2{
 				if (gameDungeon.dungeonPlayer.getItemExistence() == true){
 					for(int i = 1; i < size + 1; i++){
 						for (int place : location.get(i)){
-							str = str + place;
+							str = str + " " + place;
 						}
 						System.out.println(str);
 						for (int place2 : gameDungeon.dungeonPlayer.playerLocation()){
-							str2 = str2 + place2;
+							str2 = str2 + " " + place2;
 						}
 						System.out.println(str2);
 						if(str.equals(str2)){

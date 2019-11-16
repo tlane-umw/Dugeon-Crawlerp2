@@ -487,7 +487,7 @@ class Player extends Creature{
 		itemExistence = false;
 	}
 	public Integer[] playerLocation(){
-		Integer[] position = new Integer[]{row, column};
+		Integer[] position = new Integer[]{currentPlayerBoard, row, column};
 		return position;
 	}
 
