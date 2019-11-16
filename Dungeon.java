@@ -52,6 +52,13 @@ class Dungeon{
 }
 	//printing the gameboard showing the players location, enemies location, and items locations
 	public Hashtable<Integer, Integer[]>  printBoard(){
+		for (int z = 0; z < enemyList.size(); z++){
+			int currentEnemyBoard = enemyList.get(z).getEnemyBoardNum();
+			char[][] oldBoard = world.getCurrentBoard(currentEnemyBoard);
+			char [][] newBoard = enemyList.get(z).moveEnemy(oldBoard);
+			world.setNewBoard(currentEnemyBoard, newBoard);
+		}
+		
 		//System.out.println("About to print the board!");
 		int number = random.nextInt(4) + 3;
 		int count = 1;
