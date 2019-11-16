@@ -166,7 +166,7 @@ class Player extends Creature{
 			if ((row + 1) >= 19){
 				System.out.println("Invalid move, player would hit the wall!");
 			} 
-			else if (newBoard[row+1][column] == ' '){
+			else if (newBoard[(row + 1)][column] == ' '){
 				newBoard[row][column] = ' ';
 				row++;
 				newBoard[row][column] = playerSymbol;
@@ -269,6 +269,12 @@ class Player extends Creature{
 				}
 			}	
 		//calling the move enemy after every user turn
+		}
+		for (int i = 0; i < 20; i++){
+			for (int j = 0; j < 20; j++){
+				System.out.print(newBoard[i][j]);
+			}
+			System.out.println();
 		}
 
 		return newBoard;
