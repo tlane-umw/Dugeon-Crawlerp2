@@ -1,4 +1,4 @@
-//for chris
+//for chris number 2
 import java.util.Scanner;
 import java.util.Hashtable;
 class Player extends Creature{
