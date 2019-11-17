@@ -658,4 +658,3 @@ class Player extends Creature{
 			this.currentPlayerBoard = newPlayerBoard;
 		}
 	}
-}

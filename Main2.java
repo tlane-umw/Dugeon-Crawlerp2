@@ -114,12 +114,12 @@ public class Main2{
 				gameDungeon.dungeonPlayer.getInventory().drop();
 			}
 			else if ((userLetter == 'W') || (userLetter == 'A') || (userLetter == 'S') || (userLetter == 'D')){
-				System.out.println("The players column = " + gameDungeon.getPlayer().getColumn());
-				System.out.println();
-				System.out.println("The players row = " + gameDungeon.getPlayer().getRow());
-				System.out.println();
+				//System.out.println("The players column = " + gameDungeon.getPlayer().getColumn());
+				//System.out.println();
+				//System.out.println("The players row = " + gameDungeon.getPlayer().getRow());
+				//System.out.println();
 
-				System.out.println(playerSymbol);
+				//System.out.println(playerSymbol);
 
 				System.out.println();
 

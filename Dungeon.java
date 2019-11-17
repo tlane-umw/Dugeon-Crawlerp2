@@ -30,7 +30,7 @@ class Dungeon{
 	Player dungeonPlayer;
 	Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-	private static boolean skip = true;
+	private boolean skip = true;
 
 
 	//constructor with a 2D char array and a new player 
@@ -105,13 +105,6 @@ class Dungeon{
 				}
 			}
 			System.out.println();
-		}
-
-		for (int i = 0; i < enemyList.size(); i++){
-			int currentEnemyBoard = enemyList.get(i).getEnemyBoardNum();
-			char[][] oldBoard = world.getCurrentBoard(currentEnemyBoard);
-			char [][] newBoard = enemyList.get(i).moveEnemy(oldBoard);
-			world.setNewBoard(currentEnemyBoard, newBoard);
 		}
 		return location;
 		//System.out.println("Done printing board!");

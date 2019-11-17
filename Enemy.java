@@ -63,61 +63,65 @@ public class Enemy extends Creature{
 	public char[][] moveEnemy(char[][] enemyBoard){
 		char[][] newEnemyBoard = enemyBoard;
 		boolean validMove = false;
-		while(validMove == false) {
-			int number = random.nextInt(4);
-			if((number == 0) && (newEnemyBoard[(row - 1)][column] == ' ')){
-				newEnemyBoard[row][column] = ' ';
-				row--;
-				newEnemyBoard[row][column] = 'E';
-				//System.out.println("Enemy Row = " + row);
-				//System.out.println("Enemy column = " + column);
-				numEnemiesMoved++;
-				validMove = true;
-				return newEnemyBoard;
-			} 
+		if (newEnemyBoard[row][column] == 'E'){
+			while(validMove == false) {
+				int number = random.nextInt(4);
+				if((number == 0) && (newEnemyBoard[(row - 1)][column] == ' ')){
+					newEnemyBoard[row][column] = ' ';
+					row--;
+					newEnemyBoard[row][column] = 'E';
+					//System.out.println("Enemy Row = " + row);
+					//System.out.println("Enemy column = " + column);
+					numEnemiesMoved++;
+					validMove = true;
+					return newEnemyBoard;
+				} 
 
-			else if ((number == 1) && (newEnemyBoard[row][(column - 1)] == ' ')) {
-				newEnemyBoard[row][column] = ' ';
-				column--;
-				newEnemyBoard[row][column] = 'E';
-				//System.out.println("Enemy went west!!!!!!!!!!!!!!");
-				//System.out.println("Enemy Row = " + row);
-				//System.out.println("Enemy column = " + column);
-				numEnemiesMoved++;
-				validMove = true;
-				return newEnemyBoard;
-			} 
+				else if ((number == 1) && (newEnemyBoard[row][(column - 1)] == ' ')) {
+					newEnemyBoard[row][column] = ' ';
+					column--;
+					newEnemyBoard[row][column] = 'E';
+					//System.out.println("Enemy went west!!!!!!!!!!!!!!");
+					//System.out.println("Enemy Row = " + row);
+					//System.out.println("Enemy column = " + column);
+					numEnemiesMoved++;
+					validMove = true;
+					return newEnemyBoard;
+				} 
 
-			else if ((number == 2) && (newEnemyBoard[(row + 1)][column] == ' ')) {
-				newEnemyBoard[row][column] = ' ';
-				row++;
-				newEnemyBoard[row][column] = 'E';
-				//System.out.println("Enemy Row = " + row);
-				//System.out.println("Enemy column = " + column);
-				numEnemiesMoved++;
-				validMove = true;
-				return newEnemyBoard;
-			} 
+				else if ((number == 2) && (newEnemyBoard[(row + 1)][column] == ' ')) {
+					newEnemyBoard[row][column] = ' ';
+					row++;
+					newEnemyBoard[row][column] = 'E';
+					//System.out.println("Enemy Row = " + row);
+					//System.out.println("Enemy column = " + column);
+					numEnemiesMoved++;
+					validMove = true;
+					return newEnemyBoard;
+				} 
 
-			else if ((number == 3) && (newEnemyBoard[row][(column + 1)] == ' ')) {
-				newEnemyBoard[row][column] = ' ';
-				column++;
-				newEnemyBoard[row][column] = 'E';
-				//System.out.println("Enemy Row = " + row);
-				//System.out.println("Enemy column = " + column);
-				numEnemiesMoved++;
-				validMove = true;
-				return newEnemyBoard;
-			} 
+				else if ((number == 3) && (newEnemyBoard[row][(column + 1)] == ' ')) {
+					newEnemyBoard[row][column] = ' ';
+					column++;
+					newEnemyBoard[row][column] = 'E';
+					//System.out.println("Enemy Row = " + row);
+					//System.out.println("Enemy column = " + column);
+					numEnemiesMoved++;
+					validMove = true;
+					return newEnemyBoard;
+				} 
 
-			else {
-				//System.out.println("Enemy Row = " + row);
-				//System.out.println("Enemy column = " + column);
-				//System.out.println("Enemy wasn't moved. It was trying to go in " + number + " Trying again now.");
-				validMove = false;
+				else {
+					//System.out.println("Enemy Row = " + row);
+					//System.out.println("Enemy column = " + column);
+					//System.out.println("Enemy wasn't moved. It was trying to go in " + number + " Trying again now.");
+					validMove = false;
+				}
 			}
 		}
-
+		else{
+			newEnemyBoard[row][column] = ' ';
+		}
 
 		return newEnemyBoard;
 	}
