@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//This class stores stores all of the rooms
 public class GameBoard{
 	private char[][] gameBoard;
 
