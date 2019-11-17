@@ -9,7 +9,7 @@ class Player extends Creature{
 	private boolean itemExistence, onItem;
 	private String name;
 	private Inventory userInventory = new Inventory (250);
-	private int value, health, count, row, column;
+	private int value, health, count, row, column, newColumn, newRow;
 	private char playerSymbol;
 
 	//default constructor
@@ -63,389 +63,17 @@ class Player extends Creature{
 		char[][] newBoard = playerBoard;
 		itemExistence = false;
 		if (userMove == 'W'){
-			//if (this.dungeonGameBoard(row - 1)
-			if ((row - 1) <= 0){
-				System.out.println("Invalid move, player would hit the wall!");
-			}
-
-			else if (newBoard[(row - 1)][column] == 'D'){
-
-				System.out.println("You have found a door! Do you want to go into the new room?");
-				System.out.println("Enter 'Y' for yes and 'N' for no.");
-				String userDoor = s.nextLine();
-				while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
-					System.out.println("You did not enter a 'Y' or 'N'.");
-					System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
-					userDoor = s.nextLine();
-				}
-				if (userDoor.equals("N")){
-					return newBoard;
-				}
-				else{
-					System.out.println("You entered a door into a new room!");
-					if (currentPlayerBoard == 1){
-						if ((column < 10)){
-							newBoard[row][column] = ' ';
-							currentPlayerBoard = 0;
-							row = 10;
-							column = 17;
-						}
-						else{
-							newBoard[row][column] = ' ';
-							currentPlayerBoard = 2;
-							row = 10;
-							column = 2;
-						}
-					}
-					else if (currentPlayerBoard == 2){
-						newBoard[row][column] = ' ';
-						currentPlayerBoard = 1;
-						row = 10;
-						column = 17;
-					}
-					else{
-						newBoard[row][column] = ' ';
-						currentPlayerBoard = 1;
-						row = 10;
-						column = 2;
-
-					}
-				}
-			}
-
-			//seeing if the user landed on an item
-			else if (newBoard[row - 1][column] == 'I') {
-				newBoard[row][column] = ' ';
-				row--;
-				newBoard[row][column] = playerSymbol;
-				itemExistence = true;
-				onItem = true;
-			}
-			//seeing if the user landed on an enemy
-			else if (newBoard[row - 1][column] == 'E') {
-				boolean didPlayerWin = false;
-				didPlayerWin = fight();
-				if (didPlayerWin == true){
-					newBoard[row][column] = ' ';
-					row--;
-					newBoard[row][column] = playerSymbol;
-					numEnemiesDefeated = numEnemiesDefeated + 1;
-
-					//checking if the player has beat both enemies
-					if (numEnemiesDefeated == 2){
-						System.out.println("Congratulations!! You beat the game!!!");
-						System.out.println();
-						System.out.println("All the best from the creators - Chris, Toby, & Tyler!");
-						System.out.println();
-						System.exit(0);
-					}
-					else if (numEnemiesDefeated == 1){
-						System.out.println("You defeated the enemy! Keep going!!");
-						System.out.println();
-					}
-				}
-
-			}
-
-
-			//seeing if the user landed on an enemy
-			else if (onItem == true) {
-				newBoard[row][column] = 'I';
-				row--;
-				newBoard[row][column] = playerSymbol;
-				onItem = false;
-			} else {
-				newBoard[row][column] = ' ';
-				row--;
-				newBoard[row][column] = playerSymbol;
-			}
+			newBoard = displacement(-1, false, newBoard);
 		}
-
 		else if (userMove == 'A'){
-			if ((column - 1) <= 0){
-				System.out.println("Invalid move, player would hit the wall!");
-			}	
-			else if (newBoard[row][(column - 1)] == 'D'){
-
-				System.out.println("You have found a door! Do you want to go into the new room?");
-				System.out.println("Enter 'Y' for yes and 'N' for no.");
-				String userDoor = s.nextLine();
-				while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
-					System.out.println("You did not enter a 'Y' or 'N'.");
-					System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
-					userDoor = s.nextLine();
-				}
-				if (userDoor.equals("N")){
-					return newBoard;
-				}
-				else{
-					System.out.println("You entered a door into a new room!");
-					if (currentPlayerBoard == 1){
-						if ((column < 10)){
-							newBoard[row][column] = ' ';
-							currentPlayerBoard = 0;
-							row = 10;
-							column = 17;
-						}
-						else{
-							newBoard[row][column] = ' ';
-							currentPlayerBoard = 2;
-							row = 10;
-							column = 2;
-						}
-					}
-					else if (currentPlayerBoard == 2){
-						newBoard[row][column] = ' ';
-						currentPlayerBoard = 1;
-						row = 10;
-						column = 17;
-					}
-					else{
-						newBoard[row][column] = ' ';
-						currentPlayerBoard = 1;
-						row = 10;
-						column = 2;
-
-					}
-				}
-			} 
-
-			else if (newBoard[row][column - 1] == 'I') {
-				newBoard[row][column] = ' ';
-				column--;
-				newBoard[row][column] = playerSymbol;
-				itemExistence = true;
-				onItem = true;
-			}
-			else if (newBoard[row][column - 1] == 'E') {
-				boolean didPlayerWin = false;
-				didPlayerWin = fight();
-				if (didPlayerWin == true){
-					newBoard[row][column] = ' ';
-					column--;
-					newBoard[row][column] = playerSymbol;
-					numEnemiesDefeated = numEnemiesDefeated + 1;
-					if (numEnemiesDefeated == 2){
-						System.out.println("Congratulations!! You beat the game!!!");
-						System.out.println();
-						System.out.println("All the best from the creators - Chris, Toby, & Tyler!");
-						System.out.println();
-						System.exit(0);
-					}
-					else if (numEnemiesDefeated == 1){
-						System.out.println("You defeated the enemy! Keep going!!");
-						System.out.println();
-					}
-
-				}
-			}
-			else if (onItem == true) {
-				newBoard[row][column] = 'I';
-				column--;
-				newBoard[row][column] = playerSymbol;
-				onItem = false;
-			} 
-			else {
-				newBoard[row][column] = ' ';
-				column--;
-				newBoard[row][column] = playerSymbol;
-			}
-
+			newBoard = displacement(-1, true, newBoard);
 		} 
 		else if (userMove == 'S'){
-			if ((row + 1) >= 19){
-				System.out.println("Invalid move, player would hit the wall!");
-			}
-
-			else if (newBoard[(row + 1)][column] == 'D'){
-
-				System.out.println("You have found a door! Do you want to go into the new room?");
-				System.out.println("Enter 'Y' for yes and 'N' for no.");
-				String userDoor = s.nextLine();
-				while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
-					System.out.println("You did not enter a 'Y' or 'N'.");
-					System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
-					userDoor = s.nextLine();
-				}
-				if (userDoor.equals("N")){
-					return newBoard;
-				}
-				else{
-					System.out.println("You entered a door into a new room!");
-					if (currentPlayerBoard == 1){
-						if ((column < 10)){
-							newBoard[row][column] = ' ';
-							currentPlayerBoard = 0;
-							row = 10;
-							column = 17;
-						}
-						else{
-							newBoard[row][column] = ' ';
-							currentPlayerBoard = 2;
-							row = 10;
-							column = 2;
-						}
-					}
-					else if (currentPlayerBoard == 2){
-						newBoard[row][column] = ' ';
-						currentPlayerBoard = 1;
-						row = 10;
-						column = 17;
-					}
-					else{
-						newBoard[row][column] = ' ';
-						currentPlayerBoard = 1;
-						row = 10;
-						column = 2;
-
-					}
-				}
-			}	
-
-
-
-			else if (newBoard[row + 1][column] == 'I') {
-				newBoard[row][column] = ' ';
-				this.row++;
-				newBoard[row][column] = playerSymbol;
-				itemExistence = true;
-				onItem = true;
-			} 
-
-			else if (newBoard[row + 1][column] == 'E') {
-				boolean didPlayerWin = false;
-				didPlayerWin = fight();
-				if (didPlayerWin == true){
-					newBoard[row][column] = ' ';
-					this.row++;
-					newBoard[row][column] = playerSymbol;
-					numEnemiesDefeated = numEnemiesDefeated + 1;
-					if (numEnemiesDefeated == 2){
-						System.out.println("Congratulations!! You beat the game!!!");
-						System.out.println();
-						System.out.println("All the best from the creators - Chris, Toby, & Tyler!");
-						System.out.println();
-						System.exit(0);
-					}
-					else if (numEnemiesDefeated == 1){
-						System.out.println("You defeated the enemy! Keep going!!");
-						System.out.println();
-					}
-
-
-
-					else{
-						System.out.println("Better luck next time");
-						System.exit(0);
-					}
-
-				}
-			}	
-			else if (onItem == true) {
-				newBoard[row][column] = 'I';
-				this.row++;
-				newBoard[row][column] = playerSymbol;
-				onItem = false;
-			}
-			else {
-				newBoard[row][column] = ' ';
-				this.row++;
-				newBoard[row][column] = playerSymbol;
-				//System.out.println("Success! You have moved your player down a space!");
-			}
+			newBoard = displacement(1, false, newBoard);
 		}
 		else {
-			if ((column + 1) >= 19){
-				System.out.println("Invalid move, player would hit the wall!");
-			}
-			else if (newBoard[row][(column + 1)] == 'D'){
-
-				System.out.println("You have found a door! Do you want to go into the new room?");
-				System.out.println("Enter 'Y' for yes and 'N' for no.");
-				String userDoor = s.nextLine();
-				while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
-					System.out.println("You did not enter a 'Y' or 'N'.");
-					System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
-					userDoor = s.nextLine();
-				}
-				if (userDoor.equals("N")){
-					return newBoard;
-				}
-				else{
-					System.out.println("You entered a door into a new room!");
-					if (currentPlayerBoard == 1){
-						if ((column < 10)){
-							newBoard[row][column] = ' ';
-							currentPlayerBoard = 0;
-							row = 10;
-							column = 17;
-						}
-						else{
-							newBoard[row][column] = ' ';
-							currentPlayerBoard = 2;
-							row = 10;
-							column = 2;
-						}
-					}
-					else if (currentPlayerBoard == 2){
-						newBoard[row][column] = ' ';
-						currentPlayerBoard = 1;
-						row = 10;
-						column = 17;
-					}
-					else{
-						newBoard[row][column] = ' ';
-						currentPlayerBoard = 1;
-						row = 10;
-						column = 2;
-
-					}
-				}
-			}
-			else if (newBoard[row][column + 1] == 'I') {
-				newBoard[row][column] = ' ';
-				this.column++;
-				newBoard[row][column] = playerSymbol;
-				numEnemiesDefeated = numEnemiesDefeated + 1;
-				itemExistence = true;
-				onItem = true;
-			} 
-			else if (newBoard[row][column + 1] == 'E') {
-				boolean didPlayerWin = false;
-				didPlayerWin = fight();
-				if(didPlayerWin == true){	
-					if (numEnemiesDefeated == 2){
-						System.out.println("Congratulations!! You beat the game!!!");
-						System.out.println();
-						System.out.println("All the best from the creators - Chris, Toby, & Tyler!");
-						System.out.println();
-						System.exit(0);
-					}
-					else if (numEnemiesDefeated == 1){
-						System.out.println("You defeated the enemy! Keep going!!");
-						System.out.println();
-					}
-				}
-
-
-				else{
-					System.out.println("Better luck next time!");
-					System.exit(0);
-				}
-			}
-			else if (onItem == true) {
-				newBoard[row][column] = 'I';
-				this.column++;
-				newBoard[row][column] = playerSymbol;
-				onItem = false;
-			} 
-			else {
-				newBoard[row][column] = ' ';
-				this.column++;
-				newBoard[row][column] = playerSymbol;
-			}	
-			//calling the move enemy after every user turn
-		}
+			newBoard = displacement(1, true, newBoard);
+		}	
 		return newBoard;
 	}
 	//keeping track of where the user is
@@ -496,5 +124,105 @@ class Player extends Creature{
 	}
 	public void setCurrentPlayerBoard(int newPlayerBoard){
 		this.currentPlayerBoard = newPlayerBoard;
+	}
+	public char[][] displacement(int change, boolean choice, char[][] newBoard){
+		if(choice == true){
+			newColumn = column + change;
+			newRow = row;
+		} else {
+			newColumn = column;
+			newRow = row + change;
+		}
+		if ((newBoard[newRow][newColumn] == '|') || (newBoard[newRow][newColumn] == '_')){
+			System.out.println("Invalid move, player would hit the wall!");
+			return newBoard;
+		}
+		else if (newBoard[newRow][(newColumn)] == 'D'){
+
+			System.out.println("You have found a door! Do you want to go into the new room?");
+			System.out.println("Enter 'Y' for yes and 'N' for no.");
+			String userDoor = s.nextLine();
+			while ((!(userDoor.equals("Y"))) && (!(userDoor.equals("N")))){
+				System.out.println("You did not enter a 'Y' or 'N'.");
+				System.out.println("Please enter 'Y' to go through the door or 'N' to stay where you are.");
+				userDoor = s.nextLine();
+			}
+			if (userDoor.equals("N")){
+				return newBoard;
+			}
+			else{
+				System.out.println("You entered a door into a new room!");
+				if (currentPlayerBoard == 1){
+					if ((column < 10)){
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 0;
+						newRow = 10;
+						newColumn = 17;
+					}
+					else{
+						newBoard[row][column] = ' ';
+						currentPlayerBoard = 2;
+						newRow = 10;
+						newColumn = 2;
+					}
+				}
+				else if (currentPlayerBoard == 2){
+					newBoard[row][column] = ' ';
+					currentPlayerBoard = 1;
+					newRow = 10;
+					newColumn = 17;
+				}
+				else{
+					newBoard[row][column] = ' ';
+					currentPlayerBoard = 1;
+					newRow = 10;
+					newColumn = 2;
+
+				}
+			}
+		}
+		else if (newBoard[newRow][newColumn] == 'I') {
+			newBoard[row][column] = ' ';
+			newBoard[newRow][newColumn] = playerSymbol;
+			itemExistence = true;
+			onItem = true;
+		} 
+		else if (newBoard[newRow][newColumn] == 'E') {
+			boolean didPlayerWin = false;
+			didPlayerWin = fight();
+			if(didPlayerWin == true){	
+				if (numEnemiesDefeated == 2){
+					System.out.println("Congratulations!! You beat the game!!!");
+					System.out.println();
+					System.out.println("All the best from the creators - Chris, Toby, & Tyler!");
+					System.out.println();
+					System.exit(0);
+				}
+				else if (numEnemiesDefeated >= 0){
+					System.out.println("You defeated the enemy! Keep going!!");
+					numEnemiesDefeated = numEnemiesDefeated + 1;
+					System.out.println();
+				}
+			}
+
+
+			else{
+				System.out.println("Better luck next time!");
+				System.exit(0);
+			}
+		}
+		else if (onItem == true) {
+			newBoard[row][column] = 'I';
+			newBoard[newRow][newColumn] = playerSymbol;
+			onItem = false;
+		} 
+		else {
+			newBoard[row][column] = ' ';
+			newBoard[newRow][newColumn] = playerSymbol;
+		}
+		row = newRow;
+		column = newColumn;	
+		//calling the move enemy after every user turn
+		return newBoard;
 	}
 }
