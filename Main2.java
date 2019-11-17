@@ -130,7 +130,7 @@ public class Main2{
 				char[][] newBoard = gameDungeon.dungeonPlayer.move(userLetter, oldBoard);
 
 				gameDungeon.getWorld().setNewBoard(currentBoardNum, newBoard);
-				
+
 				gameDungeon.setCurrentBoardNum(gameDungeon.getPlayer().getCurrentPlayerBoard());
 
 				System.out.println("The current gameboard number is - " + gameDungeon.getCurrentBoardNum());
@@ -139,37 +139,38 @@ public class Main2{
 				String str = "";
 
 				String str2 = "";
-				/*
-				   if (gameDungeon.dungeonPlayer.move(userLetter) == true){
-				   for(int i = 1; i < size + 1; i++){
-				   for (int place : location.get(i)){
-				   str = str + place;
-				   }
-				   for (int place2 : gameDungeon.playerLocation()){
-				   str2 = str2 + place2;
-				   }
-				   if(str.equals(str2)){
-				   if(player.itemQuestion(groundItems.get(i)) == true){
-				   gameDungeon.makeFalse();
-				   keepPlaying = true;
-				   } else {
-				   keepPlaying = true;
-				   }
-				   }
-				   str = "";
-				   str2 = "";
-				   }
-				   }
-			}*/
+				if (gameDungeon.dungeonPlayer.getItemExistence() == true){
+					for(int i = 1; i < size + 1; i++){
+						for (int place : location.get(i)){
+							str = str + " " + place;
+						}
+						System.out.println(str);
+						for (int place2 : gameDungeon.dungeonPlayer.playerLocation()){
+							str2 = str2 + " " + place2;
+						}
+						System.out.println(str2);
+						if(str.equals(str2)){
+							if(player.itemQuestion(groundItems.get(i)) == true){
+								gameDungeon.dungeonPlayer.makeFalse();
+								keepPlaying = true;
+							} else {
+								keepPlaying = true;
+							}
+						}
+						str = "";
+						str2 = "";
+					}
+				}
 			}
 			else{
-			System.out.println("Your command was not recognized, enter 'P' to print the list of commands again.");
-			keepPlaying = true;
+				System.out.println("Your command was not recognized, enter 'P' to print the list of commands again.");
+				keepPlaying = true;
 			}
-			
 		}
+
 	}
 }
+
 
 
 

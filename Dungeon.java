@@ -26,11 +26,11 @@ class Dungeon{
 	ArrayList<Player> player = new ArrayList<Player>();
 	Random random = new Random();
 	char playerSymbol;
-	Integer[] placement = new Integer[]{0, 0};
+	Integer[] placement = new Integer[]{0, 0, 0};
 	Player dungeonPlayer;
 	Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-	
+
 
 	//constructor with a 2D char array and a new player 
 	Dungeon(Player dungeonPlayer, char playerSymbol){
@@ -49,7 +49,7 @@ class Dungeon{
 		enemyList.add(enemy3);
 		enemyList.add(enemy4);
 		enemyList.add(enemy5);
-}
+	}
 	//printing the gameboard showing the players location, enemies location, and items locations
 	public Hashtable<Integer, Integer[]>  printBoard(){
 		for (int z = 0; z < enemyList.size(); z++){
@@ -58,23 +58,26 @@ class Dungeon{
 			char [][] newBoard = enemyList.get(z).moveEnemy(oldBoard);
 			world.setNewBoard(currentEnemyBoard, newBoard);
 		}
-		
+
 		//System.out.println("About to print the board!");
 		int number = random.nextInt(4) + 3;
 		int count = 1;
 		if(!alreadyExecuted) {
-			for(int i = 0; i < number; i++){
-				value.add(random.nextInt(17) + 2);				
-				value2.add(random.nextInt(17) + 2);
-				if(world.getCurrentBoard(currentBoard)[value.get(i)][value2.get(i)] == ' ');
-				world.getCurrentBoard(currentBoard)[value.get(i)][value2.get(i)] = 'I';
-				placement = new Integer[]{value.get(i), value2.get(i)};
-				location.put(count, placement);
-				count++;
-
-			}
+			for(int k = 0; k < 3; k++){
+				for(int i = 0; i < number; i++){
+					value.add(random.nextInt(17) + 2);				
+					value2.add(random.nextInt(17) + 2);
+					if(world.getCurrentBoard(k)[value.get(i+(number*k))][value2.get(i+(number*k))] == ' '){
+						world.getCurrentBoard(k)[value.get(i+(number*k))][value2.get(i+(number*k))] = 'I';
+						placement = new Integer[]{k, value.get(i+(number*k)), value2.get(i+(number*k))};
+						location.put(count, placement);
+						count++;
+					}
+				}
+			}	
 			alreadyExecuted = true;
-			return location;	
+			return location;
+
 		}
 		world.getCurrentBoard(currentBoard)[dungeonPlayer.getRow()][dungeonPlayer.getColumn()] = playerSymbol;
 		for (int i = 0; i < 20; i++){
@@ -87,7 +90,7 @@ class Dungeon{
 			}
 			System.out.println();
 		}
-		
+
 		for (int i = 0; i < enemyList.size(); i++){
 			int currentEnemyBoard = enemyList.get(i).getEnemyBoardNum();
 			char[][] oldBoard = world.getCurrentBoard(currentEnemyBoard);
@@ -98,7 +101,7 @@ class Dungeon{
 		//System.out.println("Done printing board!");
 	}
 
-		//keeping track of where the user is
+	//keeping track of where the user is
 	public Integer[] playerLocation(){
 		Integer[] position = new Integer[]{playerRow, playerColumn};
 		return position;
@@ -111,10 +114,10 @@ class Dungeon{
 	public Player getDungeonPlayer(){
 		return this.dungeonPlayer;
 	}
-	
+
 	public int getCurrentBoardNum(){
 		return this.currentBoard;
-	
+
 	}
 
 	public void setCurrentBoardNum(int newBoard){
@@ -128,7 +131,7 @@ class Dungeon{
 		return this.dungeonPlayer;
 	}
 
-	
+
 
 
 }
