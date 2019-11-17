@@ -59,6 +59,7 @@ class Player extends Creature{
 		}
 		return groundItems;
 	}
+	/* Our move method takes the users input and the 2d array that represents the old board. Based on whether the users move was W, A, S or D, this method calls the displacement method, giving it the displacement (-1 or 1), the direction(true is the column, or x axis and false is the row, or y axis) and the old 2d array that represents the board.So, for example -1 and false would be in the negative y direction, while 1 and false would be in the positive y direction. It then returns the newBoard with the new player location.*/
 	public char[][] move(char userMove, char[][] playerBoard){
 
 		char[][] newBoard = playerBoard;
@@ -228,6 +229,7 @@ class Player extends Creature{
 	public boolean getItemExistence(){
 		return itemExistence;
 	}
+	//This method is called when the user steps on an item and chooses to pick it up. Since the item is no longer there, the booleans should be false so that the I symbol does not reappear once the player leaves that space.
 	public void makeFalse(){
 		onItem = false;
 		itemExistence = false;
@@ -243,6 +245,7 @@ class Player extends Creature{
 	public void setCurrentPlayerBoard(int newPlayerBoard){
 		this.currentPlayerBoard = newPlayerBoard;
 	}
+	//The displacement method takes an integer for the displacement of the player and a boolean for the direction (moving in the x direction or y direction) and the old board. It returns a newBoard based on the players new location. The purpose of this method was to save ourselves having to write this code 4 times for move method based on if the player pressed W, A, S, or D.
 	public char[][] displacement(int change, boolean choice, char[][] newBoard){
 		if(choice == true){
 			newColumn = column + change;
@@ -251,10 +254,12 @@ class Player extends Creature{
 			newColumn = column;
 			newRow = row + change;
 		}
+		//Prevents the player from running into the wall.
 		if ((newBoard[newRow][newColumn] == '|') || (newBoard[newRow][newColumn] == '-')){
 			System.out.println("Invalid move, player would hit the wall!");
 			return newBoard;
 		}
+		//What happens when a player lands on the symbol D for door.
 		else if (newBoard[newRow][(newColumn)] == 'D'){
 
 			System.out.println("You have found a door! Do you want to go into the new room?");
@@ -269,6 +274,7 @@ class Player extends Creature{
 				return newBoard;
 			}
 			else{
+		//If the player chooses to enter the room, the new players location in the new room is determined by which room the player is currently in and which side of the room that player is currently on. The player will now appear right next to the door in the new room.
 				System.out.println("You entered a door into a new room!");
 				if (currentPlayerBoard == 1){
 					if ((newColumn < 10)){
@@ -299,12 +305,14 @@ class Player extends Creature{
 				}
 			}
 		}
+		//What happens when the player steps on an item.
 		else if (newBoard[newRow][newColumn] == 'I') {
 			newBoard[row][column] = ' ';
 			newBoard[newRow][newColumn] = playerSymbol;
 			itemExistence = true;
 			onItem = true;
-		} 
+		}
+		//Whata happens when the player bumps into an enemy.
 		else if (newBoard[newRow][newColumn] == 'E') {
 			boolean didPlayerWin = false;
 			didPlayerWin = fight();
@@ -339,16 +347,17 @@ class Player extends Creature{
 				System.exit(0);
 			}
 		}
+		//What happens when a player is no longer standing on an item that they chose to not pick up.
 		else if (onItem == true) {
 			newBoard[row][column] = 'I';
 			newBoard[newRow][newColumn] = playerSymbol;
 			onItem = false;
 		} 
+		//Nothing is in the players way, so the player can freely move forward.
 		else {
 			newBoard[row][column] = ' ';
 			newBoard[newRow][newColumn] = playerSymbol;
 		}	
-		//calling the move enemy after every user turn
 		row = newRow;
 		column = newColumn;
 		return newBoard;
