@@ -13,6 +13,7 @@ public class Enemy extends Creature{
 	private int row;
 	private int column;
 	private int board;
+	private String placeName;
 	private static int doesEnemyMove = 2;
 	private static int numEnemiesMoved = 0;
 	private static int doesEnemyMoveThisTurn = 0;
@@ -26,14 +27,13 @@ public class Enemy extends Creature{
 		return enemyLocation;
 	}
 	Enemy(EnemyType type, String name, int health, int damage, Item drop){
-		super(name);
-		this.health = health;
+		super(name, health);
 		this.type = type;
 		this.damage = damage;
 		this.drop = drop;
 	}
-	Enemy (String name, int row, int column, int board){
-		super(name);
+	Enemy (String placeName, int row, int column, int board){
+		this.placeName = placeName;
 		this.row = row;
 		this.column = column;
 		this.board = board;
@@ -42,10 +42,6 @@ public class Enemy extends Creature{
 	//This returns the type of enemy.
 	public EnemyType getType(){
 		return type;
-	}
-	public String getName(){
-		return name;
-
 	}
 	//a method to return an item after the player defeats an enemy
 	//did not have enough time to implement this into our program

@@ -40,7 +40,7 @@ public class Main2{
 
 		//seting up the game
 		boolean keepPlaying = true;
-		Player player = new Player(signature, playerSymbol);
+		Player player = new Player(signature, 100,  playerSymbol);
 		Dungeon gameDungeon = new Dungeon(player, playerSymbol);
 		Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
 		location = gameDungeon.printBoard();

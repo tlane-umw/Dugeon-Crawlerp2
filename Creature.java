@@ -6,9 +6,12 @@ public class Creature{
 	private int column;
 	private int board;
         private int health;
-	Creature (String name){
+	Creature (String name, int health){
 		this.name = name;
+		this.health = health;
 
+	}
+	Creature(){
 	}
         public String getName(){
                 return name;
