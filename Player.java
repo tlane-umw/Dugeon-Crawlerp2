@@ -260,26 +260,26 @@ class Player extends Creature{
 						newBoard[row][column] = ' ';
 						currentPlayerBoard = 0;
 						newRow = 10;
-						newColumn = 17;
+						newColumn = 18;
 					}
 					else{
 						newBoard[row][column] = ' ';
 						currentPlayerBoard = 2;
 						newRow = 10;
-						newColumn = 2;
+						newColumn = 1;
 					}
 				}
 				else if (currentPlayerBoard == 2){
 					newBoard[row][column] = ' ';
 					currentPlayerBoard = 1;
 					newRow = 10;
-					newColumn = 17;
+					newColumn = 18;
 				}
 				else{
 					newBoard[row][column] = ' ';
 					currentPlayerBoard = 1;
 					newRow = 10;
-					newColumn = 2;
+					newColumn = 1;
 
 				}
 			}
