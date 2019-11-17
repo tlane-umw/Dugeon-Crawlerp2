@@ -22,5 +22,17 @@ public class Creature{
         public void setHealth(int health){
                 this.health = health;
         }
+	public void setName(String name){
+		this.name = name;
+	}
+	public void setColumn(int column){
+		this.column = column;
+	}
+	public void setBoard(int board){
+		this.board = board;
+		}
+	public void setRow(int row){
+		this.row = row;
+	}
 }
 

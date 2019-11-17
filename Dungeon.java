@@ -3,6 +3,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Hashtable;
+import java.io.File;
+import import java.io.PrintWriter;
 
 //instance variables
 class Dungeon{
@@ -31,6 +33,9 @@ class Dungeon{
 	Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 	private boolean skip = true;
+	File saveFile = new File("saveFile.txt");
+
+
 
 
 	//constructor with a 2D char array and a new player 
@@ -139,6 +144,23 @@ class Dungeon{
 	public Player getPlayer(){
 		return this.dungeonPlayer;
 	}
+	public void save(){
+	try{
+		PrintWriter output = new PrintWriter(saveFile);
+		output.println(dungeonPlayer.getName());
+		output.println(dungeonPlayer.getHealth());
+		output.println(dungeonPlayer.getRow());
+		output.println(dungeonPlayer.getColumn());
+		output.println(dungeonPlayer.getCurrentPlayerBoard());
+		output.close();
+	}
+	catch (IOException ex){
+		System.out.println("ERROR");
+	}
+	}
+	public void restore(){
+	Scanner input = new Scanner(saveFile);
+	this.dungeonPlayer.
 
 
 
