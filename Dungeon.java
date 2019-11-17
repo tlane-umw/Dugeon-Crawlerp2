@@ -3,8 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Hashtable;
-import java.io.File;
-import import java.io.PrintWriter;
+import java.io.*;
 
 //instance variables
 class Dungeon{
@@ -58,7 +57,7 @@ class Dungeon{
 	}
 
 	public void moveEnemies(){
-	System.out.println("The size of the enemy list is " + enemyList.size());
+		System.out.println("The size of the enemy list is " + enemyList.size());
 		if (skip == false){
 
 			for (int z = 0; z < enemyList.size(); z++){
@@ -144,23 +143,33 @@ class Dungeon{
 	public Player getPlayer(){
 		return this.dungeonPlayer;
 	}
-	public void save(){
-	try{
-		PrintWriter output = new PrintWriter(saveFile);
-		output.println(dungeonPlayer.getName());
-		output.println(dungeonPlayer.getHealth());
-		output.println(dungeonPlayer.getRow());
-		output.println(dungeonPlayer.getColumn());
-		output.println(dungeonPlayer.getCurrentPlayerBoard());
-		output.close();
-	}
-	catch (IOException ex){
-		System.out.println("ERROR");
-	}
+	public void save()throws FileNotFoundException{
+		try{
+			PrintWriter output = new PrintWriter(saveFile);
+			output.println(dungeonPlayer.getName());
+			output.println(dungeonPlayer.getHealth());
+			output.println(dungeonPlayer.getRow());
+			output.println(dungeonPlayer.getColumn());
+			output.println(dungeonPlayer.getCurrentPlayerBoard());
+			output.close();
+		}
+		catch (IOException ioe){
+			System.out.println("Error");
+		}
 	}
 	public void restore(){
-	Scanner input = new Scanner(saveFile);
-	this.dungeonPlayer.
+		try{
+			Scanner input = new Scanner(saveFile);
+			this.dungeonPlayer.setName(input.nextLine());
+			this.dungeonPlayer.setHealth(input.nextInt());
+			this.dungeonPlayer.setRow(input.nextInt());
+			this.dungeonPlayer.setColumn(input.nextInt());
+			this.dungeonPlayer.setCurrentPlayerBoard(input.nextInt());
+		}
+		catch (FileNotFoundException f){
+			System.out.println("File was not found");
+		}
+	}
 
 
 

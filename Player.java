@@ -11,7 +11,7 @@ class Player extends Creature{
 	private boolean itemExistence, onItem;
 	private String name;
 	private Inventory userInventory = new Inventory (250);
-	private int value, health, count, row, column, newColumn, newRow;
+	private int value, health, count, row, column, board, newColumn, newRow;
 	private char playerSymbol;
 
 	//default constructor
@@ -20,6 +20,7 @@ class Player extends Creature{
 		this.playerSymbol = playerSymbol;
 		this.row = 1;
 		this.column = 8;
+		this.board = 1;
 
 	}
 	public Inventory getInventory(){
@@ -229,6 +230,13 @@ class Player extends Creature{
 	public boolean getItemExistence(){
 		return itemExistence;
 	}
+	public void setRow(int row){
+		this.row = row;
+	}
+	public void setColumn(int column){
+		this.column = column;
+	}
+
 	//This method is called when the user steps on an item and chooses to pick it up. Since the item is no longer there, the booleans should be false so that the I symbol does not reappear once the player leaves that space.
 	public void makeFalse(){
 		onItem = false;

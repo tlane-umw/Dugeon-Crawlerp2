@@ -3,12 +3,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.*;
+import java.io.*;
 import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.InputMismatchException;
 public class Main2{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException, IOException {
 
 
 		Scanner input = new Scanner(System.in);
@@ -58,6 +59,8 @@ public class Main2{
 		System.out.println("O : equip a current weapon in your inventory to your player");
 		System.out.println("T : to drop an item from your inventory");
 		System.out.println("P : Print the commands of the game again");
+		System.out.println("V : Save the game");
+		System.out.println("R : Restore your previously saved gamed");
 		System.out.println("Q : quit out of the game");
 
 
@@ -100,6 +103,8 @@ public class Main2{
 				System.out.println("M : equip a current armor in your inventory to your player");
 				System.out.println("O : equip a current weapon in your inventory to your player");
 				System.out.println("P : Print the commands of the game again");
+				System.out.println("V : Save the game");
+				System.out.println("R : Resote your previously saved game");
 				System.out.println("Q : quit out of the game");
 
 				System.out.println();
@@ -107,6 +112,17 @@ public class Main2{
 			}
 			else if (userLetter == 'O'){
 				gameDungeon.dungeonPlayer.getInventory().equipWeapon();
+			}
+			else if (userLetter == 'V'){
+				gameDungeon.save();
+			}
+			else if (userLetter == 'R'){
+				gameDungeon.restore();
+				int savedPlayerBoard = gameDungeon.dungeonPlayer.getCurrentPlayerBoard();
+				gameDungeon.setCurrentBoardNum(savedPlayerBoard);
+				System.out.println("The players column after restoring is " + gameDungeon.dungeonPlayer.getColumn());
+				System.out.println("The players row after restoring is " + gameDungeon.dungeonPlayer.getRow());
+				gameDungeon.printBoard();
 			}
 			else if (userLetter == 'M'){
 				gameDungeon.dungeonPlayer.getInventory().equipArmor();
