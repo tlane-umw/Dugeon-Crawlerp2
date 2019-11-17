@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.Hashtable;
 class Player extends Creature{
+
 	//instance variables
 	Scanner s = new Scanner(System.in);
 	private String answer;
@@ -132,18 +133,20 @@ class Player extends Creature{
 					numEnemiesDefeated = numEnemiesDefeated + 1;
 
 					//checking if the player has beat both enemies
-					if (numEnemiesDefeated == 2){
+					if (numEnemiesDefeated == 6){
 						System.out.println("Congratulations!! You beat the game!!!");
 						System.out.println();
 						System.out.println("All the best from the creators - Chris, Toby, & Tyler!");
 						System.out.println();
 						System.exit(0);
 					}
-					else if (numEnemiesDefeated == 1){
+					else{
 						System.out.println("You defeated the enemy! Keep going!!");
 						System.out.println();
 					}
 				}
+
+
 
 			}
 
@@ -470,16 +473,117 @@ class Player extends Creature{
 		while ((playerAlive == true) && (enemyAlive == true)){
 			System.out.println("Round " + roundNumber + " is about to begin!");
 			System.out.println();
+			try{
+				Thread.sleep(5000);
+			}
+			catch(InterruptedException g){
+				System.out.println("Interrupted");
 
-			//player attacking the enemy
-			int enemyDamage = getInventory().getEquippedWeapon().getStrength();
-			dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
-			System.out.println("Enemy took " + enemyDamage + " damage from the players " + getInventory().getEquippedWeapon().getName());
-			System.out.println();
+				//player attacking the enemy
+				int enemyDamage = getInventory().getEquippedWeapon().getStrength();
+				dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
+				System.out.println("Enemy took " + enemyDamage + " damage from the players " + getInventory().getEquippedWeapon().getName());
+				System.out.println();
+				try{
+					Thread.sleep(5000);
+				}
+				catch (InterruptedException f){
+					System.out.println("Interrupted!");
+				}
 
-			//checking
+				//checking if the enemy won
+				if (dungeonEnemy.getHealth() <= 0){
+					didUserWin = true;
+					enemyAlive = false;
+					return true;
+				}
+
+				//printing the enemies health if it is still alive
+				else{
+					System.out.println("The new enemy health is " + dungeonEnemy.getHealth());
+					System.out.println();
+					try{
+						Thread.sleep(5000);
+					}
+					catch (InterruptedException f){
+						System.out.println("Interruputed!");
+					}
+				}
+
+				//enemy attacking the player
+
+
+				//getting players current health
+				System.out.println("The player currently has a health of " + getHealth());
+				System.out.println();
+				try{
+					Thread.sleep(5000);
+				}
+				catch (InterruptedException e){
+					System.out.println("Interrupted!");
+				}
+
+				//getting the amount of damage the enemy caused based off the players current equipped armor and the enemys damage
+				int playerDamage = ((dungeonEnemy.getDamage()) - (getInventory().getEquippedArmor().getStrength()));
+
+				//checking if the players current armor is stronger than the enemy's attack
+				if (playerDamage <= 0){
+					System.out.println("The players " + getInventory().getEquippedArmor().getName() + " completely negated the enemy's attack!");
+					System.out.println();
+					try{
+						Thread.sleep(5000);
+					}
+					catch (InterruptedException d){
+						System.out.println("Interrupted!");
+					}
+				}
+				//setting the players new health based on the previously calculated enemy damage
+				else{
+					int currentPlayerHealth = getHealth();
+					int newPlayerHealth = currentPlayerHealth - playerDamage;
+					setHealth(newPlayerHealth);
+
+					System.out.println("You took " + playerDamage + " damage from the enemy!");
+					System.out.println();
+					try{
+						Thread.sleep(5000);
+					}
+					catch (InterruptedException c){
+						System.out.println("Interrupted!");
+					}
+
+					//cheching if the player is still alive
+					if (getHealth() <= 0){
+						didUserWin = false;
+						System.out.println("The enemy brutally murdered you!");
+						System.out.println("Better luck next time!");
+						try{
+							Thread.sleep(5000);
+						}
+						catch (InterruptedException b){
+							System.out.println("Interrupted!");
+						}
+						System.exit(0);
+						System.out.println();
+						playerAlive = false;
+					}
+					else{
+						System.out.println("After the enemy's latest attack, the player's health is " + getHealth());
+						System.out.println();
+						try{
+							Thread.sleep(5000);
+						}
+						catch(InterruptedException a){
+							System.out.println("Interrupted!");
+						}
+					}
+				}
+
+				roundNumber = roundNumber + 1;
+			}
 
 		}
+
 		return didUserWin;
 	}
 
