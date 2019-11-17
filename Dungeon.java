@@ -30,6 +30,7 @@ class Dungeon{
 	Player dungeonPlayer;
 	Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+	private static boolean skip = true;
 
 
 	//constructor with a 2D char array and a new player 
@@ -50,14 +51,29 @@ class Dungeon{
 		enemyList.add(enemy4);
 		enemyList.add(enemy5);
 	}
+
+	public void moveEnemies(){
+	System.out.println("The size of the enemy list is " + enemyList.size());
+		if (skip == false){
+
+			for (int z = 0; z < enemyList.size(); z++){
+				int currentEnemyBoard = enemyList.get(z).getEnemyBoardNum();
+				char[][] oldBoard = world.getCurrentBoard(currentEnemyBoard);
+				char [][] newBoard = enemyList.get(z).moveEnemy(oldBoard);
+				world.setNewBoard(currentEnemyBoard, newBoard);
+				System.out.println("Enemy " + z + " new row = " + enemyList.get(z).getRow() + ", enemy new column = " + enemyList.get(z).getColumn());
+			}
+			skip = true;
+		}
+		else if (skip == true){
+			skip = false;
+		}
+	}
+
+
+
 	//printing the gameboard showing the players location, enemies location, and items locations
 	public Hashtable<Integer, Integer[]>  printBoard(){
-		for (int z = 0; z < enemyList.size(); z++){
-			int currentEnemyBoard = enemyList.get(z).getEnemyBoardNum();
-			char[][] oldBoard = world.getCurrentBoard(currentEnemyBoard);
-			char [][] newBoard = enemyList.get(z).moveEnemy(oldBoard);
-			world.setNewBoard(currentEnemyBoard, newBoard);
-		}
 
 		//System.out.println("About to print the board!");
 		int number = random.nextInt(4) + 3;

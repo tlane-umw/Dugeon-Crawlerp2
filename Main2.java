@@ -161,6 +161,7 @@ public class Main2{
 						str2 = "";
 					}
 				}
+				gameDungeon.moveEnemies();
 			}
 			else{
 				System.out.println("Your command was not recognized, enter 'P' to print the list of commands again.");
