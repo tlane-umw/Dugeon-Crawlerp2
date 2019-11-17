@@ -793,7 +793,6 @@ class Player extends Creature{
 		}
 		row = newRow;
 		column = newColumn;	
-		//calling the move enemy after every user turn
 		return newBoard;
 	}
 }
