@@ -1,7 +1,7 @@
-TYLER
+s
 100
-7
-14
+17
+12
 1
 Starter Sword
 5
@@ -18,9 +18,24 @@ Dragonball
 100
 0
 Other
-Fine Steel Shield
-65
-55
+Key
+10
+5
+0
+Other
+PokeBall
+2
+20
+0
+Other
+Body Armor
 85
+75
+105
 Armor
+Fine Steel Sword
+80
+55
+105
+Weapon
 .

@@ -199,19 +199,21 @@ class Dungeon{
 					int weight = input.nextInt();
 					int value = input.nextInt();
 					int strength = input.nextInt();
+					String trash = input.nextLine();
 					String itemTypeName = input.nextLine();
 					ItemType type = null;
+					Item newItem;
 					if (itemTypeName.equals("Weapon")){
-						type = ItemType.Weapon;
+						newItem = new Item(itemName, weight, value, strength, ItemType.Weapon);
 					}
 					else if (itemTypeName.equals("Armor")){
-						type = ItemType.Armor;
+						newItem = new Item(itemName, weight, value, strength, ItemType.Armor);
 					}
 					else{
-						type = ItemType.Weapon;
+						newItem = new Item(itemName, weight, value, strength, ItemType.Other);
 					}
-					Item newItem = new Item(itemName, weight, value, strength, type);
-					this.dungeonPlayer.getInventory().add(newItem);	
+					this.dungeonPlayer.getInventory().add(newItem);
+
 				}
 				catch(InputMismatchException e){
 
@@ -223,12 +225,6 @@ class Dungeon{
 		catch (FileNotFoundException f){
 			System.out.println("File was not found");
 		}
-
-
-
-
-
-
 	}
 }
 
