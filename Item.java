@@ -55,7 +55,7 @@ public class Item{
 	}
 	//stand toString method to print Object in a readable manner
 	public String toString(){
-		return ("Item type = " + this.getType() + "Name = " + this.name + ", weight = " + this.getWeight() + ", value = " +  this.getValue() + ", strength = " + this.getStrength() + ".");
+		return ("This item is a " + this.getName() + " with a weight of " + this.getWeight() + " and a value = " +  this.getValue() + " with a of strength " + this.getStrength() +" and is a type  " + this.getType() +  ".");
 	}
 }
 
