@@ -46,6 +46,15 @@ class Inventory{
 			return true;
 		}
 	}
+	public void remove(int i){
+		items.remove(i);
+	}
+	public int getSize(){
+		return items.size();
+	}
+	public Item getItem(int z){
+		return items.get(z);
+	}
 	//method to return the weapon the user currently has equipped
 	public Item getEquippedWeapon(){
 		return this.equippedWeapon;

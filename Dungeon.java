@@ -151,6 +151,25 @@ class Dungeon{
 			output.println(dungeonPlayer.getRow());
 			output.println(dungeonPlayer.getColumn());
 			output.println(dungeonPlayer.getCurrentPlayerBoard());
+			for (int z = 0; z < dungeonPlayer.getInventory().getSize(); z++){
+				output.println(dungeonPlayer.getInventory().getItem(z).getName());
+				output.println(dungeonPlayer.getInventory().getItem(z).getWeight());
+				output.println(dungeonPlayer.getInventory().getItem(z).getValue());
+				output.println(dungeonPlayer.getInventory().getItem(z).getStrength());
+				output.println("Items Beginning");
+				if((dungeonPlayer.getInventory().getItem(z).getType()) == ItemType.Weapon){
+					output.println("Weapon");
+				}
+				else if((dungeonPlayer.getInventory().getItem(z).getType()) == ItemType.Armor){
+					output.println("Armor");
+				}
+				else{
+					output.println("Other");
+				}
+
+			}
+			output.println(".");
+
 			output.close();
 		}
 		catch (IOException ioe){
@@ -165,14 +184,45 @@ class Dungeon{
 			this.dungeonPlayer.setRow(input.nextInt());
 			this.dungeonPlayer.setColumn(input.nextInt());
 			this.dungeonPlayer.setCurrentPlayerBoard(input.nextInt());
+
+			for (int y = 0; y < dungeonPlayer.getInventory().getSize(); y++){
+				dungeonPlayer.getInventory().remove(0);
+			}
+			boolean inItems = true;
+			while (inItems == true){
+				String itemName = input.nextLine();
+				if (itemName.equals(".")){
+					inItems = false;
+					break;
+				}
+				int weight = input.nextInt();
+				int value = input.nextInt();
+				int strength = input.nextInt();
+				String itemTypeName = input.nextLine();
+				ItemType type;
+				if (itemTypeName.equals("Weapon")){
+					type = ItemType.Weapon;
+				}
+				else if (itemTypeName.equals("Armor")){
+					type = ItemType.Armor;
+				}
+				else{
+					type = ItemType.Weapon;
+				}
+				Item newItem = new Item(itemName, weight, value, strength, type);
+				this.dungeonPlayer.getInventory().add(newItem);	
+
+			}
 		}
 		catch (FileNotFoundException f){
 			System.out.println("File was not found");
 		}
+
+
+
+
+
+
 	}
-
-
-
-
 }
 
