@@ -1,0 +1,26 @@
+TYLER
+100
+7
+14
+1
+Starter Sword
+5
+5
+5
+Weapon
+Starter Shield
+5
+5
+5
+Armor
+Dragonball
+0
+100
+0
+Other
+Fine Steel Shield
+65
+55
+85
+Armor
+.
