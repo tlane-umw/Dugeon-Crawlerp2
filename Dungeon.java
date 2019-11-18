@@ -157,15 +157,7 @@ class Dungeon{
 				output.println(dungeonPlayer.getInventory().getItem(z).getWeight());
 				output.println(dungeonPlayer.getInventory().getItem(z).getValue());
 				output.println(dungeonPlayer.getInventory().getItem(z).getStrength());
-				if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Weapon")){
-					output.println("Weapon");
-				}
-				else if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Armor")){
-					output.println("Armor");
-				}
-				else{
-					output.println("Other");
-				}
+				output.println(dungeonPlayer.getInventory().getItem(z).getTypeString());
 
 			}
 			output.println(".");
@@ -200,17 +192,16 @@ class Dungeon{
 					int value = input.nextInt();
 					int strength = input.nextInt();
 					String itemTypeName = input.nextLine();
-					ItemType type = null;
+					Item newItem = new Item(itemName, weight, value, strength);
 					if (itemTypeName.equals("Weapon")){
-						type = ItemType.Weapon;
+						newItem.setItemType(ItemType.Weapon);
 					}
 					else if (itemTypeName.equals("Armor")){
-						type = ItemType.Armor;
+						newItem.setItemType(ItemType.Armor);
 					}
 					else{
-						type = ItemType.Weapon;
+						newItem.setItemType(ItemType.Other);
 					}
-					Item newItem = new Item(itemName, weight, value, strength, type);
 					this.dungeonPlayer.getInventory().add(newItem);	
 				}
 				catch(InputMismatchException e){

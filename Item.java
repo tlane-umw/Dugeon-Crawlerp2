@@ -16,6 +16,15 @@ public class Item{
 		this.value = value;
 		this.strength = strength;
 	}
+	Item(String name, int weight, int value, int strength){
+		this.name = name;
+		this.weight = weight;
+		this.value = value;
+		this.strength = strength;
+	}
+	public void setItemType(ItemType type){
+		this.type = type;
+	}
 
 	//standard get methods
 	public int getWeight(){

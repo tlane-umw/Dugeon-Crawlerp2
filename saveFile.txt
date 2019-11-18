@@ -18,9 +18,9 @@ Dragonball
 100
 0
 Other
-Fine Steel Shield
-65
-55
-85
-Armor
+Sword
+50
+25
+75
+Weapon
 .
