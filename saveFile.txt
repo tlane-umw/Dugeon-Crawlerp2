@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 s
 100
 17
 12
 1
+=======
+TY;ER
+100
+5
+2
+2
+>>>>>>> aaf6ae64a98995aa2cc3f323cc0a6c5398d09dfa
 Starter Sword
 5
 5
@@ -18,11 +26,20 @@ Dragonball
 100
 0
 Other
+<<<<<<< HEAD
+=======
+PokeBall
+2
+20
+0
+Other
+>>>>>>> aaf6ae64a98995aa2cc3f323cc0a6c5398d09dfa
 Key
 10
 5
 0
 Other
+<<<<<<< HEAD
 PokeBall
 2
 20
@@ -32,6 +49,17 @@ Body Armor
 85
 75
 105
+=======
+Key
+10
+5
+0
+Other
+Shield
+40
+30
+60
+>>>>>>> aaf6ae64a98995aa2cc3f323cc0a6c5398d09dfa
 Armor
 Fine Steel Sword
 80
