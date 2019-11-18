@@ -30,6 +30,17 @@ public class Item{
 	public ItemType getType(){
 		return this.type;
 	}
+	public String getTypeString(){
+		if (type == ItemType.Weapon){
+			return "Weapon";
+		}
+		else if (type == ItemType.Armor){
+			return "Armor";
+		}
+		else{
+			return "Other";
+		}
+	}
 	public int getStrength(){
 		return this.strength;
 	}

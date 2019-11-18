@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Hashtable;
 import java.io.*;
+import java.util.InputMismatchException;
 
 //instance variables
 class Dungeon{
@@ -156,11 +157,10 @@ class Dungeon{
 				output.println(dungeonPlayer.getInventory().getItem(z).getWeight());
 				output.println(dungeonPlayer.getInventory().getItem(z).getValue());
 				output.println(dungeonPlayer.getInventory().getItem(z).getStrength());
-				output.println("Items Beginning");
-				if((dungeonPlayer.getInventory().getItem(z).getType()) == ItemType.Weapon){
+				if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Weapon")){
 					output.println("Weapon");
 				}
-				else if((dungeonPlayer.getInventory().getItem(z).getType()) == ItemType.Armor){
+				else if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Armor")){
 					output.println("Armor");
 				}
 				else{
@@ -176,7 +176,7 @@ class Dungeon{
 			System.out.println("Error");
 		}
 	}
-	public void restore(){
+	public void restore()throws InputMismatchException {
 		try{
 			Scanner input = new Scanner(saveFile);
 			this.dungeonPlayer.setName(input.nextLine());
@@ -190,29 +190,35 @@ class Dungeon{
 			}
 			boolean inItems = true;
 			while (inItems == true){
-				String itemName = input.nextLine();
-				if (itemName.equals(".")){
-					inItems = false;
-					break;
+				try{
+					String itemName = input.nextLine();
+					if (itemName.equals(".")){
+						inItems = false;
+						break;
+					}
+					int weight = input.nextInt();
+					int value = input.nextInt();
+					int strength = input.nextInt();
+					String itemTypeName = input.nextLine();
+					ItemType type = null;
+					if (itemTypeName.equals("Weapon")){
+						type = ItemType.Weapon;
+					}
+					else if (itemTypeName.equals("Armor")){
+						type = ItemType.Armor;
+					}
+					else{
+						type = ItemType.Weapon;
+					}
+					Item newItem = new Item(itemName, weight, value, strength, type);
+					this.dungeonPlayer.getInventory().add(newItem);	
 				}
-				int weight = input.nextInt();
-				int value = input.nextInt();
-				int strength = input.nextInt();
-				String itemTypeName = input.nextLine();
-				ItemType type;
-				if (itemTypeName.equals("Weapon")){
-					type = ItemType.Weapon;
+				catch(InputMismatchException e){
+
 				}
-				else if (itemTypeName.equals("Armor")){
-					type = ItemType.Armor;
-				}
-				else{
-					type = ItemType.Weapon;
-				}
-				Item newItem = new Item(itemName, weight, value, strength, type);
-				this.dungeonPlayer.getInventory().add(newItem);	
 
 			}
+			input.close();
 		}
 		catch (FileNotFoundException f){
 			System.out.println("File was not found");
