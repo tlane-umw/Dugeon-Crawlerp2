@@ -26,6 +26,12 @@ class Player extends Creature{
 	public Inventory getInventory(){
 		return userInventory;
 	}
+	public int getNumEnemiesDefeated(){
+		return this.numEnemiesDefeated;
+	}
+	public static void setNewNumEnemiesDefeated(int newNumEnemiesDefeated){
+		numEnemiesDefeated = newNumEnemiesDefeated;
+	}
 
 	//method asking the user if they want to pick up the item they stepped on
 	public boolean itemQuestion(Item item){

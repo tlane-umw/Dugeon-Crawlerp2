@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-s
+TYLER
 100
-17
-12
+15
+7
+2
 1
-=======
-TY;ER
-100
-5
-2
-2
->>>>>>> aaf6ae64a98995aa2cc3f323cc0a6c5398d09dfa
 Starter Sword
 5
 5
@@ -26,44 +19,45 @@ Dragonball
 100
 0
 Other
-<<<<<<< HEAD
-=======
-PokeBall
-2
-20
-0
-Other
->>>>>>> aaf6ae64a98995aa2cc3f323cc0a6c5398d09dfa
-Key
-10
-5
-0
-Other
-<<<<<<< HEAD
-PokeBall
-2
-20
-0
-Other
-Body Armor
-85
-75
-105
-=======
-Key
-10
-5
-0
-Other
 Shield
 40
 30
 60
->>>>>>> aaf6ae64a98995aa2cc3f323cc0a6c5398d09dfa
 Armor
 Fine Steel Sword
 80
 55
 105
 Weapon
+Fine Steel Shield
+65
+55
+85
+Armor
+Sword
+50
+25
+75
+Weapon
+.
+enemy 0
+16
+9
+0
+enemy 1
+11
+13
+0
+enemy 2
+12
+15
+1
+enemy 3
+17
+15
+1
+enemy 4
+15
+6
+2
 .

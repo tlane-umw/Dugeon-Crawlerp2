@@ -152,6 +152,7 @@ class Dungeon{
 			output.println(dungeonPlayer.getRow());
 			output.println(dungeonPlayer.getColumn());
 			output.println(dungeonPlayer.getCurrentPlayerBoard());
+			output.println(dungeonPlayer.getNumEnemiesDefeated());
 			for (int z = 0; z < dungeonPlayer.getInventory().getSize(); z++){
 				output.println(dungeonPlayer.getInventory().getItem(z).getName());
 				output.println(dungeonPlayer.getInventory().getItem(z).getWeight());
@@ -170,11 +171,25 @@ class Dungeon{
 			}
 			output.println(".");
 
+			for (int y = 0; y < enemyList.size(); y++){
+				int currentEnemyBoard = enemyList.get(y).getEnemyBoardNum();
+				if (world.getCurrentBoard(currentEnemyBoard)[enemyList.get(y).getRow()][enemyList.get(y).getColumn()] == 'E'){
+					output.println(enemyList.get(y).getPlaceName());
+					output.println(enemyList.get(y).getRow());
+					output.println(enemyList.get(y).getColumn());
+					output.println(enemyList.get(y).getEnemyBoardNum());
+				}
+			}
+			output.println(".");
+
 			output.close();
 		}
 		catch (IOException ioe){
 			System.out.println("Error");
 		}
+	}
+	public void setEnemyList(ArrayList<Enemy> enemyList){
+		this.enemyList = enemyList;
 	}
 	public void restore()throws InputMismatchException {
 		try{
@@ -184,13 +199,16 @@ class Dungeon{
 			this.dungeonPlayer.setRow(input.nextInt());
 			this.dungeonPlayer.setColumn(input.nextInt());
 			this.dungeonPlayer.setCurrentPlayerBoard(input.nextInt());
+			dungeonPlayer.setNewNumEnemiesDefeated(input.nextInt());
 
 			for (int y = 0; y < dungeonPlayer.getInventory().getSize(); y++){
 				dungeonPlayer.getInventory().remove(0);
 			}
 			boolean inItems = true;
+			boolean inEnemies = true;
 			while (inItems == true){
 				try{
+
 					String itemName = input.nextLine();
 					if (itemName.equals(".")){
 						inItems = false;
@@ -215,11 +233,62 @@ class Dungeon{
 					this.dungeonPlayer.getInventory().add(newItem);
 
 				}
-				catch(InputMismatchException e){
+				catch (InputMismatchException i){
+					System.out.println("Input Mismatch Exception");
+				}
+			}
+			for (int abc = 0; abc < this.enemyList.size(); abc++){
+				this.enemyList.remove(0);
+			}
+			ArrayList<Enemy> newEnemyList = new ArrayList<Enemy>();
+			while (inEnemies == true){
+				try{
+					String enemyPlaceName = input.nextLine();
+					if (enemyPlaceName.equals(".")){
+						inEnemies = false;
+						break;
+					}
+					int row = input.nextInt();
+					int column = input.nextInt();
+					int enemyBoard = input.nextInt();
+					Enemy newEnemy = new Enemy(enemyPlaceName, row, column, enemyBoard);
+					newEnemyList.add(newEnemy);
+				}
+				
 
+				catch(InputMismatchException e){
+					System.out.println("Input Mismatch Exception");
 				}
 
 			}
+			setEnemyList(newEnemyList);
+
+			for (int a = 0; a < 3; a++){
+                                char[][] blankBoard = world.getCurrentBoard(a);
+                                for (int i = 0; i < 20; i++){
+                                        for (int j = 0; j < 20; j++){
+                                                if ((!(blankBoard[i][j] == '-')) && ((!(blankBoard[i][j] == '|')))){
+                                                        if (!(blankBoard[i][j] == 'D')){
+                                                                blankBoard[i][j] = ' ';
+                                                        }
+                                                }
+                                        }
+                                }
+                                this.world.setNewBoard(a, blankBoard);
+                        }
+
+
+
+			for (int h = 0; h < this.enemyList.size(); h++){
+                                int restoreEnemyBoardNum = enemyList.get(h).getEnemyBoardNum();
+                                char [][] restoreEnemyBoard = world.getCurrentBoard(restoreEnemyBoardNum);
+                                restoreEnemyBoard[enemyList.get(h).getRow()][enemyList.get(h).getColumn()] = 'E';
+                                this.world.setNewBoard(restoreEnemyBoardNum, restoreEnemyBoard);
+			}
+
+
+
+
 			input.close();
 		}
 		catch (FileNotFoundException f){
@@ -227,4 +296,6 @@ class Dungeon{
 		}
 	}
 }
+
+
 

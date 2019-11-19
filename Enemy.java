@@ -38,6 +38,9 @@ public class Enemy extends Creature{
 		this.column = column;
 		this.board = board;
 	}
+	public String getPlaceName(){
+		return this.placeName;
+	}
 
 	//This returns the type of enemy.
 	public EnemyType getType(){
