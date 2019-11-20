@@ -107,7 +107,14 @@ class Player extends Creature{
 			}
 			//player attacking the enemy
 			//
-			System.out.println("The enemy currently has a health of " + dungeonEnemy.getHealth());
+			System.out.println("The " + dungeonEnemy.getName() + " currently has a health of " + dungeonEnemy.getHealth());
+			try{
+				Thread.sleep(2500);
+			}
+			catch (InterruptedException z){
+				System.out.println("Interrupted!");
+			}
+			//getting the amount of damage the enemy will take
 			int enemyDamage = getInventory().getEquippedWeapon().getStrength();
 			dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
 			System.out.println("The " + dungeonEnemy.getName() + " took "  + enemyDamage + " damage from the players " + getInventory().getEquippedWeapon().getName());
@@ -128,104 +135,98 @@ class Player extends Creature{
 
 			//printing the enemies health if it is still alive
 			else{
-
-
-				//checking if the enemy won
-				if (dungeonEnemy.getHealth() <= 0){
-					didUserWin = true;
-					enemyAlive = false;
-					return true;
-				}
-
-				//printing the enemies health if it is still alive
-				else{
-					System.out.println("The new enemy health is " + dungeonEnemy.getHealth());
-					System.out.println();
-					try{
-						Thread.sleep(2500);
-					}
-					catch (InterruptedException f){
-						System.out.println("Interruputed!");
-					}
-				}
-
-				//enemy attacking the player
-
-
-				//getting players current health
-				System.out.println("The player currently has a health of " + getHealth());
+				System.out.println("The new enemy health is " + dungeonEnemy.getHealth());
 				System.out.println();
 				try{
 					Thread.sleep(2500);
 				}
-				catch (InterruptedException e){
-					System.out.println("Interrupted!");
+				catch (InterruptedException f){
+					System.out.println("Interruputed!");
 				}
-
-				//getting the amount of damage the enemy caused based off the players current equipped armor and the enemys damage
-				int playerDamage = ((dungeonEnemy.getDamage()) - (getInventory().getEquippedArmor().getStrength()));
-
-				//checking if the players current armor is stronger than the enemy's attack
-				if (playerDamage <= 0){
-					System.out.println("The players " + getInventory().getEquippedArmor().getName() + " completely negated the enemy's attack!");
-					System.out.println();
-					try{
-						Thread.sleep(2500);
-					}
-					catch (InterruptedException d){
-						System.out.println("Interrupted!");
-					}
-				}
-				//setting the players new health based on the previously calculated enemy damage
-				else{
-					int currentPlayerHealth = getHealth();
-					int newPlayerHealth = currentPlayerHealth - playerDamage;
-					setHealth(newPlayerHealth);
-
-					System.out.println("You took " + playerDamage + " damage from the enemy!");
-					System.out.println();
-					try{
-						Thread.sleep(2500);
-					}
-					catch (InterruptedException c){
-						System.out.println("Interrupted!");
-					}
-
-					//cheching if the player is still alive
-					if (getHealth() <= 0){
-						didUserWin = false;
-						System.out.println("The enemy brutally murdered you!");
-						System.out.println("Better luck next time!");
-						try{
-							Thread.sleep(2500);
-						}
-						catch (InterruptedException b){
-							System.out.println("Interrupted!");
-						}
-						System.exit(0);
-						System.out.println();
-						playerAlive = false;
-					}
-					else{
-						System.out.println("After the enemy's latest attack, the player's health is " + getHealth());
-						System.out.println();
-						try{
-							Thread.sleep(2500);
-						}
-						catch(InterruptedException a){
-							System.out.println("Interrupted!");
-						}
-					}
-				}
-
-				roundNumber = roundNumber + 1;
 			}
 
 
-		}
-		return didUserWin;
 
+			//getting players current health
+			System.out.println("The player currently has a health of " + getHealth());
+			System.out.println();
+			try{
+				Thread.sleep(2500);
+			}
+			catch (InterruptedException eee){
+				System.out.println("Interrupted!");
+			}
+
+			//getting the amount of damage the enemy caused based off the players current equipped armor and the enemys damage
+			int playerDamage = ((dungeonEnemy.getDamage()) - (getInventory().getEquippedArmor().getStrength()));
+
+			//checking if the players current armor is stronger than the enemy's attack
+			if (playerDamage <= 0){
+				try{
+					Thread.sleep(2500);
+				}
+				catch (InterruptedException y){
+					System.out.println("Interrupted");
+				}
+				System.out.println("The players " + getInventory().getEquippedArmor().getName() + " completely negated the enemy's attack!");
+				System.out.println();
+				try{
+					Thread.sleep(2500);
+				}
+				catch (InterruptedException d){
+					System.out.println("Interrupted!");
+				}
+			}
+			//setting the players new health based on the previously calculated enemy damage
+			else{
+				int currentPlayerHealth = getHealth();
+				int newPlayerHealth = currentPlayerHealth - playerDamage;
+				setHealth(newPlayerHealth);
+
+				System.out.println("You took " + playerDamage + " damage from the enemy!");
+				System.out.println();
+				try{
+					Thread.sleep(2500);
+				}
+				catch (InterruptedException c){
+					System.out.println("Interrupted!");
+				}
+
+				//cheching if the player is still alive
+				if (getHealth() <= 0){
+					didUserWin = false;
+					System.out.println("The enemy brutally murdered you!");
+					System.out.println("Better luck next time!");
+					try{
+						Thread.sleep(2500);
+					}
+					catch (InterruptedException b){
+						System.out.println("Interrupted!");
+					}
+					System.exit(0);
+					System.out.println();
+					playerAlive = false;
+				}
+				else{
+					System.out.println("After the enemy's latest attack, the player's health is " + getHealth());
+					System.out.println();
+					try{
+						Thread.sleep(2500);
+					}
+					catch(InterruptedException a){
+						System.out.println("Interrupted!");
+					}
+				}
+			}
+
+			roundNumber = roundNumber + 1;
+		}
+
+
+
+		return didUserWin;
 	}
+
 
 	public int getColumn(){
 		return this.column;
@@ -288,7 +289,7 @@ class Player extends Creature{
 				return newBoard;
 			}
 			else{
-		//If the player chooses to enter the room, the new players location in the new room is determined by which room the player is currently in and which side of the room that player is currently on. The player will now appear right next to the door in the new room.
+				//If the player chooses to enter the room, the new players location in the new room is determined by which room the player is currently in and which side of the room that player is currently on. The player will now appear right next to the door in the new room.
 				System.out.println("You entered a door into a new room!");
 				if (currentPlayerBoard == 1){
 					if ((newColumn < 10)){
@@ -336,20 +337,37 @@ class Player extends Creature{
 				numEnemiesDefeated = numEnemiesDefeated + 1;
 				System.out.println("You have defeated " + numEnemiesDefeated);	
 				if (numEnemiesDefeated == 6){
+					try{
+						Thread.sleep(4000);
+					}
+					catch(InterruptedException w){
+						System.out.println("Interrupted!");
+					}
 					System.out.println("Congratulations!! You beat the game!!!");
 					System.out.println();
+					try{
+						Thread.sleep(4000);
+					}
+					catch (InterruptedException x){
+						System.out.println("Interrupted!");
+					}
 					System.out.println("All the best from the creators - Chris, Toby, & Tyler!");
 					System.out.println();
 					System.exit(0);
 				}
 				else{
-
+					try{
+						Thread.sleep(2500);
+					}
+					catch(InterruptedException zz){
+						System.out.println("Interrupted!");
+					}
 					System.out.println("You defeated the enemy! Keep going!!");
 					System.out.println();
 					try{
 						Thread.sleep(2500);
 					}
-					catch(InterruptedException z){
+					catch(InterruptedException fff){
 						System.out.println("Interrupted!");
 					}
 				}
@@ -357,6 +375,12 @@ class Player extends Creature{
 
 
 			else{
+				try{
+					Thread.sleep(4000);
+				}
+				catch(InterruptedException www){
+					System.out.println("Interrupted!");
+				}
 				System.out.println("Better luck next time!");
 				System.exit(0);
 			}
@@ -378,3 +402,4 @@ class Player extends Creature{
 	}
 
 }
+

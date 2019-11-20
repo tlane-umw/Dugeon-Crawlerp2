@@ -183,6 +183,12 @@ class Inventory{
 
 
 	}
+	public void restoreEquippedWeapon(Item restoreEquippedWeapon){
+		this.equippedWeapon = restoreEquippedWeapon;
+	}
+	public void restoreEquippedArmor(Item restoreEquippedArmor){
+		this.equippedArmor = restoreEquippedArmor;
+	}
 
 	//equips the armor the user chooses
 	public void equipArmor(){

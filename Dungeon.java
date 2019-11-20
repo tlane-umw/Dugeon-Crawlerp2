@@ -146,6 +146,7 @@ class Dungeon{
 	}
 	public void save()throws FileNotFoundException{
 		try{
+			//saving the current player information
 			PrintWriter output = new PrintWriter(saveFile);
 			output.println(dungeonPlayer.getName());
 			output.println(dungeonPlayer.getHealth());
@@ -153,22 +154,40 @@ class Dungeon{
 			output.println(dungeonPlayer.getColumn());
 			output.println(dungeonPlayer.getCurrentPlayerBoard());
 			output.println(dungeonPlayer.getNumEnemiesDefeated());
-			for (int z = 0; z < dungeonPlayer.getInventory().getSize(); z++){
-				output.println(dungeonPlayer.getInventory().getItem(z).getName());
-				output.println(dungeonPlayer.getInventory().getItem(z).getWeight());
-				output.println(dungeonPlayer.getInventory().getItem(z).getValue());
-				output.println(dungeonPlayer.getInventory().getItem(z).getStrength());
-				if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Weapon")){
-					output.println("Weapon");
-				}
-				else if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Armor")){
-					output.println("Armor");
-				}
-				else{
-					output.println("Other");
-				}
 
-			}
+			//saving the players current equipped weapon
+			output.println(dungeonPlayer.getInventory().getEquippedWeapon().getName());
+			output.println(dungeonPlayer.getInventory().getEquippedWeapon().getWeight());
+			output.println(dungeonPlayer.getInventory().getEquippedWeapon().getValue());
+			output.println(dungeonPlayer.getInventory().getEquippedWeapon().getStrength());
+			output.println("Weapon");
+
+			//saving the players current equipped armor
+			output.println(dungeonPlayer.getInventory().getEquippedArmor().getName());
+			output.println(dungeonPlayer.getInventory().getEquippedArmor().getWeight());
+			output.println(dungeonPlayer.getInventory().getEquippedArmor().getValue());
+			output.println(dungeonPlayer.getInventory().getEquippedArmor().getStrength());
+			output.println("Armor");
+
+
+
+			//saving the players current inventory
+				for (int z = 0; z < dungeonPlayer.getInventory().getSize(); z++){
+					output.println(dungeonPlayer.getInventory().getItem(z).getName());
+					output.println(dungeonPlayer.getInventory().getItem(z).getWeight());
+					output.println(dungeonPlayer.getInventory().getItem(z).getValue());
+					output.println(dungeonPlayer.getInventory().getItem(z).getStrength());
+					if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Weapon")){
+						output.println("Weapon");
+					}
+					else if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Armor")){
+						output.println("Armor");
+					}
+					else{
+						output.println("Other");
+					}
+
+				}
 			output.println(".");
 
 			for (int y = 0; y < enemyList.size(); y++){
@@ -204,6 +223,32 @@ class Dungeon{
 			for (int y = 0; y < dungeonPlayer.getInventory().getSize(); y++){
 				dungeonPlayer.getInventory().remove(0);
 			}
+			String thisTrash = input.nextLine();
+			String restoreEWName = input.nextLine();
+			int restoreEWWeight = input.nextInt();
+			int restoreEWValue = input.nextInt();
+			int restoreEWStrength = input.nextInt();
+			String restoreEWType = input.nextLine();
+			//String trash2 = input.nextLine();
+			Item restoreEquippedWeapon = new Item(restoreEWName, restoreEWWeight, restoreEWValue, restoreEWStrength, ItemType.Weapon);
+			dungeonPlayer.getInventory().restoreEquippedWeapon(restoreEquippedWeapon);
+			this.dungeonPlayer.getInventory().add(restoreEquippedWeapon);
+			System.out.println("Success! You restored your last equipped weapon!");
+
+			
+			String newTrash = input.nextLine();
+			String restoreEAName = input.nextLine();
+			int restoreEAWeight = input.nextInt();
+			int restoreEAValue = input.nextInt();
+			int restoreEAStrength = input.nextInt();
+			String restoreEAType = input.nextLine();
+			//String trash3 = input.nextLine();
+			Item restoreEquippedArmor = new Item(restoreEAName, restoreEAWeight, restoreEAValue, restoreEAStrength, ItemType.Armor);
+			dungeonPlayer.getInventory().restoreEquippedArmor(restoreEquippedArmor);
+			this.dungeonPlayer.getInventory().add(restoreEquippedArmor);
+			System.out.println("Success! You restored your last equipped armor!");
+
+
 			boolean inItems = true;
 			boolean inEnemies = true;
 			while (inItems == true){
@@ -221,16 +266,21 @@ class Dungeon{
 					String itemTypeName = input.nextLine();
 					ItemType type = null;
 					Item newItem;
-					if (itemTypeName.equals("Weapon")){
-						newItem = new Item(itemName, weight, value, strength, ItemType.Weapon);
-					}
-					else if (itemTypeName.equals("Armor")){
-						newItem = new Item(itemName, weight, value, strength, ItemType.Armor);
+					if ((itemName.equals(restoreEWName)) || (itemName.equals(restoreEAName))){
+
 					}
 					else{
-						newItem = new Item(itemName, weight, value, strength, ItemType.Other);
+						if (itemTypeName.equals("Weapon")){
+							newItem = new Item(itemName, weight, value, strength, ItemType.Weapon);
+						}
+						else if (itemTypeName.equals("Armor")){
+							newItem = new Item(itemName, weight, value, strength, ItemType.Armor);
+						}
+						else{
+							newItem = new Item(itemName, weight, value, strength, ItemType.Other);
+						}
+						this.dungeonPlayer.getInventory().add(newItem);
 					}
-					this.dungeonPlayer.getInventory().add(newItem);
 
 				}
 				catch (InputMismatchException i){
@@ -254,7 +304,7 @@ class Dungeon{
 					Enemy newEnemy = new Enemy(enemyPlaceName, row, column, enemyBoard);
 					newEnemyList.add(newEnemy);
 				}
-				
+
 
 				catch(InputMismatchException e){
 					System.out.println("Input Mismatch Exception");
@@ -264,26 +314,26 @@ class Dungeon{
 			setEnemyList(newEnemyList);
 
 			for (int a = 0; a < 3; a++){
-                                char[][] blankBoard = world.getCurrentBoard(a);
-                                for (int i = 0; i < 20; i++){
-                                        for (int j = 0; j < 20; j++){
-                                                if ((!(blankBoard[i][j] == '-')) && ((!(blankBoard[i][j] == '|')))){
-                                                        if (!(blankBoard[i][j] == 'D')){
-                                                                blankBoard[i][j] = ' ';
-                                                        }
-                                                }
-                                        }
-                                }
-                                this.world.setNewBoard(a, blankBoard);
-                        }
+				char[][] blankBoard = world.getCurrentBoard(a);
+				for (int i = 0; i < 20; i++){
+					for (int j = 0; j < 20; j++){
+						if ((!(blankBoard[i][j] == '-')) && ((!(blankBoard[i][j] == '|')))){
+							if (!(blankBoard[i][j] == 'D')){
+								blankBoard[i][j] = ' ';
+							}
+						}
+					}
+				}
+				this.world.setNewBoard(a, blankBoard);
+			}
 
 
 
 			for (int h = 0; h < this.enemyList.size(); h++){
-                                int restoreEnemyBoardNum = enemyList.get(h).getEnemyBoardNum();
-                                char [][] restoreEnemyBoard = world.getCurrentBoard(restoreEnemyBoardNum);
-                                restoreEnemyBoard[enemyList.get(h).getRow()][enemyList.get(h).getColumn()] = 'E';
-                                this.world.setNewBoard(restoreEnemyBoardNum, restoreEnemyBoard);
+				int restoreEnemyBoardNum = enemyList.get(h).getEnemyBoardNum();
+				char [][] restoreEnemyBoard = world.getCurrentBoard(restoreEnemyBoardNum);
+				restoreEnemyBoard[enemyList.get(h).getRow()][enemyList.get(h).getColumn()] = 'E';
+				this.world.setNewBoard(restoreEnemyBoardNum, restoreEnemyBoard);
 			}
 
 

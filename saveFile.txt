@@ -1,9 +1,19 @@
 TYLER
 100
-15
-7
-2
+17
+3
 1
+0
+Fine Steel Sword
+80
+55
+105
+Weapon
+Body Armor
+85
+75
+105
+Armor
 Starter Sword
 5
 5
@@ -19,45 +29,39 @@ Dragonball
 100
 0
 Other
-Shield
-40
-30
-60
-Armor
 Fine Steel Sword
 80
 55
 105
 Weapon
-Fine Steel Shield
-65
-55
+Body Armor
 85
-Armor
-Sword
-50
-25
 75
-Weapon
+105
+Armor
 .
 enemy 0
 16
-9
+1
 0
 enemy 1
-11
-13
+16
+16
 0
 enemy 2
-12
 15
+2
 1
 enemy 3
-17
-15
+16
+16
 1
 enemy 4
-15
-6
+16
+5
+2
+enemy 5
+16
+16
 2
 .
