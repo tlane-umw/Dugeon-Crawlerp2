@@ -126,7 +126,8 @@ class Inventory{
 				for (int k = 0; k < items.size(); k++){
 					System.out.println("Item #" + (k+1) + " = " + items.get(k).getName());
 				}
-				System.out.println("Please enter the number of the item you'd like to drop: ");
+				System.out.println("Please enter the number of the item you'd like to drop or a 0 to cancel: ");
+				System.out.println();
 				try{
 					numToDrop = input.nextInt();
 				}
@@ -147,8 +148,20 @@ class Inventory{
 					validNum = true;
 					break;
 				}
+
+				else if(numToDrop == 0){
+					System.out.println("Okay. Nothing will be dropped from your inventory!");
+					System.out.println();
+					try{
+						Thread.sleep(2000);
+					}
+					catch(InterruptedException nothingDropped){
+						System.out.println("Interrupted!");
+					}
+					validNum = false;
+					break;
 				else {
-					System.out.println("Please enter a number you see on the screen: ");
+					System.out.println("Please enter a number you see on the screen or 0 to cancel: ");
 					validNum = false;
 				}
 			}
