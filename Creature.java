@@ -1,18 +1,24 @@
 import java.util.Scanner;
 import java.util.Hashtable;
 public class Creature{
-        private String name;
+       	//instance variables
+       	private String name;
 	private int row;
 	private int column;
 	private int board;
         private int health;
+
+	//constructor
 	Creature (String name, int health){
 		this.name = name;
 		this.health = health;
 
 	}
+	//blank default constructor
 	Creature(){
 	}
+
+	//set & get methods
         public String getName(){
                 return name;
         }

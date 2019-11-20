@@ -1,4 +1,4 @@
-//for chris number 2
+
 import java.util.Scanner;
 import java.util.Hashtable;
 class Player extends Creature{
@@ -36,7 +36,10 @@ class Player extends Creature{
 	//method asking the user if they want to pick up the item they stepped on
 	public boolean itemQuestion(Item item){
 		boolean response;
-		System.out.println("You have found the " + item.toString() + ", would you like to pick it up?");
+		System.out.println("You have stumbled onto a " + item.getName() + ".");
+		System.out.println("Here is some information about the item: ");
+		System.out.println(item.toString());
+		System.out.println("Would you like to pick this item up?");
 		System.out.println("Enter 'Y' for yes and 'N' for no.");
 		answer = s.nextLine();
 		while(!(answer.equals("N") || answer.equals("n"))){
@@ -335,7 +338,6 @@ class Player extends Creature{
 				newBoard[row][column] = ' ';
 				newBoard[newRow][newColumn] = playerSymbol;
 				numEnemiesDefeated = numEnemiesDefeated + 1;
-				System.out.println("You have defeated " + numEnemiesDefeated);	
 				if (numEnemiesDefeated == 6){
 					try{
 						Thread.sleep(4000);
@@ -362,7 +364,16 @@ class Player extends Creature{
 					catch(InterruptedException zz){
 						System.out.println("Interrupted!");
 					}
-					System.out.println("You defeated the enemy! Keep going!!");
+					if (numEnemiesDefeated == 1){
+						System.out.println("You've defreated 1 enemy so far!");
+					}
+					else{ 
+						System.out.println("You have defeated " + numEnemiesDefeated + " enemies so far!");
+					}
+					System.out.println();
+                                	System.out.println("Defeat all 6 to defeat the game!");
+					System.out.println();
+					System.out.println("Keeip going!!");
 					System.out.println();
 					try{
 						Thread.sleep(2500);

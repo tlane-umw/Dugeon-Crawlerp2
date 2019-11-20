@@ -37,17 +37,33 @@ class Inventory{
 		if (potentialNewWeight  >= maxWeight){
 
 			System.out.println("This was not possible. This item would cause you to go over the max. Weight would be : " + potentialNewWeight);
+			try{
+				Thread.sleep(3000);
+			}
+			catch(InterruptedException noAdd){
+				System.out.println("Interrupted!");
+			}
 			potentialNewWeight = 0;
 			return false;
 		}
 		else{
 			items.add(item);
-			System.out.println("The new updated weight is: " + this.totalWeight());
+			System.out.println("Your new weight in your inventory is: " + this.totalWeight());
+			System.out.println("The max weight for your inventory is: " + this.getMaxWeight());
+			try{
+				Thread.sleep(3000);
+			}
+			catch (InterruptedException yesAdd){
+				System.out.println("Interrupted!");
+			}
 			return true;
 		}
 	}
 	public void remove(int i){
 		items.remove(i);
+	}
+	public int getMaxWeight(){
+		return this.maxWeight;
 	}
 	public int getSize(){
 		return items.size();
@@ -97,6 +113,12 @@ class Inventory{
 		while (validNum == false){
 			if (items.size() == 0){
 				System.out.println("No items in your inventory to drop.");
+				try{
+					Thread.sleep(3000);
+				}
+				catch(InterruptedException noDrop){
+					System.out.println("Interrupted!");
+				}
 				validNum = true;
 				break;
 			}
@@ -115,6 +137,13 @@ class Inventory{
 				if ((numToDrop > 0) && (numToDrop <= items.size())) {
 					System.out.println("Success! You have dropped " + items.get(numToDrop - 1).getName() + " from your inventory.");
 					items.remove(numToDrop - 1);
+					try{
+						Thread.sleep(3000);
+					}
+					catch(InterruptedException yesAdd){
+						System.out.println("Interrupted!");
+
+					}
 					validNum = true;
 					break;
 				}
@@ -140,6 +169,12 @@ class Inventory{
 		//making sure there is an item they can equip
 		if (currentWeapons.size() == 0){
 			System.out.println("No current weapons that you can equip.");
+			try{
+				Thread.sleep(2000);
+			}
+			catch (InterruptedException noWeapon){
+				System.out.println("Interrupted!");
+			}
 			validNum = true;
 		}
 
@@ -170,6 +205,12 @@ class Inventory{
 				else if ((userNum > 0) && (userNum <= (currentWeapons.size()))){
 					System.out.println("Success! You have equipped " + currentWeapons.get(userNum-1).getName() + " as your weapon.");
 					this.equippedWeapon = currentWeapons.get(userNum - 1);
+					try{
+						Thread.sleep(3000);
+					}
+					catch (InterruptedException yesWeapon){
+						System.out.println("Interrupted");
+					}
 					validNum = true;
 					break;
 				}
@@ -183,6 +224,7 @@ class Inventory{
 
 
 	}
+	//methods that set the restored equipped weapon & armor
 	public void restoreEquippedWeapon(Item restoreEquippedWeapon){
 		this.equippedWeapon = restoreEquippedWeapon;
 	}
@@ -205,6 +247,12 @@ class Inventory{
 		//making sure there is a armor the player can equip
 		if (currentArmors.size() == 0){
 			System.out.println("No current armors that you can equip.");
+			try{
+				Thread.sleep(3000);
+			}
+			catch (InterruptedException noArmor){
+				System.out.println("Interrupted");
+			}
 			validNum = true;
 		}
 
@@ -235,6 +283,12 @@ class Inventory{
 				else if ((userNum > 0) && (userNum <= (currentArmors.size()))){
 					System.out.println("Success! You have equipped " + currentArmors.get(userNum-1).getName() + " as your armor.");
 					this.equippedArmor = currentArmors.get(userNum - 1);
+					try{
+						Thread.sleep(3000);
+					}
+					catch (InterruptedException yesArmor){
+						System.out.println("Interrupted");
+					}
 					validNum = true;
 					break;
 				}

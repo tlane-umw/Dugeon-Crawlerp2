@@ -6,6 +6,7 @@ public enum EnemyType{
 	CRAZIEDHIPPIE ("Crazied Hippie"),
 	ZOMBIE ("Zombie");
 
+	//testing to get enum types to strings for save/restore methods
 	private final String name;
 
 	private EnemyType(String s){

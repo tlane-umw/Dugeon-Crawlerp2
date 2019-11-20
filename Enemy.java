@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 //This class sets up the enemy object in order for use in the Dungeon class.
 public class Enemy extends Creature{
+	//instance variables
 	Random random = new Random();
 	private String name;
 	private int health;
@@ -26,12 +27,14 @@ public class Enemy extends Creature{
 		enemyLocation.add(new Integer[]{15,17,2});
 		return enemyLocation;
 	}
+	//constructor for the fight method
 	Enemy(EnemyType type, String name, int health, int damage, Item drop){
 		super(name, health);
 		this.type = type;
 		this.damage = damage;
 		this.drop = drop;
 	}
+	//constructor for placing enemies on the board
 	Enemy (String placeName, int row, int column, int board){
 		this.placeName = placeName;
 		this.row = row;
@@ -59,6 +62,9 @@ public class Enemy extends Creature{
 		this.column = column;
 		this.board = board;
 	}
+	//method that takes in a 2d char array and tests until the enemy moves into a blank space on the board
+	//then it returns the new board after updating the enemies row & column, and where their E is on the board
+	//if the enemy has been defeated and their E is replaced with a space, it returns the same board that was passed in
 	public char[][] moveEnemy(char[][] enemyBoard){
 		char[][] newEnemyBoard = enemyBoard;
 		boolean validMove = false;
@@ -130,6 +136,7 @@ public class Enemy extends Creature{
 	public static void setDoesEnemyMove(int newDoesEnemyMove){
 		doesEnemyMove = newDoesEnemyMove;
 	}
+	//enemies only move for every other player turn
 	public static int getDoesEnemyMove(){
 		return doesEnemyMove;
 	}

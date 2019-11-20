@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-
+//world class that stores an arraylist of our 2d char array gameboards
 public class World{
 
 	private ArrayList<GameBoard> world = new ArrayList<GameBoard>();
@@ -17,6 +17,8 @@ public class World{
 		world.add(gameBoard2);
 
 	}
+
+	//getting and setting the current gameboards depending on what board the player and enemies are on
 	public char[][] getCurrentBoard(int num){
 		if (num == 1){
 			return world.get(1).getGameBoard();

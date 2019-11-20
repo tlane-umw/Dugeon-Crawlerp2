@@ -19,6 +19,7 @@ class Dungeon{
 	private World world;
 	private boolean alreadyExecuted = false;
 	private boolean alreadyExecuted2 = false;
+	private static boolean doesFileExist = false;
 	private boolean onItem = false;
 	private boolean itemExistence = false;
 	private static int doesEnemyMove = 2;
@@ -58,7 +59,7 @@ class Dungeon{
 	}
 
 	public void moveEnemies(){
-		System.out.println("The size of the enemy list is " + enemyList.size());
+		//System.out.println("The size of the enemy list is " + enemyList.size());
 		if (skip == false){
 
 			for (int z = 0; z < enemyList.size(); z++){
@@ -66,7 +67,7 @@ class Dungeon{
 				char[][] oldBoard = world.getCurrentBoard(currentEnemyBoard);
 				char [][] newBoard = enemyList.get(z).moveEnemy(oldBoard);
 				world.setNewBoard(currentEnemyBoard, newBoard);
-				System.out.println("Enemy " + z + " new row = " + enemyList.get(z).getRow() + ", enemy new column = " + enemyList.get(z).getColumn());
+				//System.out.println("Enemy " + z + " new row = " + enemyList.get(z).getRow() + ", enemy new column = " + enemyList.get(z).getColumn());
 			}
 			skip = true;
 		}
@@ -100,6 +101,7 @@ class Dungeon{
 			return location;
 
 		}
+		//printing a star in the blank spaces
 		world.getCurrentBoard(currentBoard)[dungeonPlayer.getRow()][dungeonPlayer.getColumn()] = playerSymbol;
 		for (int i = 0; i < 20; i++){
 			for (int j = 0; j < 20; j++){
@@ -144,6 +146,8 @@ class Dungeon{
 	public Player getPlayer(){
 		return this.dungeonPlayer;
 	}
+
+	//saving the game
 	public void save()throws FileNotFoundException{
 		try{
 			//saving the current player information
@@ -189,9 +193,11 @@ class Dungeon{
 
 				}
 			output.println(".");
-
+			
+			//saving the current enemies
 			for (int y = 0; y < enemyList.size(); y++){
 				int currentEnemyBoard = enemyList.get(y).getEnemyBoardNum();
+				//making sure the enemies still correlate with an alive enemy or E on the board
 				if (world.getCurrentBoard(currentEnemyBoard)[enemyList.get(y).getRow()][enemyList.get(y).getColumn()] == 'E'){
 					output.println(enemyList.get(y).getPlaceName());
 					output.println(enemyList.get(y).getRow());
@@ -207,11 +213,15 @@ class Dungeon{
 			System.out.println("Error");
 		}
 	}
+	//overriding the default enemy list
 	public void setEnemyList(ArrayList<Enemy> enemyList){
 		this.enemyList = enemyList;
 	}
+
+	//restoring the game
 	public void restore()throws InputMismatchException {
 		try{
+			//restoring player information
 			Scanner input = new Scanner(saveFile);
 			this.dungeonPlayer.setName(input.nextLine());
 			this.dungeonPlayer.setHealth(input.nextInt());
@@ -220,9 +230,12 @@ class Dungeon{
 			this.dungeonPlayer.setCurrentPlayerBoard(input.nextInt());
 			dungeonPlayer.setNewNumEnemiesDefeated(input.nextInt());
 
+			//removing any possible items in player inventory
 			for (int y = 0; y < dungeonPlayer.getInventory().getSize(); y++){
 				dungeonPlayer.getInventory().remove(0);
 			}
+
+			//restoring players equipped weapon
 			String thisTrash = input.nextLine();
 			String restoreEWName = input.nextLine();
 			int restoreEWWeight = input.nextInt();
@@ -235,7 +248,7 @@ class Dungeon{
 			this.dungeonPlayer.getInventory().add(restoreEquippedWeapon);
 			System.out.println("Success! You restored your last equipped weapon!");
 
-			
+			//restoring the players equipped armor
 			String newTrash = input.nextLine();
 			String restoreEAName = input.nextLine();
 			int restoreEAWeight = input.nextInt();
@@ -248,7 +261,7 @@ class Dungeon{
 			this.dungeonPlayer.getInventory().add(restoreEquippedArmor);
 			System.out.println("Success! You restored your last equipped armor!");
 
-
+			//restoring the rest of the items in the inventory
 			boolean inItems = true;
 			boolean inEnemies = true;
 			while (inItems == true){
@@ -287,9 +300,12 @@ class Dungeon{
 					System.out.println("Input Mismatch Exception");
 				}
 			}
+
+			//removing any possible enemies in the enemy list
 			for (int abc = 0; abc < this.enemyList.size(); abc++){
 				this.enemyList.remove(0);
 			}
+			//restoring the enemies and adding them to the new list
 			ArrayList<Enemy> newEnemyList = new ArrayList<Enemy>();
 			while (inEnemies == true){
 				try{
@@ -313,6 +329,7 @@ class Dungeon{
 			}
 			setEnemyList(newEnemyList);
 
+			//blanking out the boarda if theyre not a wall or a door
 			for (int a = 0; a < 3; a++){
 				char[][] blankBoard = world.getCurrentBoard(a);
 				for (int i = 0; i < 20; i++){
@@ -328,7 +345,7 @@ class Dungeon{
 			}
 
 
-
+			//putting E's on the board based on the restored enemy list
 			for (int h = 0; h < this.enemyList.size(); h++){
 				int restoreEnemyBoardNum = enemyList.get(h).getEnemyBoardNum();
 				char [][] restoreEnemyBoard = world.getCurrentBoard(restoreEnemyBoardNum);
@@ -340,10 +357,23 @@ class Dungeon{
 
 
 			input.close();
+			doesFileExist = true;
 		}
 		catch (FileNotFoundException f){
-			System.out.println("File was not found");
+			System.out.println("Error.... there was no previous save file found.");
+			System.out.println("You must save your game before you can restore it!");
+			doesFileExist = false;
+			try{
+				Thread.sleep(3000);
+			}
+			catch (InterruptedException noSave){
+				System.out.println("Interrupted!");
+			}
+
 		}
+	}
+	public  boolean doesSaveFileExist(){
+		return this.doesFileExist;
 	}
 }
 
