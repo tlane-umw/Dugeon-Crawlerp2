@@ -149,7 +149,7 @@ class Inventory{
 					break;
 				}
 
-				else if(numToDrop == 0){
+				else if (numToDrop == 0){
 					System.out.println("Okay. Nothing will be dropped from your inventory!");
 					System.out.println();
 					try{
@@ -160,6 +160,7 @@ class Inventory{
 					}
 					validNum = false;
 					break;
+				}
 				else {
 					System.out.println("Please enter a number you see on the screen or 0 to cancel: ");
 					validNum = false;
