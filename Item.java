@@ -7,6 +7,9 @@ public class Item{
 	private int weight;
 	private int value;
 	private int strength;
+	private int itemBoard;
+	private int itemRow;
+	private int itemColumn
 
 	//default constructor
 	Item (String name, int weight, int value, int strength, ItemType type){
@@ -21,6 +24,11 @@ public class Item{
 		this.weight = weight;
 		this.value = value;
 		this.strength = strength;
+	}
+	Item(int itemBoard, int itemRow, int itemColumn){
+		this.itemBoard = itemBoard;
+		this.itemRow = itemRow;
+		this.itemColumn = itemColumn;
 	}
 	public void setItemType(ItemType type){
 		this.type = type;
@@ -57,5 +65,25 @@ public class Item{
 	public String toString(){
 		return ("The " + this.getName() + " is a " + this.getType() + ", it has a weight of: " + this.getWeight() + ". a value of: " + this.getValue() + ", and a strength of: " + this.getStrength() + ".");
 	}
+	public void setItemBoard(int itemBoard){
+		this.itemBoard = itemBoard;
+	}
+	public int getItemBoard(){
+		return this.itemBoard;
+	}
+	public void setItemRow(int itemRow){
+		this.itemRow = itemRow;
+	}
+	public int getItemRow(){
+		return this.itemRow;
+	}
+	public int getItemColum(){
+		return this.itemColumn;
+	}
+
+	public void setItemColum(int itemColumn){
+		this.itemColumn = itemColumn;
+	}
+
 }
 

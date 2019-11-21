@@ -24,9 +24,8 @@ class Dungeon{
 	char playerSymbol;
 	Integer[] placement = new Integer[]{0, 0, 0};
 	Player dungeonPlayer;
-	Hashtable<Integer, Integer[]> dungeonLocation = new Hashtable<Integer, Integer[]>();
-	Hashtable<Integer, Item> dungeonGroundItems = new Hashtable<Integer, Item>();
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+	ArrayList<Item> itemList = new ArrayList<Item>();
 	private boolean skip = true;
 	File saveFile = new File("saveFile.txt");
 
@@ -50,6 +49,34 @@ class Dungeon{
 		enemyList.add(enemy3);
 		enemyList.add(enemy4);
 		enemyList.add(enemy5);
+		Item newItem;
+		for int(zz = 0; zz < 3; z++){
+			for (int yy = 0; yy < 4; yy++){
+				boolean validItemLocation = false;
+				while(validItemLocation == false){
+					newItem = ItemGenerator.generate();
+					int itemRow = newItem.getRow();
+					int itemColumn = newItem.getColumn();
+					char[][] currentItemBoard = world.getCurrentBoard(zz);
+					if (currentItemBoard[itemRow][itemColumn] == ' '){
+						currentItemBoard[itemRow][itemColumn] = 'I';
+						newItem.setItemBoard(zz);
+						itemsList.add(newItem);
+						world.setNewBoard(zz, currentItemBoard);
+						validItemLocation = true;
+					}
+					else{
+						validItemLocation = false;
+					}
+				}
+			}
+		}
+	}
+	public ArrayList<Item> getItemsList(){
+		return this.itemsList;
+	}
+	public void setItemsList(ArrayList<Items> newItemsList){
+		this.itemList = newItemsList;
 	}
 
 	public void moveEnemies(){

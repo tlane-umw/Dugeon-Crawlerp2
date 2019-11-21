@@ -218,9 +218,9 @@ public class Main2{
 						System.out.println(str2);
 						if(str.equals(str2)){
 							if(player.itemQuestion(gameDungeon.getDungeonGroundItems().get(i)) == true){
-								//location.remove(i);
-								//groundItems.remove(i);
-								//gameDungeon.setDungeonLocation(location);
+								//gameDungeon.getDungeonLocation().remove(i);
+								//gameDungeon.getDungeonGroundItems().remove(i);
+								gameDungeon.setDungeonLocation(location);
 								gameDungeon.setDungeonGroundItems(groundItems);
 								gameDungeon.dungeonPlayer.makeFalse();
 								keepPlaying = true;
