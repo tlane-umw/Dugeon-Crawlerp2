@@ -75,13 +75,13 @@ class Player extends Creature{
 
 		char[][] newBoard = playerBoard;
 		itemExistence = false;
-		if (userMove == 'W'){
+		if (userMove == 'W' || 'w'){
 			newBoard = displacement(-1, false, newBoard);
 		}
-		else if (userMove == 'A'){
+		else if (userMove == 'A' || 'a' ){
 			newBoard = displacement(-1, true, newBoard);
 		} 
-		else if (userMove == 'S'){
+		else if (userMove == 'S' || 's'){
 			newBoard = displacement(1, false, newBoard);
 		}
 		else {
