@@ -13,7 +13,6 @@ class Player extends Creature{
 	private Inventory userInventory = new Inventory (250);
 	private int value, health, count, row, column, board, newColumn, newRow;
 	private char playerSymbol;
-	private Hashtable<Integer, Item> playerGroundItems;
 
 	//default constructor
 	public Player(String name, int health, char PlayerSymbol){
@@ -59,19 +58,9 @@ class Player extends Creature{
 		}
 		response = false;
 		return response;
-	}
-	//generating new items on the board for the player
-	public Hashtable<Integer, Item> itemSpawn(int size){
-		count = 1;
-		Hashtable<Integer, Item> groundItems = new Hashtable<Integer, Item>();
-		for(int i = 1; i < size + 1; i++) {
-			groundItems.put(count, ItemGenerator.generate());
-			count++;
-		}
-		return groundItems;
-	}
+	}	
 	/* Our move method takes the users input and the 2d array that represents the old board. Based on whether the users move was W, A, S or D, this method calls the displacement method, giving it the displacement (-1 or 1), the direction(true is the column, or x axis and false is the row, or y axis) and the old 2d array that represents the board.So, for example -1 and false would be in the negative y direction, while 1 and false would be in the positive y direction. It then returns the newBoard with the new player location.*/
-	public char[][] move(char userMove, char[][] playerBoard){
+	public char[][] move(char userMove, char[][] playerBoard Dungeon playerDungeon){
 
 		char[][] newBoard = playerBoard;
 		itemExistence = false;
@@ -246,12 +235,6 @@ class Player extends Creature{
 	}
 	public void setColumn(int column){
 		this.column = column;
-	}
-	public Hashtable<Integer, Item> getPlayerGroundItems(){
-		return this.playerGroundItems;
-	}
-	public void setPlayerGroundItems(Hashtable<Integer, Item> playerGroundItems){
-		this.playerGroundItems = playerGroundItems;
 	}
 
 	//This method is called when the user steps on an item and chooses to pick it up. Since the item is no longer there, the booleans should be false so that the I symbol does not reappear once the player leaves that space.
