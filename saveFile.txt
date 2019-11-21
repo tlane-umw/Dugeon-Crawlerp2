@@ -1,7 +1,7 @@
 TYLER
 100
-4
-9
+17
+17
 1
 0
 Starter Sword
@@ -29,91 +29,119 @@ Dragonball
 100
 0
 Other
+Fine Sword
+60
+35
+85
+Weapon
+Key
+10
+5
+0
+Other
+Fine Steel Sword
+80
+55
+105
+Weapon
+Key
+10
+5
+0
+Other
 .
 enemy 0
-14
+17
 2
 0
 enemy 1
-15
-16
+14
+18
 0
 enemy 2
-14
-2
+16
+1
 1
 enemy 3
-16
-15
+13
+9
 1
 enemy 4
-15
-1
+18
+5
 2
 enemy 5
-13
-18
+12
+16
 2
 .
 0
-6
-15
-Sword
-50
-25
-75
+9
+9
+Fine Steel Sword
+80
+55
+105
 Weapon
 0
-11
-15
-Fine Steel Shield
-65
-55
-85
-Armor
-0
-3
-13
-Fine Steel Shield
-65
-55
-85
-Armor
-1
-3
-18
-Fine Steel Shield
-65
-55
-85
-Armor
-1
-18
-2
-PokeBall
-2
-20
-0
-Other
-1
+8
 4
+Key
 10
-PokeBall
-2
-20
+5
+0
+Other
+0
+7
+3
+Body Armor
+85
+75
+105
+Armor
+1
+17
+17
+Key
+10
+5
+0
+Other
+1
+6
+14
+Fine Sword
+60
+35
+85
+Weapon
+1
+16
+9
+Fine Steel Sword
+80
+55
+105
+Weapon
+1
+13
+8
+Key
+10
+5
 0
 Other
 2
-5
-5
-PokeBall
+6
+6
+Shield
+40
+30
+60
+Armor
 2
-20
-0
-Other
-2
-11
-15
+14
+12
 Fine Sword
 60
 35
@@ -121,18 +149,18 @@ Fine Sword
 Weapon
 2
 9
-8
+4
 Body Armor
 85
 75
 105
 Armor
 2
-16
 5
-Fine Steel Shield
-65
+8
+Fine Steel Sword
+80
 55
-85
-Armor
+105
+Weapon
 .

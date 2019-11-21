@@ -208,7 +208,7 @@ public class Main2{
 				String str2 = "";
 				if (gameDungeon.dungeonPlayer.getItemExistence() == true){
 					for(int i = 1; i < size + 1; i++){
-						for (int place : location.get(i)){
+						for (int place : gameDungeon.getDungeonLocation().get(i)){
 							str = str + " " + place;
 						}
 						System.out.println(str);
@@ -217,10 +217,10 @@ public class Main2{
 						}
 						System.out.println(str2);
 						if(str.equals(str2)){
-							if(player.itemQuestion(groundItems.get(i)) == true){
-								location.remove(i);
-								groundItems.remove(i);
-								gameDungeon.setDungeonLocation(location);
+							if(player.itemQuestion(gameDungeon.getDungeonGroundItems().get(i)) == true){
+								//location.remove(i);
+								//groundItems.remove(i);
+								//gameDungeon.setDungeonLocation(location);
 								gameDungeon.setDungeonGroundItems(groundItems);
 								gameDungeon.dungeonPlayer.makeFalse();
 								keepPlaying = true;
