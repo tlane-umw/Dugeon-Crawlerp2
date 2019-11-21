@@ -9,16 +9,9 @@ import java.util.InputMismatchException;
 //instance variables
 class Dungeon{
 	private static int numEnemiesDefeated = 0;
-	int playerColumn;
-	int playerRow;
-	int enemyColumn;
-	int enemyRow;
-	int enemyColumn2;
-	int enemyRow2;
 	private static int currentBoard = 1;
 	private World world;
 	private boolean alreadyExecuted = false;
-	private boolean alreadyExecuted2 = false;
 	private static boolean doesFileExist = false;
 	private boolean onItem = false;
 	private boolean itemExistence = false;
@@ -31,7 +24,8 @@ class Dungeon{
 	char playerSymbol;
 	Integer[] placement = new Integer[]{0, 0, 0};
 	Player dungeonPlayer;
-	Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
+	Hashtable<Integer, Integer[]> dungeonLocation = new Hashtable<Integer, Integer[]>();
+	Hashtable<Integer, Item> dungeonGroundItems = new Hashtable<Integer, Item>();
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
 	private boolean skip = true;
 	File saveFile = new File("saveFile.txt");
@@ -92,13 +86,13 @@ class Dungeon{
 					if(world.getCurrentBoard(k)[value.get(i+(number*k))][value2.get(i+(number*k))] == ' '){
 						world.getCurrentBoard(k)[value.get(i+(number*k))][value2.get(i+(number*k))] = 'I';
 						placement = new Integer[]{k, value.get(i+(number*k)), value2.get(i+(number*k))};
-						location.put(count, placement);
+						dungeonLocation.put(count, placement);
 						count++;
 					}
 				}
 			}	
 			alreadyExecuted = true;
-			return location;
+			return dungeonLocation;
 
 		}
 		//printing a star in the blank spaces
@@ -113,15 +107,10 @@ class Dungeon{
 			}
 			System.out.println();
 		}
-		return location;
+		return dungeonLocation;
 		//System.out.println("Done printing board!");
 	}
 
-	//keeping track of where the user is
-	public Integer[] playerLocation(){
-		Integer[] position = new Integer[]{playerRow, playerColumn};
-		return position;
-	}
 	//making the item dissapear after you pick it up, if you dont the item will reappear and a new item will be created
 	public void makeFalse(){
 		onItem = false;
@@ -146,7 +135,18 @@ class Dungeon{
 	public Player getPlayer(){
 		return this.dungeonPlayer;
 	}
-
+	public Hashtable<Integer, Integer[]> getDungeonLocation(){
+		return this.dungeonLocation;
+	}
+	public void setDungeonLocation(Hashtable<Integer, Integer[]> dungeonLocation){
+		this.dungeonLocation = dungeonLocation;
+	}
+	public Hashtable<Integer, Item> getDungeonGroundItems(){
+		return this.dungeonGroundItems;
+	}
+	public void setDungeonGroundItems(Hashtable<Integer, Item> dungeonGroundItems){
+		this.dungeonGroundItems = dungeonGroundItems;
+	}
 	//saving the game
 	public void save()throws FileNotFoundException{
 		try{
@@ -176,24 +176,24 @@ class Dungeon{
 
 
 			//saving the players current inventory
-				for (int z = 0; z < dungeonPlayer.getInventory().getSize(); z++){
-					output.println(dungeonPlayer.getInventory().getItem(z).getName());
-					output.println(dungeonPlayer.getInventory().getItem(z).getWeight());
-					output.println(dungeonPlayer.getInventory().getItem(z).getValue());
-					output.println(dungeonPlayer.getInventory().getItem(z).getStrength());
-					if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Weapon")){
-						output.println("Weapon");
-					}
-					else if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Armor")){
-						output.println("Armor");
-					}
-					else{
-						output.println("Other");
-					}
-
+			for (int z = 0; z < dungeonPlayer.getInventory().getSize(); z++){
+				output.println(dungeonPlayer.getInventory().getItem(z).getName());
+				output.println(dungeonPlayer.getInventory().getItem(z).getWeight());
+				output.println(dungeonPlayer.getInventory().getItem(z).getValue());
+				output.println(dungeonPlayer.getInventory().getItem(z).getStrength());
+				if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Weapon")){
+					output.println("Weapon");
 				}
+				else if(dungeonPlayer.getInventory().getItem(z).getTypeString().equals("Armor")){
+					output.println("Armor");
+				}
+				else{
+					output.println("Other");
+				}
+
+			}
 			output.println(".");
-			
+
 			//saving the current enemies
 			for (int y = 0; y < enemyList.size(); y++){
 				int currentEnemyBoard = enemyList.get(y).getEnemyBoardNum();
@@ -203,6 +203,30 @@ class Dungeon{
 					output.println(enemyList.get(y).getRow());
 					output.println(enemyList.get(y).getColumn());
 					output.println(enemyList.get(y).getEnemyBoardNum());
+				}
+
+			}
+			output.println(".");
+			int num = 0;
+			for(int x = 0; x < dungeonLocation.size(); x++){
+				num++;
+				if(dungeonLocation.get(x) != null){
+					for(int place : dungeonLocation.get(num)){
+						output.println(place);
+					}
+					output.println(dungeonGroundItems.get(num).getName());
+					output.println(dungeonGroundItems.get(num).getWeight());
+					output.println(dungeonGroundItems.get(num).getValue());
+					output.println(dungeonGroundItems.get(num).getStrength());
+					if(dungeonGroundItems.get(num).getTypeString().equals("Weapon")){
+						output.println("Weapon");
+					}
+					else if(dungeonGroundItems.get(num).getTypeString().equals("Armor")){
+						output.println("Armor");
+					}
+					else{
+						output.println("Other");
+					}
 				}
 			}
 			output.println(".");
@@ -352,6 +376,58 @@ class Dungeon{
 				restoreEnemyBoard[enemyList.get(h).getRow()][enemyList.get(h).getColumn()] = 'E';
 				this.world.setNewBoard(restoreEnemyBoardNum, restoreEnemyBoard);
 			}
+
+
+			Hashtable<Integer, Item> newDungeonGroundItems = new Hashtable<Integer, Item>();
+			Hashtable<Integer, Integer[]> newDungeonLocation = new Hashtable<Integer, Integer[]>();
+			boolean inGroundItems = true;
+			Integer numGroundItems = 1;
+			Integer numLocations = 1;
+			Item newItem2;
+
+
+			while (inGroundItems == true){
+				try{
+					String restoreGroundName = input.nextLine();
+					if (restoreGroundName.equals(".")){
+						inGroundItems = false;
+						break;
+					}
+					int restoreGroundWeight = input.nextInt();
+					int restoreGroundValue = input.nextInt();
+					int restoreGroundStrength = input.nextInt();
+					String trashNew = input.nextLine();
+					String restoreGroundType = input.nextLine();
+					if (restoreGroundType.equals("Weapon")){
+						newItem2 = new Item(restoreGroundName, restoreGroundWeight, restoreGroundValue, restoreGroundStrength, ItemType.Weapon);
+					}
+					else if (restoreGroundType.equals("Armor")){
+						newItem2 = new Item(restoreGroundName, restoreGroundWeight, restoreGroundValue, restoreGroundStrength, ItemType.Armor);
+					}
+					else{
+						newItem2 = new Item(restoreGroundName, restoreGroundWeight, restoreGroundValue, restoreGroundStrength, ItemType.Other);
+					}
+					newDungeonGroundItems.put(numGroundItems, newItem2);
+					numGroundItems++;
+
+					int groundBoard = input.nextInt();
+					int groundRow = input.nextInt();
+					int groundColumn = input.nextInt();
+
+					char [][] restoreGroundBoard = world.getCurrentBoard(groundBoard);
+					restoreGroundBoard[groundRow][groundColumn] = 'I';
+					this.world.setNewBoard(groundBoard, restoreGroundBoard);
+					Integer[] groundItemLocation = new Integer[]{groundBoard, groundRow, groundColumn};
+					newDungeonLocation.put(numLocations, groundItemLocation);
+					numLocations++;
+				}
+				catch (InputMismatchException noMoreGroundItems){
+					System.out.println("Input Mismatch Exception");
+				}
+			}
+			setDungeonGroundItems(newDungeonGroundItems);
+			setDungeonLocation(newDungeonLocation);
+			dungeonPlayer.setPlayerGroundItems(newDungeonGroundItems);
 
 
 

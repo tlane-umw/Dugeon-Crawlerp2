@@ -13,6 +13,7 @@ class Player extends Creature{
 	private Inventory userInventory = new Inventory (250);
 	private int value, health, count, row, column, board, newColumn, newRow;
 	private char playerSymbol;
+	private Hashtable<Integer, Item> playerGroundItems;
 
 	//default constructor
 	public Player(String name, int health, char PlayerSymbol){
@@ -245,6 +246,12 @@ class Player extends Creature{
 	}
 	public void setColumn(int column){
 		this.column = column;
+	}
+	public Hashtable<Integer, Item> getPlayerGroundItems(){
+		return this.playerGroundItems;
+	}
+	public void setPlayerGroundItems(Hashtable<Integer, Item> playerGroundItems){
+		this.playerGroundItems = playerGroundItems;
 	}
 
 	//This method is called when the user steps on an item and chooses to pick it up. Since the item is no longer there, the booleans should be false so that the I symbol does not reappear once the player leaves that space.

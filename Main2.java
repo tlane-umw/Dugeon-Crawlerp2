@@ -42,6 +42,7 @@ public class Main2{
 		location = gameDungeon.printBoard();
 		int size = location.size();
 		Hashtable<Integer, Item> groundItems = player.itemSpawn(size);
+		gameDungeon.setDungeonGroundItems(groundItems);
 
 		//commands of the game
 		System.out.println("Here are the commands for the game. Select one of the characters then hit 'enter'");
@@ -217,6 +218,10 @@ public class Main2{
 						System.out.println(str2);
 						if(str.equals(str2)){
 							if(player.itemQuestion(groundItems.get(i)) == true){
+								location.remove(i);
+								groundItems.remove(i);
+								gameDungeon.setDungeonLocation(location);
+								gameDungeon.setDungeonGroundItems(groundItems);
 								gameDungeon.dungeonPlayer.makeFalse();
 								keepPlaying = true;
 							} else {
