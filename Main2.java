@@ -27,7 +27,7 @@ public class Main2{
 		System.out.println("Navigate through the different rooms marked with 'D', to pick up items and defeat all the enemies!");
 		System.out.println("Good luck!");
 		try{
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 		}
 		catch(InterruptedException newException){
 			System.out.println("Interrupted!");
@@ -38,7 +38,6 @@ public class Main2{
 		boolean keepPlaying = true;
 		Player player = new Player(signature, 100,  playerSymbol);
 		Dungeon gameDungeon = new Dungeon(player, playerSymbol);
-		gameDungeon.printBoard();
 	
 
 		//commands of the game
@@ -55,7 +54,7 @@ public class Main2{
 		System.out.println("R : Restore your previously saved gamed");
 		System.out.println("Q : quit out of the game");
 		try{
-			Thread.sleep(10000);
+			Thread.sleep(5000);
 		}
 		catch (InterruptedException printCommands){
 			System.out.println("Interrupted!");
@@ -125,7 +124,7 @@ public class Main2{
 				if (userSave.equals("Y")){
 					System.out.println("Hang tight while we save your game....");
 					try{
-						Thread.sleep(3000);
+						Thread.sleep(1000);
 					}
 					catch(InterruptedException save1){
 						System.out.println("Interrupted!");
@@ -133,7 +132,7 @@ public class Main2{
 					gameDungeon.save();
 					System.out.println(".... Success! We saved your game. Be sure to save again if you keep playing!");
 					try{
-						Thread.sleep(3000);
+						Thread.sleep(1000);
 					}
 					catch(InterruptedException save2){
 						System.out.println("Interrupted!");
@@ -150,7 +149,7 @@ public class Main2{
 					System.out.println("Hang tight while we restore your game....");
 					System.out.println();
 					try{
-						Thread.sleep(3000);
+						Thread.sleep(1000);
 					}
 					catch(InterruptedException restore1){
 						System.out.println("Interrupted!");
@@ -162,7 +161,7 @@ public class Main2{
 					System.out.println(".... Success! We were able to load your game.");
 					System.out.println("Get ready to jump back into your game! Good luck!");
 					try{
-						Thread.sleep(3000);
+						Thread.sleep(1000);
 					}
 					catch(InterruptedException restore2){
 						System.out.println("Interrupted!");

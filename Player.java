@@ -8,7 +8,7 @@ class Player extends Creature{
 	private String answer;
 	private static int currentPlayerBoard = 1;
 	private static int numEnemiesDefeated = 0;
-	private boolean itemExistence, onItem;
+	private boolean itemExistence;
 	private String name;
 	private Inventory userInventory = new Inventory (250);
 	private int value, health, count, row, column, board, newColumn, newRow;
@@ -35,15 +35,12 @@ class Player extends Creature{
 
 	//method asking the user if they want to pick up the item they stepped on
 	public boolean itemQuestion(Dungeon itemQuestionDungeon, int tempRow, int tempColumn){
-		boolean doesItemVanish;
+		boolean doesItemRemain;
 		ArrayList<Item> currentDungeonItems = itemQuestionDungeon.getItemsList();
 		for (int yy = 0; yy < currentDungeonItems.size(); yy++){
-			System.out.println(currentDungeonItems.get(yy).toString());
 			int currentItemRow = currentDungeonItems.get(yy).getItemRow();
 			int currentItemColumn = currentDungeonItems.get(yy).getItemColumn();
 			int currentItemBoard = currentDungeonItems.get(yy).getItemBoard();
-			System.out.println("The items board is: " + currentItemBoard + ", the row is: " + currentItemRow + ", the column is: " + currentItemColumn);
-			System.out.println("The player is currently on board: " + currentPlayerBoard + ", row is: " + row + ", column is: " + column);
 			if ((currentItemRow == tempRow) && (currentItemColumn == tempColumn)){
 				if (currentItemBoard == this.currentPlayerBoard){
 					System.out.println("You have stumbled onto a " + currentDungeonItems.get(yy).getName() + ".");
@@ -57,10 +54,10 @@ class Player extends Creature{
 							userInventory.add(currentDungeonItems.get(yy));
 							currentDungeonItems.remove(yy);
 							itemQuestionDungeon.setItemsList(currentDungeonItems);
-							doesItemVanish = true;
-							return doesItemVanish;
+							doesItemRemain = false;
+							return doesItemRemain;
 						}
-					       	else { 
+						else { 
 							System.out.println("Not a valid input.");
 							System.out.println("You have found an item, would you like to pick it up?");
 							System.out.println("Enter 'Y' for yes and 'N' for no.");
@@ -72,14 +69,13 @@ class Player extends Creature{
 			}
 
 		}
-		doesItemVanish = false;
-		return doesItemVanish;
+		doesItemRemain = true;
+		return doesItemRemain;
 	}	
 	/* Our move method takes the users input and the 2d array that represents the old board. Based on whether the users move was W, A, S or D, this method calls the displacement method, giving it the displacement (-1 or 1), the direction(true is the column, or x axis and false is the row, or y axis) and the old 2d array that represents the board.So, for example -1 and false would be in the negative y direction, while 1 and false would be in the positive y direction. It then returns the newBoard with the new player location.*/
 	public char[][] move(char userMove, char[][] playerBoard, Dungeon playerDungeon){
 
 		char[][] newBoard = playerBoard;
-		itemExistence = false;
 		if (userMove == 'W'){
 			newBoard = displacement(-1, false, newBoard, playerDungeon);
 		}
@@ -109,7 +105,7 @@ class Player extends Creature{
 			System.out.println();
 			try{
 
-				Thread.sleep(2500);
+				Thread.sleep(1000);
 			}
 			catch(InterruptedException g){
 				System.out.println("Interrupted");
@@ -118,7 +114,7 @@ class Player extends Creature{
 			//
 			System.out.println("The " + dungeonEnemy.getName() + " currently has a health of " + dungeonEnemy.getHealth());
 			try{
-				Thread.sleep(2500);
+				Thread.sleep(1000);
 			}
 			catch (InterruptedException z){
 				System.out.println("Interrupted!");
@@ -129,7 +125,7 @@ class Player extends Creature{
 			System.out.println("The " + dungeonEnemy.getName() + " took "  + enemyDamage + " damage from the players " + getInventory().getEquippedWeapon().getName());
 			System.out.println();
 			try{
-				Thread.sleep(2500);
+				Thread.sleep(1000);
 			}
 			catch (InterruptedException f){
 				System.out.println("Interrupted!");
@@ -147,7 +143,7 @@ class Player extends Creature{
 				System.out.println("The new enemy health is " + dungeonEnemy.getHealth());
 				System.out.println();
 				try{
-					Thread.sleep(2500);
+					Thread.sleep(1000);
 				}
 				catch (InterruptedException f){
 					System.out.println("Interruputed!");
@@ -160,7 +156,7 @@ class Player extends Creature{
 			System.out.println("The player currently has a health of " + getHealth());
 			System.out.println();
 			try{
-				Thread.sleep(2500);
+				Thread.sleep(1000);
 			}
 			catch (InterruptedException eee){
 				System.out.println("Interrupted!");
@@ -172,7 +168,7 @@ class Player extends Creature{
 			//checking if the players current armor is stronger than the enemy's attack
 			if (playerDamage <= 0){
 				try{
-					Thread.sleep(2500);
+					Thread.sleep(1000);
 				}
 				catch (InterruptedException y){
 					System.out.println("Interrupted");
@@ -180,7 +176,7 @@ class Player extends Creature{
 				System.out.println("The players " + getInventory().getEquippedArmor().getName() + " completely negated the enemy's attack!");
 				System.out.println();
 				try{
-					Thread.sleep(2500);
+					Thread.sleep(1000);
 				}
 				catch (InterruptedException d){
 					System.out.println("Interrupted!");
@@ -195,7 +191,7 @@ class Player extends Creature{
 				System.out.println("You took " + playerDamage + " damage from the enemy!");
 				System.out.println();
 				try{
-					Thread.sleep(2500);
+					Thread.sleep(1000);
 				}
 				catch (InterruptedException c){
 					System.out.println("Interrupted!");
@@ -207,7 +203,7 @@ class Player extends Creature{
 					System.out.println("The enemy brutally murdered you!");
 					System.out.println("Better luck next time!");
 					try{
-						Thread.sleep(2500);
+						Thread.sleep(1000);
 					}
 					catch (InterruptedException b){
 						System.out.println("Interrupted!");
@@ -220,7 +216,7 @@ class Player extends Creature{
 					System.out.println("After the enemy's latest attack, the player's health is " + getHealth());
 					System.out.println();
 					try{
-						Thread.sleep(2500);
+						Thread.sleep(1000);
 					}
 					catch(InterruptedException a){
 						System.out.println("Interrupted!");
@@ -243,9 +239,6 @@ class Player extends Creature{
 	public int getRow(){
 		return this.row;
 	}
-	public boolean getItemExistence(){
-		return itemExistence;
-	}
 	public void setRow(int row){
 		this.row = row;
 	}
@@ -254,10 +247,6 @@ class Player extends Creature{
 	}
 
 	//This method is called when the user steps on an item and chooses to pick it up. Since the item is no longer there, the booleans should be false so that the I symbol does not reappear once the player leaves that space.
-	public void makeFalse(){
-		onItem = false;
-		itemExistence = false;
-	}
 	public Integer[] playerLocation(){
 		Integer[] position = new Integer[]{currentPlayerBoard, row, column};
 		return position;
@@ -333,8 +322,6 @@ class Player extends Creature{
 		else if (newBoard[newRow][newColumn] == 'I') {
 			newBoard[row][column] = ' ';
 			newBoard[newRow][newColumn] = playerSymbol;
-			//itemExistence = true;
-			onItem = true;
 			itemExistence = itemQuestion(displacementDungeon, newRow, newColumn);
 		}
 		//Whata happens when the player bumps into an enemy.
@@ -347,7 +334,7 @@ class Player extends Creature{
 				numEnemiesDefeated = numEnemiesDefeated + 1;
 				if (numEnemiesDefeated == 6){
 					try{
-						Thread.sleep(4000);
+						Thread.sleep(1000);
 					}
 					catch(InterruptedException w){
 						System.out.println("Interrupted!");
@@ -355,7 +342,7 @@ class Player extends Creature{
 					System.out.println("Congratulations!! You beat the game!!!");
 					System.out.println();
 					try{
-						Thread.sleep(4000);
+						Thread.sleep(1000);
 					}
 					catch (InterruptedException x){
 						System.out.println("Interrupted!");
@@ -366,7 +353,7 @@ class Player extends Creature{
 				}
 				else{
 					try{
-						Thread.sleep(2500);
+						Thread.sleep(1000);
 					}
 					catch(InterruptedException zz){
 						System.out.println("Interrupted!");
@@ -378,12 +365,12 @@ class Player extends Creature{
 						System.out.println("You have defeated " + numEnemiesDefeated + " enemies so far!");
 					}
 					System.out.println();
-                                	System.out.println("Defeat all 6 to defeat the game!");
+					System.out.println("Defeat all 6 to defeat the game!");
 					System.out.println();
 					System.out.println("Keeip going!!");
 					System.out.println();
 					try{
-						Thread.sleep(2500);
+						Thread.sleep(1000);
 					}
 					catch(InterruptedException fff){
 						System.out.println("Interrupted!");
@@ -394,7 +381,7 @@ class Player extends Creature{
 
 			else{
 				try{
-					Thread.sleep(4000);
+					Thread.sleep(1000);
 				}
 				catch(InterruptedException www){
 					System.out.println("Interrupted!");
@@ -402,9 +389,14 @@ class Player extends Creature{
 				System.out.println("Better luck next time!");
 				System.exit(0);
 			}
+
+			//Nothing is in the players way, so the player can freely move forward.
 		}
-		
-		//Nothing is in the players way, so the player can freely move forward.
+		else if (itemExistence == true){
+			newBoard[row][column] = 'I';
+			newBoard[newRow][newColumn] = playerSymbol;
+			itemExistence = false;
+		}
 		else {
 			newBoard[row][column] = ' ';
 			newBoard[newRow][newColumn] = playerSymbol;
