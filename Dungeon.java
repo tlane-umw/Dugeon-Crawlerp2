@@ -207,12 +207,23 @@ class Dungeon{
 			}
 			output.println(".");
 
-			//add save for current itemsList
+			for (int xx = 0; xx < itemsList.size(); xx++){
+				output.println(itemsList.get(xx).getName());
+				output.println(itemsList.get(xx).getWeight());
+				output.println(itemsList.get(xx).getValue());
+				output.println(itemsList.get(xx).getStrength());
+				output.println(itemsList.get(xx).getTypeString());
+				output.println(itemsList.get(xx).getItemRow());
+				output.println(itemsList.get(xx).getItemColumn());
+				output.println(itemsList.get(xx).getItemBoard());
+
+				//add save for current itemsList
 
 
-			output.println(".");
+				output.println(".");
 
-			output.close();
+				output.close();
+			}
 		}
 		catch (IOException ioe){
 			System.out.println("Error");
@@ -334,6 +345,46 @@ class Dungeon{
 			}
 			setEnemyList(newEnemyList);
 
+			//removing any possible items on the board
+			for (int cba = 0; cba < this.itemsList.size(); cba++){
+				this.itemsList.remove(0);
+			}
+			ArrayList<Item> newItemsList = new ArrayList<Item>();
+			boolean inItemsList = true;
+			Item newItem;
+			while(inItemsList == true){
+				try{
+					String itemName = input.nextLine();
+					if (itemName.equals(".")){
+						inItemsList = false;
+						break;
+					}
+					int itemWeight = input.nextInt();
+					int itemValue = input.nextInt();
+					int itemStrength = input.nextInt();
+					String itemType = input.nextLine();
+					int itemRow = input.nextInt();
+					int itemColumn = input.nextInt();
+					int itemBoard = input.nextInt();
+					if (itemType.equals("Weapon")){
+						newItem = new Item(itemName, itemWeight, itemValue, itemStrength, itemRow, itemColumn, ItemType.Weapon);
+					}
+					else if (itemType.equals("Armor")){
+						newItem = new Item(itemName, itemWeight, itemValue, itemStrength, itemRow, itemColumn, ItemType.Armor);
+					}
+					else{
+						newItem = new Item(itemName, itemWeight, itemValue, itemStrength, itemRow, itemColumn, ItemType.Armor);
+					}
+					newItem.setItemBoard(itemBoard);
+					newItemsList.add(newItem);
+				}
+
+				catch(InputMismatchException noMoreItems){
+
+				}
+			}
+			setItemsList(newItemsList);
+
 			//blanking out the boarda if theyre not a wall or a door
 			for (int a = 0; a < 3; a++){
 				char[][] blankBoard = world.getCurrentBoard(a);
@@ -357,54 +408,11 @@ class Dungeon{
 				restoreEnemyBoard[enemyList.get(h).getRow()][enemyList.get(h).getColumn()] = 'E';
 				this.world.setNewBoard(restoreEnemyBoardNum, restoreEnemyBoard);
 			}
-
-
-			Hashtable<Integer, Item> newDungeonGroundItems = new Hashtable<Integer, Item>();
-			Hashtable<Integer, Integer[]> newDungeonLocation = new Hashtable<Integer, Integer[]>();
-			boolean inGroundItems = true;
-			Integer numGroundItems = 1;
-			Integer numLocations = 1;
-			Item newItem2;
-
-
-			while (inGroundItems == true){
-				try{
-					String restoreGroundName = input.nextLine();
-					if (restoreGroundName.equals(".")){
-						inGroundItems = false;
-						break;
-					}
-					int restoreGroundWeight = input.nextInt();
-					int restoreGroundValue = input.nextInt();
-					int restoreGroundStrength = input.nextInt();
-					String trashNew = input.nextLine();
-					String restoreGroundType = input.nextLine();
-					if (restoreGroundType.equals("Weapon")){
-						newItem2 = new Item(restoreGroundName, restoreGroundWeight, restoreGroundValue, restoreGroundStrength, ItemType.Weapon);
-					}
-					else if (restoreGroundType.equals("Armor")){
-						newItem2 = new Item(restoreGroundName, restoreGroundWeight, restoreGroundValue, restoreGroundStrength, ItemType.Armor);
-					}
-					else{
-						newItem2 = new Item(restoreGroundName, restoreGroundWeight, restoreGroundValue, restoreGroundStrength, ItemType.Other);
-					}
-					newDungeonGroundItems.put(numGroundItems, newItem2);
-					numGroundItems++;
-
-					int groundBoard = input.nextInt();
-					int groundRow = input.nextInt();
-					int groundColumn = input.nextInt();
-
-					char [][] restoreGroundBoard = world.getCurrentBoard(groundBoard);
-					restoreGroundBoard[groundRow][groundColumn] = 'I';
-					this.world.setNewBoard(groundBoard, restoreGroundBoard);
-					Integer[] groundItemLocation = new Integer[]{groundBoard, groundRow, groundColumn};
-					newDungeonLocation.put(numLocations, groundItemLocation);
-					numLocations++;
-				}
-				catch (InputMismatchException noMoreGroundItems){
-					System.out.println("Input Mismatch Exception");
-				}
+			for (int hh = 0; hh < this.itemsList.size(); hh++){
+				int restoreItemBoardNum = itemsList.get(hh).getItemBoard();
+				char[][] restoreItemBoard = world.getCurrentBoard(restoreItemBoardNum);
+				restoreItemBoard[itemsList.get(hh).getItemRow()][itemsList.get(hh).getItemColumn()] = 'I';
+				this.world.setNewBoard(restoreItemBoardNum, restoreItemBoard);
 			}
 
 
