@@ -25,7 +25,7 @@ class Dungeon{
 	Integer[] placement = new Integer[]{0, 0, 0};
 	Player dungeonPlayer;
 	ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
-	ArrayList<Item> itemList = new ArrayList<Item>();
+	ArrayList<Item> itemsList = new ArrayList<Item>();
 	private boolean skip = true;
 	File saveFile = new File("saveFile.txt");
 
@@ -50,13 +50,13 @@ class Dungeon{
 		enemyList.add(enemy4);
 		enemyList.add(enemy5);
 		Item newItem;
-		for int(zz = 0; zz < 3; z++){
+		for (int zz = 0; zz < 3; zz++){
 			for (int yy = 0; yy < 4; yy++){
 				boolean validItemLocation = false;
 				while(validItemLocation == false){
 					newItem = ItemGenerator.generate();
-					int itemRow = newItem.getRow();
-					int itemColumn = newItem.getColumn();
+					int itemRow = newItem.getItemRow();
+					int itemColumn = newItem.getItemColumn();
 					char[][] currentItemBoard = world.getCurrentBoard(zz);
 					if (currentItemBoard[itemRow][itemColumn] == ' '){
 						currentItemBoard[itemRow][itemColumn] = 'I';
@@ -75,8 +75,8 @@ class Dungeon{
 	public ArrayList<Item> getItemsList(){
 		return this.itemsList;
 	}
-	public void setItemsList(ArrayList<Items> newItemsList){
-		this.itemList = newItemsList;
+	public void setItemsList(ArrayList<Item> newItemsList){
+		this.itemsList = newItemsList;
 	}
 
 	public void moveEnemies(){
@@ -100,28 +100,12 @@ class Dungeon{
 
 
 	//printing the gameboard showing the players location, enemies location, and items locations
-	public Hashtable<Integer, Integer[]>  printBoard(){
+	public void  printBoard(){
 
 		//System.out.println("About to print the board!");
-		int number = random.nextInt(4) + 3;
-		int count = 1;
-		if(!alreadyExecuted) {
-			for(int k = 0; k < 3; k++){
-				for(int i = 0; i < number; i++){
-					value.add(random.nextInt(17) + 2);				
-					value2.add(random.nextInt(17) + 2);
-					if(world.getCurrentBoard(k)[value.get(i+(number*k))][value2.get(i+(number*k))] == ' '){
-						world.getCurrentBoard(k)[value.get(i+(number*k))][value2.get(i+(number*k))] = 'I';
-						placement = new Integer[]{k, value.get(i+(number*k)), value2.get(i+(number*k))};
-						dungeonLocation.put(count, placement);
-						count++;
-					}
-				}
-			}	
-			alreadyExecuted = true;
-			return dungeonLocation;
 
-		}
+
+
 		//printing a star in the blank spaces
 		world.getCurrentBoard(currentBoard)[dungeonPlayer.getRow()][dungeonPlayer.getColumn()] = playerSymbol;
 		for (int i = 0; i < 20; i++){
@@ -134,7 +118,7 @@ class Dungeon{
 			}
 			System.out.println();
 		}
-		return dungeonLocation;
+
 		//System.out.println("Done printing board!");
 	}
 
@@ -161,18 +145,6 @@ class Dungeon{
 	}
 	public Player getPlayer(){
 		return this.dungeonPlayer;
-	}
-	public Hashtable<Integer, Integer[]> getDungeonLocation(){
-		return this.dungeonLocation;
-	}
-	public void setDungeonLocation(Hashtable<Integer, Integer[]> dungeonLocation){
-		this.dungeonLocation = dungeonLocation;
-	}
-	public Hashtable<Integer, Item> getDungeonGroundItems(){
-		return this.dungeonGroundItems;
-	}
-	public void setDungeonGroundItems(Hashtable<Integer, Item> dungeonGroundItems){
-		this.dungeonGroundItems = dungeonGroundItems;
 	}
 	//saving the game
 	public void save()throws FileNotFoundException{
@@ -234,28 +206,10 @@ class Dungeon{
 
 			}
 			output.println(".");
-			int num = 0;
-			for(int x = 0; x < dungeonLocation.size(); x++){
-				num++;
-				if(dungeonLocation.get(x) != null){
-					for(int place : dungeonLocation.get(num)){
-						output.println(place);
-					}
-					output.println(dungeonGroundItems.get(num).getName());
-					output.println(dungeonGroundItems.get(num).getWeight());
-					output.println(dungeonGroundItems.get(num).getValue());
-					output.println(dungeonGroundItems.get(num).getStrength());
-					if(dungeonGroundItems.get(num).getTypeString().equals("Weapon")){
-						output.println("Weapon");
-					}
-					else if(dungeonGroundItems.get(num).getTypeString().equals("Armor")){
-						output.println("Armor");
-					}
-					else{
-						output.println("Other");
-					}
-				}
-			}
+
+			//add save for current itemsList
+
+
 			output.println(".");
 
 			output.close();
@@ -452,9 +406,6 @@ class Dungeon{
 					System.out.println("Input Mismatch Exception");
 				}
 			}
-			setDungeonGroundItems(newDungeonGroundItems);
-			setDungeonLocation(newDungeonLocation);
-			dungeonPlayer.setPlayerGroundItems(newDungeonGroundItems);
 
 
 

@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Hashtable;
 class Player extends Creature{
@@ -34,24 +34,40 @@ class Player extends Creature{
 	}
 
 	//method asking the user if they want to pick up the item they stepped on
-	public boolean itemQuestion(Item item){
+	public boolean itemQuestion(Dungeon itemQuestionDungeon, int tempRow, int tempColumn){
 		boolean response;
-		System.out.println("You have stumbled onto a " + item.getName() + ".");
-		System.out.println("Here is some information about the item: ");
-		System.out.println(item.toString());
-		System.out.println("Would you like to pick this item up?");
-		System.out.println("Enter 'Y' for yes and 'N' for no.");
-		answer = s.nextLine();
-		while(!(answer.equals("N") || answer.equals("n"))){
-			if(answer.equals("Y") || answer.equals("y")){
-				userInventory.add(item);
-				response = true;
-				return response;
-			} else { 
-				System.out.println("Not a valid input.");
-				System.out.println("You have found an item, would you like to pick it up?");
-				System.out.println("Enter 'Y' for yes and 'N' for no.");
-				answer = s.nextLine();
+		ArrayList<Item> currentDungeonItems = itemQuestionDungeon.getItemsList();
+		for (int yy = 0; yy < currentDungeonItems.size(); yy++){
+			System.out.println(currentDungeonItems.get(yy).toString());
+			int currentItemRow = currentDungeonItems.get(yy).getItemRow();
+			int currentItemColumn = currentDungeonItems.get(yy).getItemColumn();
+			int currentItemBoard = currentDungeonItems.get(yy).getItemBoard();
+			System.out.println("The items board is: " + currentItemBoard + ", the row is: " + currentItemRow + ", the column is: " + currentItemColumn);
+			System.out.println("The player is currently on board: " + currentPlayerBoard + ", row is: " + row + ", column is: " + column);
+			if ((currentItemRow == tempRow) && (currentItemColumn == tempColumn)){
+				if (currentItemBoard == this.currentPlayerBoard){
+					System.out.println("You have stumbled onto a " + currentDungeonItems.get(yy).getName() + ".");
+					System.out.println("Here is some information about the item: ");
+					System.out.println(currentDungeonItems.get(yy).toString());
+					System.out.println("Would you like to pick this item up?");
+					System.out.println("Enter 'Y' for yes and 'N' for no.");
+					answer = s.nextLine();
+					while(!(answer.equals("N") || answer.equals("n"))){
+						if(answer.equals("Y") || answer.equals("y")){
+							userInventory.add(currentDungeonItems.get(yy));
+							currentDungeonItems.remove(yy);
+							itemQuestionDungeon.setItemsList(currentDungeonItems);
+							response = true;
+							return response;
+						}
+					       	else { 
+							System.out.println("Not a valid input.");
+							System.out.println("You have found an item, would you like to pick it up?");
+							System.out.println("Enter 'Y' for yes and 'N' for no.");
+							answer = s.nextLine();
+						}
+					}
+				}
 
 			}
 
@@ -60,21 +76,21 @@ class Player extends Creature{
 		return response;
 	}	
 	/* Our move method takes the users input and the 2d array that represents the old board. Based on whether the users move was W, A, S or D, this method calls the displacement method, giving it the displacement (-1 or 1), the direction(true is the column, or x axis and false is the row, or y axis) and the old 2d array that represents the board.So, for example -1 and false would be in the negative y direction, while 1 and false would be in the positive y direction. It then returns the newBoard with the new player location.*/
-	public char[][] move(char userMove, char[][] playerBoard Dungeon playerDungeon){
+	public char[][] move(char userMove, char[][] playerBoard, Dungeon playerDungeon){
 
 		char[][] newBoard = playerBoard;
 		itemExistence = false;
-		if (userMove == 'W' || userMove == 'w'){
-			newBoard = displacement(-1, false, newBoard);
+		if (userMove == 'W'){
+			newBoard = displacement(-1, false, newBoard, playerDungeon);
 		}
-		else if (userMove == 'A' || userMove == 'a' ){
-			newBoard = displacement(-1, true, newBoard);
+		else if (userMove == 'A'){
+			newBoard = displacement(-1, true, newBoard, playerDungeon);
 		} 
-		else if (userMove == 'S' || userMove == 's'){
-			newBoard = displacement(1, false, newBoard);
+		else if (userMove == 'S'){
+			newBoard = displacement(1, false, newBoard, playerDungeon);
 		}
 		else {
-			newBoard = displacement(1, true, newBoard);
+			newBoard = displacement(1, true, newBoard, playerDungeon);
 		}	
 		return newBoard;
 	}		
@@ -254,7 +270,7 @@ class Player extends Creature{
 		this.currentPlayerBoard = newPlayerBoard;
 	}
 	//The displacement method takes an integer for the displacement of the player and a boolean for the direction (moving in the x direction or y direction) and the old board. It returns a newBoard based on the players new location. The purpose of this method was to save ourselves having to write this code 4 times for move method based on if the player pressed W, A, S, or D.
-	public char[][] displacement(int change, boolean choice, char[][] newBoard){
+	public char[][] displacement(int change, boolean choice, char[][] newBoard, Dungeon displacementDungeon){
 		if(choice == true){
 			newColumn = column + change;
 			newRow = row;
@@ -319,6 +335,7 @@ class Player extends Creature{
 			newBoard[newRow][newColumn] = playerSymbol;
 			itemExistence = true;
 			onItem = true;
+			itemQuestion(displacementDungeon, newRow, newColumn);
 		}
 		//Whata happens when the player bumps into an enemy.
 		else if (newBoard[newRow][newColumn] == 'E') {
@@ -392,6 +409,7 @@ class Player extends Creature{
 			newBoard[newRow][newColumn] = playerSymbol;
 			onItem = false;
 		} 
+		
 		//Nothing is in the players way, so the player can freely move forward.
 		else {
 			newBoard[row][column] = ' ';
@@ -399,6 +417,7 @@ class Player extends Creature{
 		}	
 		row = newRow;
 		column = newColumn;
+
 		return newBoard;
 	}
 

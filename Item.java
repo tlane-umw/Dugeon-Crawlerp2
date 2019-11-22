@@ -9,21 +9,24 @@ public class Item{
 	private int strength;
 	private int itemBoard;
 	private int itemRow;
-	private int itemColumn
+	private int itemColumn;
 
 	//default constructor
-	Item (String name, int weight, int value, int strength, ItemType type){
+	Item (String name, int weight, int value, int strength, int itemRow, int itemColumn, ItemType type){
 		this.type = type;
 		this.name = name;
 		this.weight = weight;
 		this.value = value;
 		this.strength = strength;
+		this.itemRow = itemRow;
+		this.itemColumn = itemColumn;
 	}
-	Item(String name, int weight, int value, int strength){
+	Item(String name, int weight, int value, int strength, ItemType type){
 		this.name = name;
 		this.weight = weight;
 		this.value = value;
 		this.strength = strength;
+		this.type = type;
 	}
 	Item(int itemBoard, int itemRow, int itemColumn){
 		this.itemBoard = itemBoard;
@@ -77,7 +80,7 @@ public class Item{
 	public int getItemRow(){
 		return this.itemRow;
 	}
-	public int getItemColum(){
+	public int getItemColumn(){
 		return this.itemColumn;
 	}
 

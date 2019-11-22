@@ -38,11 +38,8 @@ public class Main2{
 		boolean keepPlaying = true;
 		Player player = new Player(signature, 100,  playerSymbol);
 		Dungeon gameDungeon = new Dungeon(player, playerSymbol);
-		Hashtable<Integer, Integer[]> location = new Hashtable<Integer, Integer[]>();
-		location = gameDungeon.printBoard();
-		int size = location.size();
-		Hashtable<Integer, Item> groundItems = player.itemSpawn(size);
-		gameDungeon.setDungeonGroundItems(groundItems);
+		gameDungeon.printBoard();
+	
 
 		//commands of the game
 		System.out.println("Here are the commands for the game. Select one of the characters then hit 'enter'");
@@ -180,58 +177,19 @@ public class Main2{
 				gameDungeon.dungeonPlayer.getInventory().drop();
 			}
 			else if ((userLetter == 'W') || (userLetter == 'A') || (userLetter == 'S') || (userLetter == 'D')){
-				//System.out.println("The players column = " + gameDungeon.getPlayer().getColumn());
-				//System.out.println();
-				//System.out.println("The players row = " + gameDungeon.getPlayer().getRow());
-				//System.out.println();
 
-				//System.out.println(playerSymbol);
-
-				//getting the current board the player is on, moving the player on that board, then setting the world board to the updated board after the player moved
 				System.out.println();
 
 				int currentBoardNum = gameDungeon.getCurrentBoardNum();
 
 				char[][] oldBoard = gameDungeon.getWorld().getCurrentBoard(currentBoardNum);
 
-				char[][] newBoard = gameDungeon.dungeonPlayer.move(userLetter, oldBoard);
+				char[][] newBoard = gameDungeon.dungeonPlayer.move(userLetter, oldBoard, gameDungeon);
 
 				gameDungeon.getWorld().setNewBoard(currentBoardNum, newBoard);
 
 				gameDungeon.setCurrentBoardNum(gameDungeon.getPlayer().getCurrentPlayerBoard());
 
-				//System.out.println("The current gameboard number is - " + gameDungeon.getCurrentBoardNum());
-
-
-				String str = "";
-
-				String str2 = "";
-				if (gameDungeon.dungeonPlayer.getItemExistence() == true){
-					for(int i = 1; i < size + 1; i++){
-						for (int place : gameDungeon.getDungeonLocation().get(i)){
-							str = str + " " + place;
-						}
-						System.out.println(str);
-						for (int place2 : gameDungeon.dungeonPlayer.playerLocation()){
-							str2 = str2 + " " + place2;
-						}
-						System.out.println(str2);
-						if(str.equals(str2)){
-							if(player.itemQuestion(gameDungeon.getDungeonGroundItems().get(i)) == true){
-								//gameDungeon.getDungeonLocation().remove(i);
-								//gameDungeon.getDungeonGroundItems().remove(i);
-								gameDungeon.setDungeonLocation(location);
-								gameDungeon.setDungeonGroundItems(groundItems);
-								gameDungeon.dungeonPlayer.makeFalse();
-								keepPlaying = true;
-							} else {
-								keepPlaying = true;
-							}
-						}
-						str = "";
-						str2 = "";
-					}
-				}
 				gameDungeon.moveEnemies();
 			}
 			else{
