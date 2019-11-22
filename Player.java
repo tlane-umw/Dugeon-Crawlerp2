@@ -51,11 +51,18 @@ class Player extends Creature{
 					answer = s.nextLine();
 					while(!(answer.equals("N") || answer.equals("n"))){
 						if(answer.equals("Y") || answer.equals("y")){
-							userInventory.add(currentDungeonItems.get(yy));
-							currentDungeonItems.remove(yy);
-							itemQuestionDungeon.setItemsList(currentDungeonItems);
-							doesItemRemain = false;
-							return doesItemRemain;
+							boolean couldUserAdd = userInventory.add(currentDungeonItems.get(yy));
+
+							if(couldUserAdd == true){
+								currentDungeonItems.remove(yy);
+								itemQuestionDungeon.setItemsList(currentDungeonItems);
+								doesItemRemain = false;
+								return doesItemRemain;
+							}
+							else{
+								doesItemRemain = true;
+								return doesItemRemain;
+							}
 						}
 						else { 
 							System.out.println("Not a valid input.");
