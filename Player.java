@@ -35,7 +35,7 @@ class Player extends Creature{
 
 	//method asking the user if they want to pick up the item they stepped on
 	public boolean itemQuestion(Dungeon itemQuestionDungeon, int tempRow, int tempColumn){
-		boolean response;
+		boolean doesItemVanish;
 		ArrayList<Item> currentDungeonItems = itemQuestionDungeon.getItemsList();
 		for (int yy = 0; yy < currentDungeonItems.size(); yy++){
 			System.out.println(currentDungeonItems.get(yy).toString());
@@ -57,8 +57,8 @@ class Player extends Creature{
 							userInventory.add(currentDungeonItems.get(yy));
 							currentDungeonItems.remove(yy);
 							itemQuestionDungeon.setItemsList(currentDungeonItems);
-							response = true;
-							return response;
+							doesItemVanish = true;
+							return doesItemVanish;
 						}
 					       	else { 
 							System.out.println("Not a valid input.");
@@ -72,8 +72,8 @@ class Player extends Creature{
 			}
 
 		}
-		response = false;
-		return response;
+		doesItemVanish = false;
+		return doesItemVanish;
 	}	
 	/* Our move method takes the users input and the 2d array that represents the old board. Based on whether the users move was W, A, S or D, this method calls the displacement method, giving it the displacement (-1 or 1), the direction(true is the column, or x axis and false is the row, or y axis) and the old 2d array that represents the board.So, for example -1 and false would be in the negative y direction, while 1 and false would be in the positive y direction. It then returns the newBoard with the new player location.*/
 	public char[][] move(char userMove, char[][] playerBoard, Dungeon playerDungeon){
@@ -333,9 +333,9 @@ class Player extends Creature{
 		else if (newBoard[newRow][newColumn] == 'I') {
 			newBoard[row][column] = ' ';
 			newBoard[newRow][newColumn] = playerSymbol;
-			itemExistence = true;
+			//itemExistence = true;
 			onItem = true;
-			itemQuestion(displacementDungeon, newRow, newColumn);
+			itemExistence = itemQuestion(displacementDungeon, newRow, newColumn);
 		}
 		//Whata happens when the player bumps into an enemy.
 		else if (newBoard[newRow][newColumn] == 'E') {
@@ -403,12 +403,6 @@ class Player extends Creature{
 				System.exit(0);
 			}
 		}
-		//What happens when a player is no longer standing on an item that they chose to not pick up.
-		else if (onItem == true) {
-			newBoard[row][column] = 'I';
-			newBoard[newRow][newColumn] = playerSymbol;
-			onItem = false;
-		} 
 		
 		//Nothing is in the players way, so the player can freely move forward.
 		else {
