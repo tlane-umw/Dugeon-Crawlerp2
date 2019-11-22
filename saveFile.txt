@@ -1,49 +1,24 @@
 TYLER
 100
-9
-17
 1
+10
 0
-Starter Sword
-5
-5
-5
+0
+Fine Steel Sword
+80
+55
+105
 Weapon
-Starter Shield
-5
-5
-5
-Armor
-Starter Sword
-5
-5
-5
-Weapon
-Starter Shield
-5
-5
-5
-Armor
-Dragonball
-0
-100
-0
-Other
-Fine Sword
-60
-35
+Body Armor
 85
+75
+105
+Armor
+Fine Steel Sword
+80
+55
+105
 Weapon
-Fine Sword
-60
-35
-85
-Weapon
-PokeBall
-2
-20
-0
-Other
 Body Armor
 85
 75
@@ -51,12 +26,12 @@ Body Armor
 Armor
 .
 enemy 0
-13
-5
+11
+3
 0
 enemy 1
-18
-15
+14
+17
 0
 enemy 2
 15
@@ -64,103 +39,87 @@ enemy 2
 1
 enemy 3
 15
-18
+16
 1
 enemy 4
 15
 1
 2
 enemy 5
-12
-17
+16
+15
 2
 .
-0
-16
-6
-Sword
-50
-25
-75
-Weapon
-0
-4
-14
-Sword
-50
-25
-75
-Weapon
-0
-18
-18
-Fine Sword
-60
-35
-85
-Weapon
-1
-15
-13
-PokeBall
-2
-20
-0
-Other
-1
-9
-17
 Body Armor
 85
 75
 105
 Armor
 1
-7
-13
+5
+0
 Fine Sword
 60
 35
 85
 Weapon
-1
-7
-7
-Fine Sword
-60
-35
-85
-Weapon
-2
 6
-10
-PokeBall
-2
-20
+6
+0
+Fine Steel Sword
+80
+55
+105
+Weapon
+15
+14
+0
+Vase
+7
+3
 0
 Other
-2
+1
 11
-14
-Fine Sword
-60
-35
-85
-Weapon
-2
-12
-15
-Body Armor
-85
-75
+0
+Fine Steel Sword
+80
+55
 105
-Armor
-2
-14
+Weapon
 8
+13
+1
 Key
 10
 5
 0
 Other
+1
+15
+2
+Fine Steel Shield
+65
+55
+85
+Armor
+5
+4
+2
+Body Armor
+85
+75
+105
+Armor
+2
+5
+2
+PokeBall
+2
+20
+0
+Other
+14
+3
+2
 .

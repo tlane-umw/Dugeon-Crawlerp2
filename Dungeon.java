@@ -206,7 +206,8 @@ class Dungeon{
 
 			}
 			output.println(".");
-
+			
+			//saving the current items left on the board
 			for (int xx = 0; xx < itemsList.size(); xx++){
 				output.println(itemsList.get(xx).getName());
 				output.println(itemsList.get(xx).getWeight());
@@ -216,14 +217,15 @@ class Dungeon{
 				output.println(itemsList.get(xx).getItemRow());
 				output.println(itemsList.get(xx).getItemColumn());
 				output.println(itemsList.get(xx).getItemBoard());
-
-				//add save for current itemsList
-
-
-				output.println(".");
-
-				output.close();
 			}
+
+	
+
+
+			output.println(".");
+
+			output.close();
+
 		}
 		catch (IOException ioe){
 			System.out.println("Error");
@@ -280,6 +282,7 @@ class Dungeon{
 			//restoring the rest of the items in the inventory
 			boolean inItems = true;
 			boolean inEnemies = true;
+			ArrayList<Item> newInventoryItems = new ArrayList<Item>();
 			while (inItems == true){
 				try{
 
@@ -293,7 +296,6 @@ class Dungeon{
 					int strength = input.nextInt();
 					String trash = input.nextLine();
 					String itemTypeName = input.nextLine();
-					ItemType type = null;
 					Item newItem;
 					if ((itemName.equals(restoreEWName)) || (itemName.equals(restoreEAName))){
 
@@ -308,7 +310,7 @@ class Dungeon{
 						else{
 							newItem = new Item(itemName, weight, value, strength, ItemType.Other);
 						}
-						this.dungeonPlayer.getInventory().add(newItem);
+						newInventoryItems.add(newItem);
 					}
 
 				}
@@ -316,6 +318,7 @@ class Dungeon{
 					System.out.println("Input Mismatch Exception");
 				}
 			}
+			dungeonPlayer.getInventory().setItems(newInventoryItems);
 
 			//removing any possible enemies in the enemy list
 			for (int abc = 0; abc < this.enemyList.size(); abc++){
@@ -362,6 +365,7 @@ class Dungeon{
 					int itemWeight = input.nextInt();
 					int itemValue = input.nextInt();
 					int itemStrength = input.nextInt();
+					String tylertrash = input.nextLine();
 					String itemType = input.nextLine();
 					int itemRow = input.nextInt();
 					int itemColumn = input.nextInt();
@@ -373,7 +377,7 @@ class Dungeon{
 						newItem = new Item(itemName, itemWeight, itemValue, itemStrength, itemRow, itemColumn, ItemType.Armor);
 					}
 					else{
-						newItem = new Item(itemName, itemWeight, itemValue, itemStrength, itemRow, itemColumn, ItemType.Armor);
+						newItem = new Item(itemName, itemWeight, itemValue, itemStrength, itemRow, itemColumn, ItemType.Other);
 					}
 					newItem.setItemBoard(itemBoard);
 					newItemsList.add(newItem);
@@ -414,7 +418,9 @@ class Dungeon{
 				restoreItemBoard[itemsList.get(hh).getItemRow()][itemsList.get(hh).getItemColumn()] = 'I';
 				this.world.setNewBoard(restoreItemBoardNum, restoreItemBoard);
 			}
-
+			for (int tylersays = 0; tylersays < newItemsList.size(); tylersays++){
+				System.out.println(newItemsList.get(tylersays).toString());
+			}
 
 
 

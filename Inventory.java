@@ -28,6 +28,9 @@ class Inventory{
 
 
 	}
+	public void setItems(ArrayList<Item> newItems){
+		this.items = newItems;
+	}
 	//add method to see if the newly generated Item object can be added to the users inventory
 	//checks to make sure the newly created item will not push the users weight past their max limit
 	//if true the Item is added to the users inventory and the total weight will reflect the newly added item
