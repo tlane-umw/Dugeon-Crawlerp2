@@ -1,125 +1,61 @@
 TYLER
 100
-1
-10
-0
-0
-Fine Steel Sword
-80
-55
-105
-Weapon
-Body Armor
-85
-75
-105
-Armor
-Fine Steel Sword
-80
-55
-105
-Weapon
-Body Armor
-85
-75
-105
-Armor
-.
-enemy 0
-11
 3
-0
-enemy 1
-14
-17
-0
-enemy 2
-15
-3
-1
-enemy 3
-15
 16
-1
-enemy 4
-15
-1
-2
-enemy 5
-16
-15
-2
-.
-Body Armor
-85
-75
-105
-Armor
-1
-5
 0
-Fine Sword
-60
-35
-85
-Weapon
-6
-6
 0
 Fine Steel Sword
 80
 55
 105
 Weapon
-15
-14
-0
-Vase
-7
-3
-0
-Other
-1
-11
-0
-Fine Steel Sword
-80
-55
-105
-Weapon
-8
-13
-1
-Key
-10
-5
-0
-Other
-1
-15
-2
 Fine Steel Shield
 65
 55
 85
 Armor
-5
-4
-2
-Body Armor
-85
-75
+Fine Steel Sword
+80
+55
 105
+Weapon
+Fine Steel Shield
+65
+55
+85
 Armor
-2
-5
-2
-PokeBall
-2
-20
-0
-Other
+.
+enemy 0
 14
+11
+0
+enemy 1
+17
+9
+0
+enemy 2
+12
+11
+1
+enemy 3
+14
+8
+1
+enemy 4
+16
 3
 2
+enemy 5
+12
+14
+2
+.
+Key
+10
+5
+0
+Other
+3
+17
+0
 .

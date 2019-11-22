@@ -318,6 +318,8 @@ class Dungeon{
 					System.out.println("Input Mismatch Exception");
 				}
 			}
+			newInventoryItems.add(restoreEquippedWeapon);
+			newInventoryItems.add(restoreEquippedArmor);
 			dungeonPlayer.getInventory().setItems(newInventoryItems);
 
 			//removing any possible enemies in the enemy list
