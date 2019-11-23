@@ -30,6 +30,7 @@ public class World{
 			return world.get(2).getGameBoard();
 		}
 	}
+	//method called to set the new board based on where the enemy or player moves, depending on what board they are on
 	public void setNewBoard(int num, char [][] newBoard){
 
 		GameBoard newGameBoard = new GameBoard(newBoard);

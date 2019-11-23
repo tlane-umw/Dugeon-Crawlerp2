@@ -37,6 +37,8 @@ class Dungeon{
 		this.dungeonPlayer = dungeonPlayer;
 		this.playerSymbol = playerSymbol;
 		world = new World();
+
+		//adding creating two enemeies for each board
 		Enemy enemy0 = new Enemy("enemy 0", 15, 2, 0);
 		Enemy enemy1 = new Enemy("enemy 1", 15, 17, 0);
 		Enemy enemy2 = new Enemy("enemy 2", 15, 2, 1);
@@ -50,6 +52,8 @@ class Dungeon{
 		enemyList.add(enemy4);
 		enemyList.add(enemy5);
 		Item newItem;
+		
+		//adding 4 items to all 3 boards
 		for (int zz = 0; zz < 3; zz++){
 			for (int yy = 0; yy < 4; yy++){
 				boolean validItemLocation = false;
@@ -79,16 +83,14 @@ class Dungeon{
 		this.itemsList = newItemsList;
 	}
 
+	//moving all remaining enemies every other turn
 	public void moveEnemies(){
-		//System.out.println("The size of the enemy list is " + enemyList.size());
 		if (skip == false){
-
 			for (int z = 0; z < enemyList.size(); z++){
 				int currentEnemyBoard = enemyList.get(z).getEnemyBoardNum();
 				char[][] oldBoard = world.getCurrentBoard(currentEnemyBoard);
 				char [][] newBoard = enemyList.get(z).moveEnemy(oldBoard);
 				world.setNewBoard(currentEnemyBoard, newBoard);
-				//System.out.println("Enemy " + z + " new row = " + enemyList.get(z).getRow() + ", enemy new column = " + enemyList.get(z).getColumn());
 			}
 			skip = true;
 		}
@@ -99,13 +101,8 @@ class Dungeon{
 
 
 
-	//printing the gameboard showing the players location, enemies location, and items locations
+	//printing the gameboard showing the players location, enemies location, and items locations depending on what board the player is on
 	public void  printBoard(){
-
-		//System.out.println("About to print the board!");
-
-
-
 		//printing a star in the blank spaces
 		world.getCurrentBoard(currentBoard)[dungeonPlayer.getRow()][dungeonPlayer.getColumn()] = playerSymbol;
 		for (int i = 0; i < 20; i++){
@@ -118,8 +115,6 @@ class Dungeon{
 			}
 			System.out.println();
 		}
-
-		//System.out.println("Done printing board!");
 	}
 
 	//making the item dissapear after you pick it up, if you dont the item will reappear and a new item will be created
@@ -299,14 +294,17 @@ class Dungeon{
 					String trash = input.nextLine();
 					String itemTypeName = input.nextLine();
 					Item newItem;
+					//making sure you dont add the equipped weapon to your inventory twice
 					if ((itemName.equals(restoreEWName)) && (addedEW == false)){
 						addedEW = true;
 					}
+					//making sure you dont add the equipped armor to your inventory twice
 					else if ((itemName.equals(restoreEAName)) && (addedEA == false)){
 						addedEA = true;
 
 
 					}
+					//adding the rest of your items to your inventory
 					else{
 						if (itemTypeName.equals("Weapon")){
 							newItem = new Item(itemName, weight, value, strength, ItemType.Weapon);
@@ -326,7 +324,7 @@ class Dungeon{
 					System.out.println("Input Mismatch Exception");
 				}
 			}
-
+			//adding the equipped weapon and 
 			newInventoryItems.add(restoreEquippedWeapon);
 			newInventoryItems.add(restoreEquippedArmor);
 			dungeonPlayer.getInventory().setItems(newInventoryItems);
@@ -359,13 +357,14 @@ class Dungeon{
 			}
 			setEnemyList(newEnemyList);
 
-			//removing any possible items on the board
+			//removing any possible items from our item list
 			for (int cba = 0; cba < this.itemsList.size(); cba++){
 				this.itemsList.remove(0);
 			}
 			ArrayList<Item> newItemsList = new ArrayList<Item>();
 			boolean inItemsList = true;
 			Item newItem;
+			//adding the saved items back to our item list
 			while(inItemsList == true){
 				try{
 					String itemName = input.nextLine();
@@ -398,6 +397,7 @@ class Dungeon{
 
 				}
 			}
+			//setting the new items list
 			setItemsList(newItemsList);
 
 			//blanking out the boarda if theyre not a wall or a door
@@ -423,17 +423,13 @@ class Dungeon{
 				restoreEnemyBoard[enemyList.get(h).getRow()][enemyList.get(h).getColumn()] = 'E';
 				this.world.setNewBoard(restoreEnemyBoardNum, restoreEnemyBoard);
 			}
+			//adding I's to the board from the new items list
 			for (int hh = 0; hh < this.itemsList.size(); hh++){
 				int restoreItemBoardNum = itemsList.get(hh).getItemBoard();
 				char[][] restoreItemBoard = world.getCurrentBoard(restoreItemBoardNum);
 				restoreItemBoard[itemsList.get(hh).getItemRow()][itemsList.get(hh).getItemColumn()] = 'I';
 				this.world.setNewBoard(restoreItemBoardNum, restoreItemBoard);
 			}
-			for (int tylersays = 0; tylersays < newItemsList.size(); tylersays++){
-				System.out.println(newItemsList.get(tylersays).toString());
-			}
-
-
 
 			input.close();
 			doesFileExist = true;
@@ -456,6 +452,3 @@ class Dungeon{
 		return this.doesFileExist;
 	}
 }
-
-
-

@@ -97,8 +97,7 @@ class Player extends Creature{
 		}	
 		return newBoard;
 	}		
-	//keeping track of where the user is
-	//keeping track of where the user is
+
 	public boolean fight(){
 		Enemy dungeonEnemy = EnemyGenerator.generate();
 		boolean playerAlive = true;
@@ -118,7 +117,6 @@ class Player extends Creature{
 				System.out.println("Interrupted");
 			}
 			//player attacking the enemy
-			//
 			System.out.println("The " + dungeonEnemy.getName() + " currently has a health of " + dungeonEnemy.getHealth());
 			try{
 				Thread.sleep(1000);
@@ -126,7 +124,7 @@ class Player extends Creature{
 			catch (InterruptedException z){
 				System.out.println("Interrupted!");
 			}
-			//getting the amount of damage the enemy will take
+			//getting the amount of damage the enemy will take and subtracting that from their current health
 			int enemyDamage = getInventory().getEquippedWeapon().getStrength();
 			dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
 			System.out.println("The " + dungeonEnemy.getName() + " took "  + enemyDamage + " damage from the players " + getInventory().getEquippedWeapon().getName());
@@ -138,7 +136,7 @@ class Player extends Creature{
 				System.out.println("Interrupted!");
 			}
 
-			//checking if the enemy won
+			//checking if the enemy is still alive
 			if (dungeonEnemy.getHealth() <= 0){
 				didUserWin = true;
 				enemyAlive = false;
@@ -159,7 +157,7 @@ class Player extends Creature{
 
 
 
-			//getting players current health
+			//getting players current health before the enemy attacks
 			System.out.println("The player currently has a health of " + getHealth());
 			System.out.println();
 			try{
@@ -220,6 +218,7 @@ class Player extends Creature{
 					playerAlive = false;
 				}
 				else{
+					//printing out players health after enemy attack
 					System.out.println("After the enemy's latest attack, the player's health is " + getHealth());
 					System.out.println();
 					try{
@@ -239,32 +238,30 @@ class Player extends Creature{
 		return didUserWin;
 	}
 
-
 	public int getColumn(){
 		return this.column;
 	}
+
 	public int getRow(){
 		return this.row;
 	}
+
 	public void setRow(int row){
 		this.row = row;
 	}
+
 	public void setColumn(int column){
 		this.column = column;
-	}
-
-	//This method is called when the user steps on an item and chooses to pick it up. Since the item is no longer there, the booleans should be false so that the I symbol does not reappear once the player leaves that space.
-	public Integer[] playerLocation(){
-		Integer[] position = new Integer[]{currentPlayerBoard, row, column};
-		return position;
 	}
 
 	public int getCurrentPlayerBoard(){
 		return this.currentPlayerBoard;
 	}
+
 	public void setCurrentPlayerBoard(int newPlayerBoard){
 		this.currentPlayerBoard = newPlayerBoard;
 	}
+
 	//The displacement method takes an integer for the displacement of the player and a boolean for the direction (moving in the x direction or y direction) and the old board. It returns a newBoard based on the players new location. The purpose of this method was to save ourselves having to write this code 4 times for move method based on if the player pressed W, A, S, or D.
 	public char[][] displacement(int change, boolean choice, char[][] newBoard, Dungeon displacementDungeon){
 		if(choice == true){
@@ -338,7 +335,10 @@ class Player extends Creature{
 			if(didPlayerWin == true){
 				newBoard[row][column] = ' ';
 				newBoard[newRow][newColumn] = playerSymbol;
+				//updating the amount of enemies defeated
 				numEnemiesDefeated = numEnemiesDefeated + 1;
+
+				//checking to see if the user defeated the game
 				if (numEnemiesDefeated == 6){
 					try{
 						Thread.sleep(1000);
@@ -358,6 +358,8 @@ class Player extends Creature{
 					System.out.println();
 					System.exit(0);
 				}
+				
+				//telling the user how many enemies they have beaten so far
 				else{
 					try{
 						Thread.sleep(1000);
@@ -393,6 +395,7 @@ class Player extends Creature{
 				catch(InterruptedException www){
 					System.out.println("Interrupted!");
 				}
+				//exiting out if the user loses
 				System.out.println("Better luck next time!");
 				System.exit(0);
 			}

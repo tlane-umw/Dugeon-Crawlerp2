@@ -81,7 +81,7 @@ public class GameBoard{
 		this.gameBoard = updatedGameBoard;
 
 	}
-
+	//cconstructor that creates a gameboard object depending on what number is passed in
 	public GameBoard(int num){
 		if (num == 0){
 			this.gameBoard = gameBoard0;
@@ -93,6 +93,7 @@ public class GameBoard{
 			this.gameBoard = gameBoard2;
 		}
 	}
+	//returns the gameboard depending on what number board it is on
 	public char[][] getGameBoard(){
 		return this.gameBoard;
 	}

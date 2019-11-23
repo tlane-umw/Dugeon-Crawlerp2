@@ -3,7 +3,7 @@ import java.util.*;
 import java.util.stream.IntStream;
 //This class holds the generate method in order to generate an item. 
 public class EnemyGenerator{
-	// 	This method is a dozy. It generates a new item using Random numbers and Arrays of items.
+	// It generates a new item using Random numbers and Arrays of items.
 	// It gets its first random number, which decides which item type it is going to be. 
 	// It then generates the name of the item with random numbers. It then uses random numbers to generate a strength, weight, and value.
 	// If it is not a weapon or armor however, it does not have a strength.

@@ -33,6 +33,7 @@ public class Item{
 		this.itemRow = itemRow;
 		this.itemColumn = itemColumn;
 	}
+	//standard set methods
 	public void setItemType(ItemType type){
 		this.type = type;
 	}

@@ -40,5 +40,14 @@ public class Creature{
 	public void setRow(int row){
 		this.row = row;
 	}
+	public int getColumn(){
+		return this.column;
+	}
+	public int getRow(){
+		return this.row;
+	}
+	public int getBoard(){
+		return this.board;
+	}
 }
 

@@ -9,24 +9,14 @@ public class Enemy extends Creature{
 	private int health;
 	private int damage;
 	private EnemyType type;
-	private Item drop;
-	ArrayList<Integer[]> enemyLocation = new ArrayList<Integer[]>();
 	private int row;
 	private int column;
 	private int board;
+	private Item drop;
 	private String placeName;
-	private static int doesEnemyMove = 2;
 	private static int numEnemiesMoved = 0;
 	private static int doesEnemyMoveThisTurn = 0;
-	public ArrayList<Integer[]> getInitialLocation(){
-		enemyLocation.add(new Integer[]{15,2,0});
-		enemyLocation.add(new Integer[]{15,17,0});
-		enemyLocation.add(new Integer[]{15,2,1});
-		enemyLocation.add(new Integer[]{15,17,1});
-		enemyLocation.add(new Integer[]{15,2,2});
-		enemyLocation.add(new Integer[]{15,17,2});
-		return enemyLocation;
-	}
+
 	//constructor for the fight method
 	Enemy(EnemyType type, String name, int health, int damage, Item drop){
 		super(name, health);
@@ -41,6 +31,7 @@ public class Enemy extends Creature{
 		this.column = column;
 		this.board = board;
 	}
+	//place holder name for E's on the board
 	public String getPlaceName(){
 		return this.placeName;
 	}
@@ -49,19 +40,10 @@ public class Enemy extends Creature{
 	public EnemyType getType(){
 		return type;
 	}
-	//a method to return an item after the player defeats an enemy
-	//did not have enough time to implement this into our program
-	public Item getDrop(){
-		return drop;
-	}
 	public int getDamage(){
 		return this.damage;
 	}
-	public void setInitialLocation(int row, int column, int board){
-		this.row = row;
-		this.column = column;
-		this.board = board;
-	}
+
 	//method that takes in a 2d char array and tests until the enemy moves into a blank space on the board
 	//then it returns the new board after updating the enemies row & column, and where their E is on the board
 	//if the enemy has been defeated and their E is replaced with a space, it returns the same board that was passed in
@@ -132,19 +114,6 @@ public class Enemy extends Creature{
 	}
 	public int getEnemyBoardNum(){
 		return this.board;
-	}
-	public static void setDoesEnemyMove(int newDoesEnemyMove){
-		doesEnemyMove = newDoesEnemyMove;
-	}
-	//enemies only move for every other player turn
-	public static int getDoesEnemyMove(){
-		return doesEnemyMove;
-	}
-	public int getRow(){
-		return this.row;
-	}
-	public int getColumn(){
-		return this.column;
 	}
 
 }
