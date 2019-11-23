@@ -206,7 +206,7 @@ class Dungeon{
 
 			}
 			output.println(".");
-			
+
 			//saving the current items left on the board
 			for (int xx = 0; xx < itemsList.size(); xx++){
 				output.println(itemsList.get(xx).getName());
@@ -219,7 +219,7 @@ class Dungeon{
 				output.println(itemsList.get(xx).getItemBoard());
 			}
 
-	
+
 
 
 			output.println(".");
@@ -282,6 +282,8 @@ class Dungeon{
 			//restoring the rest of the items in the inventory
 			boolean inItems = true;
 			boolean inEnemies = true;
+			boolean addedEW = false;
+			boolean addedEA = false;
 			ArrayList<Item> newInventoryItems = new ArrayList<Item>();
 			while (inItems == true){
 				try{
@@ -297,7 +299,12 @@ class Dungeon{
 					String trash = input.nextLine();
 					String itemTypeName = input.nextLine();
 					Item newItem;
-					if ((itemName.equals(restoreEWName)) || (itemName.equals(restoreEAName))){
+					if ((itemName.equals(restoreEWName)) && (addedEW == false)){
+						addedEW = true;
+					}
+					else if ((itemName.equals(restoreEAName)) && (addedEA == false)){
+						addedEA = true;
+
 
 					}
 					else{
@@ -311,13 +318,15 @@ class Dungeon{
 							newItem = new Item(itemName, weight, value, strength, ItemType.Other);
 						}
 						newInventoryItems.add(newItem);
-					}
 
+
+					}
 				}
 				catch (InputMismatchException i){
 					System.out.println("Input Mismatch Exception");
 				}
 			}
+
 			newInventoryItems.add(restoreEquippedWeapon);
 			newInventoryItems.add(restoreEquippedArmor);
 			dungeonPlayer.getInventory().setItems(newInventoryItems);
@@ -428,6 +437,7 @@ class Dungeon{
 
 			input.close();
 			doesFileExist = true;
+
 		}
 		catch (FileNotFoundException f){
 			System.out.println("Error.... there was no previous save file found.");

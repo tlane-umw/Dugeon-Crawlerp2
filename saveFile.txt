@@ -1,61 +1,140 @@
 TYLER
 100
-3
-16
+6
+11
+1
 0
-0
-Fine Steel Sword
-80
-55
-105
+Starter Sword
+5
+5
+5
 Weapon
-Fine Steel Shield
-65
-55
-85
+Shield
+40
+30
+60
 Armor
+Starter Sword
+5
+5
+5
+Weapon
+Dragonball
+0
+100
+0
+Other
 Fine Steel Sword
 80
 55
 105
 Weapon
-Fine Steel Shield
-65
-55
-85
+Shield
+40
+30
+60
+Armor
+Shield
+40
+30
+60
 Armor
 .
 enemy 0
-14
-11
+16
+7
 0
 enemy 1
-17
-9
+14
+12
 0
 enemy 2
-12
-11
+16
+3
 1
 enemy 3
-14
-8
+17
+17
 1
 enemy 4
-16
+12
 3
 2
 enemy 5
-12
-14
+11
+15
 2
 .
-Key
-10
-5
+Fine Steel Sword
+80
+55
+105
+Weapon
+12
+2
+0
+Fine Steel Shield
+65
+55
+85
+Armor
+8
+6
+0
+Vase
+7
+3
 0
 Other
-3
-17
+15
+5
 0
+Fine Steel Shield
+65
+55
+85
+Armor
+15
+8
+0
+Body Armor
+85
+75
+105
+Armor
+6
+6
+1
+Fine Steel Shield
+65
+55
+85
+Armor
+10
+4
+2
+Fine Steel Shield
+65
+55
+85
+Armor
+2
+16
+2
+Sword
+50
+25
+75
+Weapon
+4
+1
+2
+Fine Steel Sword
+80
+55
+105
+Weapon
+13
+6
+2
 .

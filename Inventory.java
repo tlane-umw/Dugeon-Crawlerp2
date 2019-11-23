@@ -109,6 +109,12 @@ class Inventory{
 			System.out.println();
 		}
 	}
+	public void setNewEquippedWeapon(Item newWeapon){
+		this.equippedWeapon = newWeapon;
+	}
+	public void setNewEquippedArmor(Item newArmor){
+		this.equippedArmor = newArmor;
+	}
 	//lists all the users items and removes which ever item they choose
 	public void drop(){
 		int numToDrop = -1;
@@ -139,15 +145,62 @@ class Inventory{
 					validNum = false;
 				}
 				if ((numToDrop > 0) && (numToDrop <= items.size())) {
-					System.out.println("Success! You have dropped " + items.get(numToDrop - 1).getName() + " from your inventory.");
-					items.remove(numToDrop - 1);
-					try{
-						Thread.sleep(3000);
-					}
-					catch(InterruptedException yesAdd){
-						System.out.println("Interrupted!");
+					Item dropTest = items.get(numToDrop - 1);
+					if (dropTest.getTypeString().equals("Other")){
+						System.out.println("Success! You have dropped " + items.get(numToDrop - 1).getName() + " from your inventory.");
+						items.remove(numToDrop - 1);
+						try{
+							Thread.sleep(3000);
+						}
+						catch(InterruptedException yesAdd){
+							System.out.println("Interrupted!");
 
+						}
 					}
+					else if (dropTest.getTypeString().equals("Armor")){
+						boolean anotherArmor = false;
+						for (int zz = 0; zz < items.size(); zz++){
+							if ((numToDrop - 1) == zz){
+
+							}
+							else{
+								if(items.get(zz).getTypeString().equals("Armor")){
+									setNewEquippedArmor(items.get(zz));
+									System.out.println("Success! You dropped " + items.get(numToDrop - 1).getName() + " and automatically equipped " + items.get(zz).getName() + " as your new armor.");
+									items.remove(numToDrop - 1);
+									anotherArmor = true;
+									break;
+								}
+							}
+						}
+						if(anotherArmor == false){
+							System.out.println("You cannot drop this armor. You don't have another in your inventory to equip.");
+							System.out.println("If you want to drop this armor, find another one, add it to your inventory, and try again.");
+						}
+					}
+					else{
+						boolean anotherWeapon = false;
+						for (int yy = 0; yy < items.size(); yy++){
+							if ((numToDrop - 1) == yy){
+
+							}
+							else{
+								if(items.get(yy).getTypeString().equals("Weapon")){
+									setNewEquippedWeapon(items.get(yy));
+									System.out.println("Success! You dropped " + items.get(numToDrop).getName() + " and automatically equipped " + items.get(yy).getName() + " as your new weapon.");
+									items.remove(numToDrop - 1);
+									anotherWeapon = true;
+									break;
+								}
+							}
+						}
+						if(anotherWeapon == false){
+							System.out.println("You cannot drop this weapon. You don't have another in your inventory to equip.");
+                                                        System.out.println("If you want to drop this armor, find another one, add it to your inventory, and try again.");
+						}
+					}
+
+							
 					validNum = true;
 					break;
 				}
