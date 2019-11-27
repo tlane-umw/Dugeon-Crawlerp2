@@ -9,9 +9,6 @@ public class Enemy extends Creature{
 	private int health;
 	private int damage;
 	private EnemyType type;
-	private int row;
-	private int column;
-	private int board;
 	private Item drop;
 	private String placeName;
 	private static int numEnemiesMoved = 0;
@@ -26,10 +23,8 @@ public class Enemy extends Creature{
 	}
 	//constructor for placing enemies on the board
 	Enemy (String placeName, int row, int column, int board){
-		this.placeName = placeName;
-		this.row = row;
-		this.column = column;
-		this.board = board;
+		super(placeName, row, column, board);
+
 	}
 	//place holder name for E's on the board
 	public String getPlaceName(){
@@ -40,80 +35,70 @@ public class Enemy extends Creature{
 	public EnemyType getType(){
 		return type;
 	}
+	//get damage of enemy
 	public int getDamage(){
 		return this.damage;
 	}
 
 	//method that takes in a 2d char array and tests until the enemy moves into a blank space on the board
-	//then it returns the new board after updating the enemies row & column, and where their E is on the board
+	//then it returns the new board after updating the enemies getRow() & getColumn(), and where their E is on the board
 	//if the enemy has been defeated and their E is replaced with a space, it returns the same board that was passed in
 	public char[][] moveEnemy(char[][] enemyBoard){
 		char[][] newEnemyBoard = enemyBoard;
 		boolean validMove = false;
-		if (newEnemyBoard[row][column] == 'E'){
+		if (newEnemyBoard[getRow()][getColumn()] == 'E'){
 			while(validMove == false) {
 				int number = random.nextInt(4);
-				if((number == 0) && (newEnemyBoard[(row - 1)][column] == ' ')){
-					newEnemyBoard[row][column] = ' ';
-					row--;
-					newEnemyBoard[row][column] = 'E';
-					//System.out.println("Enemy Row = " + row);
-					//System.out.println("Enemy column = " + column);
+				if((number == 0) && (newEnemyBoard[(getRow() - 1)][getColumn()] == ' ')){
+					newEnemyBoard[getRow()][getColumn()] = ' ';
+					int currentRow = this.getRow() - 1;
+					setRow(currentRow);
+					newEnemyBoard[getRow()][getColumn()] = 'E';
 					numEnemiesMoved++;
 					validMove = true;
 					return newEnemyBoard;
 				} 
 
-				else if ((number == 1) && (newEnemyBoard[row][(column - 1)] == ' ')) {
-					newEnemyBoard[row][column] = ' ';
-					column--;
-					newEnemyBoard[row][column] = 'E';
-					//System.out.println("Enemy went west!!!!!!!!!!!!!!");
-					//System.out.println("Enemy Row = " + row);
-					//System.out.println("Enemy column = " + column);
+				else if ((number == 1) && (newEnemyBoard[getRow()][(getColumn() - 1)] == ' ')) {
+					newEnemyBoard[getRow()][getColumn()] = ' ';
+					int currentColumn = this.getColumn() - 1;
+					setColumn(currentColumn);
+					newEnemyBoard[getRow()][getColumn()] = 'E';
 					numEnemiesMoved++;
 					validMove = true;
 					return newEnemyBoard;
 				} 
 
-				else if ((number == 2) && (newEnemyBoard[(row + 1)][column] == ' ')) {
-					newEnemyBoard[row][column] = ' ';
-					row++;
-					newEnemyBoard[row][column] = 'E';
-					//System.out.println("Enemy Row = " + row);
-					//System.out.println("Enemy column = " + column);
+				else if ((number == 2) && (newEnemyBoard[(getRow() + 1)][getColumn()] == ' ')) {
+					newEnemyBoard[getRow()][getColumn()] = ' ';
+					int currentRow = this.getRow() + 1;
+					setRow(currentRow);
+					newEnemyBoard[getRow()][getColumn()] = 'E';
 					numEnemiesMoved++;
 					validMove = true;
 					return newEnemyBoard;
 				} 
 
-				else if ((number == 3) && (newEnemyBoard[row][(column + 1)] == ' ')) {
-					newEnemyBoard[row][column] = ' ';
-					column++;
-					newEnemyBoard[row][column] = 'E';
-					//System.out.println("Enemy Row = " + row);
-					//System.out.println("Enemy column = " + column);
+				else if ((number == 3) && (newEnemyBoard[getRow()][(getColumn() + 1)] == ' ')) {
+					newEnemyBoard[getRow()][getColumn()] = ' ';
+					int currentColumn = this.getColumn() + 1;
+					setColumn(currentColumn);
+					newEnemyBoard[getRow()][getColumn()] = 'E';
 					numEnemiesMoved++;
 					validMove = true;
 					return newEnemyBoard;
 				} 
 
 				else {
-					//System.out.println("Enemy Row = " + row);
-					//System.out.println("Enemy column = " + column);
-					//System.out.println("Enemy wasn't moved. It was trying to go in " + number + " Trying again now.");
 					validMove = false;
 				}
 			}
 		}
 		else{
-			newEnemyBoard[row][column] = ' ';
+			newEnemyBoard[getRow()][getColumn()] = ' ';
 		}
 
 		return newEnemyBoard;
-	}
-	public int getEnemyBoardNum(){
-		return this.board;
 	}
 
 }

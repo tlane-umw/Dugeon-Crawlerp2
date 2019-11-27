@@ -33,7 +33,7 @@ public class Item{
 		this.itemRow = itemRow;
 		this.itemColumn = itemColumn;
 	}
-	//standard set methods
+	//standard get &et methods along with to string
 	public void setItemType(ItemType type){
 		this.type = type;
 	}
@@ -49,8 +49,6 @@ public class Item{
 	public void setStrength(int strength){
 		this.strength = strength;
 	}
-
-	//standard get methods
 	public int getWeight(){
 		return this.weight;
 	}
@@ -77,7 +75,6 @@ public class Item{
 	public int getStrength(){
 		return this.strength;
 	}
-	//stand toString method to print Object in a readable manner
 	public String toString(){
 		return ("The " + this.getName() + " is a " + this.getType() + ", it has a weight of: " + this.getWeight() + ". a value of: " + this.getValue() + ", and a strength of: " + this.getStrength() + ".");
 	}
@@ -102,4 +99,3 @@ public class Item{
 	}
 
 }
-

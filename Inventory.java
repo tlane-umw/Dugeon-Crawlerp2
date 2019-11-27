@@ -40,6 +40,7 @@ class Inventory{
 		if (potentialNewWeight  >= maxWeight){
 
 			System.out.println("This was not possible. This item would cause you to go over the max. Weight would be : " + potentialNewWeight);
+			System.out.println("You are only allowed to have a weight of " + this.getMaxWeight() + " in your inventory.");
 			try{
 				Thread.sleep(3000);
 			}
@@ -109,7 +110,7 @@ class Inventory{
 			System.out.println();
 		}
 	}
-	
+
 	//method called from drop that passes in the next weapon in users inventory
 	public void setNewEquippedWeapon(Item newWeapon){
 		this.equippedWeapon = newWeapon;
@@ -218,7 +219,7 @@ class Inventory{
 						}
 						if(anotherWeapon == false){
 							System.out.println("You cannot drop this weapon. You don't have another in your inventory to equip.");
-                                                        System.out.println("If you want to drop this armor, find another one, add it to your inventory, and try again.");
+							System.out.println("If you want to drop this armor, find another one, add it to your inventory, and try again.");
 							try{
 								Thread.sleep(3000);
 							}
@@ -229,17 +230,17 @@ class Inventory{
 					}
 					else{ 
 						System.out.println("Success! You have dropped " + items.get(numToDrop - 1).getName() + " from your inventory.");
-                                                items.remove(numToDrop - 1);
-                                                try{
-                                                        Thread.sleep(3000);
-                                                }
-                                                catch(InterruptedException yesAdd){
-                                                        System.out.println("Interrupted!");
+						items.remove(numToDrop - 1);
+						try{
+							Thread.sleep(3000);
+						}
+						catch(InterruptedException yesAdd){
+							System.out.println("Interrupted!");
 
 						}
 					}
 
-							
+
 					validNum = true;
 					break;
 				}

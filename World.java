@@ -5,7 +5,6 @@ public class World{
 
 	private ArrayList<GameBoard> world = new ArrayList<GameBoard>();
 
-
 	public World (){
 		GameBoard gameBoard0 = new GameBoard(0);
 		world.add(gameBoard0);
@@ -30,6 +29,7 @@ public class World{
 			return world.get(2).getGameBoard();
 		}
 	}
+
 	//method called to set the new board based on where the enemy or player moves, depending on what board they are on
 	public void setNewBoard(int num, char [][] newBoard){
 
@@ -45,5 +45,4 @@ public class World{
 		}
 	}
 
-	
 }

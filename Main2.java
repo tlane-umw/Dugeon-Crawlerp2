@@ -9,6 +9,9 @@ import java.util.Enumeration;
 import java.util.InputMismatchException;
 public class Main2{
 
+	public static Dungeon gameDungeon;
+
+
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 
 
@@ -16,8 +19,14 @@ public class Main2{
 		System.out.print("What is your name: ");
 		String signature = input.nextLine();
 		char playerSymbol = '@';
-
-
+		System.out.println("Hello, " + playerSignature + ", we hope you are doing well");
+		System.out.println("Get ready to dive into the game and be sure to note the instructions...");
+		try{
+			Thread.sleep(3000);
+		}
+		catch(InterruptedException goodDaySir){
+			System.out.println("Interrupted");
+		}
 
 		//plot of the game
 		System.out.println("You have accidentally stumbled into a cave, and it locks shut behind you.");
@@ -37,8 +46,7 @@ public class Main2{
 		//seting up the game
 		boolean keepPlaying = true;
 		Player player = new Player(signature, 100,  playerSymbol);
-		Dungeon gameDungeon = new Dungeon(player, playerSymbol);
-
+		gameDungeon = new Dungeon(player, playerSymbol);
 
 		//commands of the game
 		System.out.println("Here are the commands for the game. Select one of the characters then hit 'enter'");
@@ -49,6 +57,7 @@ public class Main2{
 		System.out.println("M : equip a current armor in your inventory to your player");
 		System.out.println("O : equip a current weapon in your inventory to your player");
 		System.out.println("T : to drop an item from your inventory");
+		System.out.println("L : list all the items in your inventory");
 		System.out.println("P : Print the commands of the game again");
 		System.out.println("V : Save the game");
 		System.out.println("R : Restore your previously saved gamed");
@@ -60,21 +69,17 @@ public class Main2{
 			System.out.println("Interrupted!");
 		}
 
-
-		//Enumeration<Integer> number;
-		//System.out.println(location);
-		//
 		//loop to keep playing until user quits, player dies, or player wins
 		//allows the user to move, print the commands again, equip a weapon or armor, drop an item, or quit
 		while(keepPlaying == true){
 			try{
-				//location = gameDungeon.printBoard();
+
 				gameDungeon.printBoard();
 				System.out.println("P : Print the commands of the game again");
 				char userLetter = ' ';
 				try{
-				String userOption = input.nextLine();
-				userLetter = userOption.charAt(0);
+					String userOption = input.nextLine();
+					userLetter = userOption.charAt(0);
 				}
 				catch(StringIndexOutOfBoundsException nothingEntered){
 					keepPlaying = true;
@@ -106,6 +111,7 @@ public class Main2{
 					System.out.println("M : equip a current armor in your inventory to your player");
 					System.out.println("O : equip a current weapon in your inventory to your player");
 					System.out.println("T : to drop an item from your inventory");
+					System.out.println("L : list all the items in your inventory");
 					System.out.println("P : Print the commands of the game again");
 					System.out.println("V : Save the game");
 					System.out.println("R : Resote your previously saved game");
@@ -135,7 +141,8 @@ public class Main2{
 						catch(InterruptedException save1){
 							System.out.println("Interrupted!");
 						}
-						gameDungeon.save();
+						SaveRestore saveRestore = new SaveRestore(gameDungeon);
+						saveRestore.save(gameDungeon);
 						System.out.println(".... Success! We saved your game. Be sure to save again if you keep playing!");
 						try{
 							Thread.sleep(1000);
@@ -150,8 +157,9 @@ public class Main2{
 
 				}
 				else if (userLetter == 'R'){
-					gameDungeon.restore();
-					if (gameDungeon.doesSaveFileExist() == true){
+					SaveRestore saveRestore = new SaveRestore(gameDungeon);
+					setGameDungeon(saveRestore.restore());
+					if (saveRestore.doesSaveFileExist() == true){
 						System.out.println("Hang tight while we restore your game....");
 						System.out.println();
 						try{
@@ -162,8 +170,6 @@ public class Main2{
 						}
 						int savedPlayerBoard = gameDungeon.dungeonPlayer.getCurrentPlayerBoard();
 						gameDungeon.setCurrentBoardNum(savedPlayerBoard);
-						//System.out.println("The players column after restoring is " + gameDungeon.dungeonPlayer.getColumn());
-						//System.out.println("The players row after restoring is " + gameDungeon.dungeonPlayer.getRow());
 						System.out.println(".... Success! We were able to load your game.");
 						System.out.println("Get ready to jump back into your game! Good luck!");
 						try{
@@ -180,6 +186,9 @@ public class Main2{
 				}
 				else if (userLetter == 'T'){
 					gameDungeon.dungeonPlayer.getInventory().drop();
+				}
+				else if (userLetter == 'L'){
+					gameDungeon.dungeonPlayer.getInventory().print();
 				}
 				else if ((userLetter == 'W') || (userLetter == 'A') || (userLetter == 'S') || (userLetter == 'D')){
 
@@ -209,9 +218,10 @@ public class Main2{
 		}
 
 	}
+	public static void setGameDungeon(Dungeon newDungeon){
+		gameDungeon = newDungeon;
+	}
+	public static Dungeon getGameDungeon(){
+		return gameDungeon;
+	}
 }
-
-
-
-
-

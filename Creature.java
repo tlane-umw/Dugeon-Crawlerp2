@@ -1,12 +1,12 @@
 import java.util.Scanner;
 import java.util.Hashtable;
 public class Creature{
-       	//instance variables
-       	private String name;
+	//instance variables
+	private String name;
 	private int row;
 	private int column;
 	private int board;
-        private int health;
+	private int health;
 
 	//constructor
 	Creature (String name, int health){
@@ -14,20 +14,26 @@ public class Creature{
 		this.health = health;
 
 	}
+	Creature(String name, int row, int column, int board){
+		this.name = name;
+		this.row = row;
+		this.column = column;
+		this.board = board;
+	}
 	//blank default constructor
 	Creature(){
 	}
 
 	//set & get methods
-        public String getName(){
-                return name;
-        }
-        public int getHealth(){
-                return health;
-        }
-        public void setHealth(int health){
-                this.health = health;
-        }
+	public String getName(){
+		return name;
+	}
+	public int getHealth(){
+		return health;
+	}
+	public void setHealth(int health){
+		this.health = health;
+	}
 	public void setName(String name){
 		this.name = name;
 	}
@@ -36,7 +42,7 @@ public class Creature{
 	}
 	public void setBoard(int board){
 		this.board = board;
-		}
+	}
 	public void setRow(int row){
 		this.row = row;
 	}
