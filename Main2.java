@@ -21,6 +21,9 @@ public class Main2{
 		char playerSymbol = '@';
 		System.out.println("Hello, " + signature + ", we hope you are doing well");
 		System.out.println("Get ready to dive into the game and be sure to note the instructions...");
+		System.out.println();
+		System.out.println();
+		System.out.println();
 		try{
 			Thread.sleep(3000);
 		}
@@ -136,7 +139,7 @@ public class Main2{
 					if (userSave.equals("Y")){
 						System.out.println("Hang tight while we save your game....");
 						try{
-							Thread.sleep(1000);
+							Thread.sleep(2500);
 						}
 						catch(InterruptedException save1){
 							System.out.println("Interrupted!");
@@ -145,7 +148,7 @@ public class Main2{
 						saveRestore.save(gameDungeon);
 						System.out.println(".... Success! We saved your game. Be sure to save again if you keep playing!");
 						try{
-							Thread.sleep(1000);
+							Thread.sleep(3000);
 						}
 						catch(InterruptedException save2){
 							System.out.println("Interrupted!");
@@ -163,7 +166,7 @@ public class Main2{
 						System.out.println("Hang tight while we restore your game....");
 						System.out.println();
 						try{
-							Thread.sleep(1000);
+							Thread.sleep(2000);
 						}
 						catch(InterruptedException restore1){
 							System.out.println("Interrupted!");
@@ -173,7 +176,7 @@ public class Main2{
 						System.out.println(".... Success! We were able to load your game.");
 						System.out.println("Get ready to jump back into your game! Good luck!");
 						try{
-							Thread.sleep(1000);
+							Thread.sleep(3000);
 						}
 						catch(InterruptedException restore2){
 							System.out.println("Interrupted!");

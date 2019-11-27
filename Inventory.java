@@ -100,14 +100,26 @@ class Inventory{
 		if (items.size() == 0){
 			System.out.println("You currently have 0 items.");
 			System.out.println("You must add an item before you can print the items.");
+			try{
+				Thread.sleep(3000);
+			}
+			catch(InterruptedException noItemsInventory){
+				System.out.println("Interrupted!");
+			}
 		}
 		else{
 			System.out.println("You currently have " + items.size() + " items.");//mostly for me, couldn't get the add method to work properly
-			System.out.println("You currently have the following items: ");
+			System.out.println("Here is a list of all your items: ");
 			for (int j = 0; j < items.size(); j++){
 				System.out.println(items.get(j).getName() + " " + items.get(j).getWeight() + " " + items.get(j).getValue() + " " + items.get(j).getValue());
 			}
 			System.out.println();
+			try{
+				Thread.sleep(5000);
+			}
+			catch(InterruptedException itemsInventory){
+				System.out.println("Interrupted!");
+			}
 		}
 	}
 
