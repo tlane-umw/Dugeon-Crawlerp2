@@ -19,7 +19,7 @@ public class Main2{
 		System.out.print("What is your name: ");
 		String signature = input.nextLine();
 		char playerSymbol = '@';
-		System.out.println("Hello, " + playerSignature + ", we hope you are doing well");
+		System.out.println("Hello, " + signature + ", we hope you are doing well");
 		System.out.println("Get ready to dive into the game and be sure to note the instructions...");
 		try{
 			Thread.sleep(3000);

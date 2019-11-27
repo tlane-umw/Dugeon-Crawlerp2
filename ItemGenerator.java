@@ -10,15 +10,15 @@ public class ItemGenerator{
 
 
 		//creating the possible weapon item types
-		Item sword = new Item("Sword", 50, 25, 75, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Weapon);
-		Item fineSword = new Item("Fine Sword", 60, 35, 85, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Weapon);
-		Item fineSteelSword = new Item("Fine Steel Sword", 80, 55, 105, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Weapon);
+		Item sword = new Item("Sword", 20, 10, 20, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Weapon);
+		Item fineSword = new Item("Fine Sword", 30, 20, 30, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Weapon);
+		Item fineSteelSword = new Item("Fine Steel Sword", 40, 55, 40, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Weapon);
 		ArrayList<Item> weaponsList = new ArrayList<Item>(Arrays.asList(sword, fineSword, fineSteelSword));
 
 		//creating the possible armor item types
-		Item shield = new Item("Shield", 40, 30, 60,  (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Armor);
-		Item fineSteelShield = new Item("Fine Steel Shield", 65, 55, 85, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Armor);
-		Item bodyArmor = new Item("Body Armor", 85, 75, 105, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Armor);
+		Item shield = new Item("Shield", 20, 10, 20,  (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Armor);
+		Item fineSteelShield = new Item("Fine Steel Shield", 30, 20, 30, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Armor);
+		Item bodyArmor = new Item("Body Armor", 40, 55, 40, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Armor);
 		ArrayList<Item> armorList = new ArrayList<Item>(Arrays.asList(shield, fineSteelShield, bodyArmor));
 
 		//creating the possible other item types
