@@ -125,7 +125,6 @@ class SaveRestore{
 			//String trash2 = input.nextLine();
 			Item restoreEquippedWeapon = new Item(restoreEWName, restoreEWWeight, restoreEWValue, restoreEWStrength, ItemType.Weapon);
 			dungeon.getPlayer().getInventory().restoreEquippedWeapon(restoreEquippedWeapon);
-			dungeon.dungeonPlayer.getInventory().add(restoreEquippedWeapon);
 
 			//restoring the players equipped armor
 			String newTrash = input.nextLine();
@@ -137,7 +136,6 @@ class SaveRestore{
 			//String trash3 = input.nextLine();
 			Item restoreEquippedArmor = new Item(restoreEAName, restoreEAWeight, restoreEAValue, restoreEAStrength, ItemType.Armor);
 			dungeon.getPlayer().getInventory().restoreEquippedArmor(restoreEquippedArmor);
-			dungeon.getPlayer().getInventory().add(restoreEquippedArmor);
 
 			//restoring the rest of the items in the inventory
 			boolean inItems = true;

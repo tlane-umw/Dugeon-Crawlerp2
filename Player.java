@@ -382,7 +382,7 @@ class Player extends Creature{
 					System.out.println();
 					System.out.println("Defeat all 6 to defeat the game!");
 					System.out.println();
-					System.out.println("Keeip going!!");
+					System.out.println("Keep going!!");
 					System.out.println();
 					try{
 						Thread.sleep(3000);
