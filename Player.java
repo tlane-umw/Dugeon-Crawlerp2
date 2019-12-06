@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Hashtable;
+/**
+ *The player class takes care of all activity and action related to the player, except for the fight method, which is handled in the Fight class. This class has access to the players location(row, column, current board), the players inventory, the players name, the players health.
+ *@author Christopher Papp, Tyler
+ */
 class Player extends Creature{
 
 	//instance variables
@@ -15,8 +19,13 @@ class Player extends Creature{
 	private int value, health, count, row, column, board, newColumn, newRow;
 	private char playerSymbol;
 
-	//default constructor
-	public Player(String name, int health, char PlayerSymbol){
+	/**
+	 *The constructor for player takes the users name, health and symbol for the player on the board. 
+	 *@param name The name of the player.
+	 *@param health The health of the player.
+	 *@param playerSymbol The symbol for the player on the board.
+	*/
+	public Player(String name, int health, char playerSymbol){
 		super(name, health);
 		this.playerSymbol = playerSymbol;
 		this.row = 1;
@@ -24,23 +33,58 @@ class Player extends Creature{
 		this.board = 1;
 
 	}
+
+	/**
+	 *Returns all of the item objects in the users current inventory.
+	 *@return The current inventory of the player.
+	*/
 	public Inventory getInventory(){
 		return userInventory;
 	}
+
+	/**
+	 *Returns the number of the enemies that have been defeated by the player at the moment.
+	 *@return The number of enemies that have been defeated at this moment in time.
+	*/
 	public int getNumEnemiesDefeated(){
 		return this.numEnemiesDefeated;
 	}
+
+	/**
+	 *Returns the number of times that the player has dug a hole using a shovel, since there are a limited number
+	 *times that you can use a shovel.
+	 *@return An integer representing the number of times a player has used their shovel to dig a hole in the ground.
+	*/
 	public int getNumDigs(){
 		return this.numDigs;
 	}
+
+	/**
+	 *Gives the player class the most updated version of the number of times that a player has used their shovel to 
+	 *dig a hole.
+	 *@param numDigs The updated number of times that a player has dug a hole using their shovel.
+	*/
 	public static void setNumDigs(int numDigs){
 		numDigs = numDigs;
 	}
+
+	/**
+	 *Gives the player class the most updated version of the number of enemies that have currently been defeated
+	 *by the player at a given time.
+	 *@param newNumEnemiesDefeated The most up to date value for the number of enemies that have been defeated by the player at a given time.
+	*/
 	public static void setNewNumEnemiesDefeated(int newNumEnemiesDefeated){
 		numEnemiesDefeated = newNumEnemiesDefeated;
 	}
 
-	//method asking the user if they want to pick up the item they stepped on
+	/**
+	 *This method asks the user if they want to pick up an item that they stepped on. If the player chooses to
+	 *pick up the item, it is added to their inventory, if not, it remains on the ground.
+	 *@param itemQuestionDungeon The current dungeon as it stands, for the purpose of finding the item location.
+	 *@param tempRow Refers to the current row that the player is on.
+	 *@param tempColumn Refers to the current column that the player is on.
+	 *@return Whether or not the item remains as a result of the players choice to either pick it up or not to pick it up.
+	*/
 	public boolean itemQuestion(Dungeon itemQuestionDungeon, int tempRow, int tempColumn){
 		boolean doesItemRemain;
 		ArrayList<Item> currentDungeonItems = itemQuestionDungeon.getItemsList();
@@ -86,11 +130,18 @@ class Player extends Creature{
 		doesItemRemain = true;
 		return doesItemRemain;
 	}   
-	//Our move method takes the users input and the 2d array that represents the old board. 
-	//Based on whether the users move was W, A, S or D, this method calls the displacement method, giving it the displacement (-1 or 1), 
-	//the direction(true is the column, or x axis and false is the row, or y axis) and the old 2d array that represents the board.
-	//So, for example -1 and false would be in the negative y direction, while 1 and false would be in the positive y direction. It then returns the newBoard with the new player location.
-	//Ian, if you are reading this, full credit goes to Chris here. This method is absolutely brilliant. Chris, god bless you buddy - Tyler
+
+	/**
+	 *Our move method takes the users input and the 2d array that represents the old board. 
+	 *Based on whether the users move was W, A, S or D, this method calls the displacement method, giving it the displacement (-1 or 1), 
+	 *the direction(true is the column, or x axis and false is the row, or y axis) and the old 2d array that represents the board.
+	 *So, for example -1 and false would be in the negative y direction, while 1 and false would be in the positive y direction. It then returns the newBoard with the new player location.
+	 *Ian, if you are reading this, full credit goes to Chris here. This method is absolutely brilliant. Chris, god bless you buddy - Tyler
+	 *@param userMove The users move, W, A, S or D, that tells the player where to move.
+	 *@param playerBoard The 2d array that represents the board that the player is currently on.
+	 *@param playerDungeon The current dungeon.
+	 *@return The updated current player board as a result of the players movement.
+	 */
 	public char[][] move(char userMove, char[][] playerBoard, Dungeon playerDungeon){
 
 		char[][] newBoard = playerBoard;
@@ -109,32 +160,63 @@ class Player extends Creature{
 		return newBoard;
 	} 
 
+	/**
+	 *Returns what column the player is currently on in the current game board.
+	 *@return The column that the player is currently on.
+	*/
 	public int getColumn(){
 		return this.column;
 	}
-
+	
+	/**
+	 *Returns what row the player is currently on in the current game board.
+	 *@return The row that the player is currently on.
+	*/
 	public int getRow(){
 		return this.row;
 	}
 
+	/**
+	 *Provides the player class with the most updated version of the current players row in the current game board.
+	 *@param row The row that the player is currently on.
+	*/
 	public void setRow(int row){
 		this.row = row;
 	}
-
+	
+	/**
+	 *Provides the player class with the most updated version of the current players column in the current game board.
+	 *@param column The column that the player is currently on.
+	*/
 	public void setColumn(int column){
 		this.column = column;
 	}
 
+	/**
+	 *Returns the most updated version of which board the player is currently on.
+	 *@return The board that the player is currently on.
+	*/
 	public int getCurrentPlayerBoard(){
 		return this.currentPlayerBoard;
 	}
 
+	/**
+	 *Provides the player class with the most updated version of which game board the player is currently on at the moment.
+	 *@param newPlayerBoard Which board the player is currently on at the moment.
+	*/
 	public void setCurrentPlayerBoard(int newPlayerBoard){
 		this.currentPlayerBoard = newPlayerBoard;
 	}
 
-	//The displacement method takes an integer for the displacement of the player and a boolean for the direction (moving in the x direction or y direction) and the old board. 
-	//It returns a newBoard based on the players new location. The purpose of this method was to save ourselves having to write this code 4 times for move method based on if the player pressed W, A, S, or D.
+	/**
+	 *The displacement method takes an integer for the displacement of the player and a boolean for the direction (moving in the x direction or y direction) and the old board. 
+	 *It returns a newBoard based on the players new location. The purpose of this method was to save ourselves having to write this code 4 times for move method based on if the player pressed W, A, S, or D.
+	 *@param change The displacement of the player on the current game board.
+	 *@param choice Which direction the player is going in, true fot x direction and false for y direction.
+	 *@param newBoard The 2d array that represents the current game board before the player moves.
+	 *@param displacementDungeon The current dungeon.
+	 *@return The updated 2d array that represents the current game board as a result of the players movement.
+	*/
 	public char[][] displacement(int change, boolean choice, char[][] newBoard, Dungeon displacementDungeon){
 		if(choice == true){
 			newColumn = column + change;
