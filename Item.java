@@ -75,6 +75,12 @@ public class Item{
 		else if (type == ItemType.Armor){
 			return "Armor";
 		}
+		else if (type == ItemType.Shovel){
+			return "Shovel";
+		}
+		else if (type == ItemType.Potion){
+			return "Potion";
+		}
 		else{
 			return "Other";
 		}

@@ -10,12 +10,13 @@ import java.util.InputMismatchException;
 public class Main2{
 
 	public static Dungeon gameDungeon;
-	public static boolean alreadyDroppedShovel = false;
+	//public static boolean alreadyDroppedShovel = false;
+	public static int numTimesDug = 0;
 
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 
-
+		boolean alreadyDroppedShovel = false;
 		Scanner input = new Scanner(System.in);
 		System.out.print("What is your name: ");
 		String signature = input.nextLine();
@@ -209,8 +210,8 @@ public class Main2{
 					}
 				}
 				else if (userLetter == 'I'){
-					int currentNumDigs = gameDungeon.dungeonPlayer.getNumDigs();
-					int numDigsLeft = 9 - currentNumDigs;
+					int currentNumDigs = numTimesDug;
+					int numDigsLeft = 9 - numTimesDug;
 					if (currentNumDigs == 9){
 						System.out.println("You cannot dig anymore! You broke your shovel and dropped it!");
 						try{
@@ -218,14 +219,11 @@ public class Main2{
 						}
 						catch (InterruptedException noMoreDigs){
 						}
-						if (alreadyDroppedShovel = false){
-							gameDungeon.dungeonPlayer.getInventory().drop(1);
-							alreadyDroppedShovel = true;
-						}
+						gameDungeon.dungeonPlayer.getInventory().drop(1);
 					}
 					else{
 						System.out.println("Be sure to use your digs, carefully!");
-						System.out.println("You have currently dug " + (currentNumDigs + 1) + ", you can only dig " + (numDigsLeft - 1) + " more times!");
+						System.out.println("This is your " + (currentNumDigs + 1) + " time digging, you can only dig " + (numDigsLeft - 1) + " more times!");
 						try{
 							Thread.sleep(2500);
 						}
@@ -241,7 +239,6 @@ public class Main2{
 							try{
 								String dugUpItemYesNo = input.nextLine();
 								char dugUpChar = dugUpItemYesNo.charAt(0);
-								System.out.println("You entered a ---- " + dugUpItemYesNo + " ---- whether you wanted to pick up the item");
 								if(dugUpChar == 'N'){
 									System.out.println("You decided to bury the item back in the ground.");
 									try {
@@ -274,9 +271,9 @@ public class Main2{
 								validDugUp = false;
 							}
 						}
-						int newNumDigs = currentNumDigs + 1;
-						System.out.println("The player has now dug " + newNumDigs + " times");
-						gameDungeon.dungeonPlayer.setNumDigs(newNumDigs);
+						numTimesDug++;
+						setNumTimesDug(numTimesDug);
+						gameDungeon.dungeonPlayer.setNumDigs(numTimesDug);
 
 					}
 				}
@@ -315,5 +312,8 @@ public class Main2{
 	}
 	public static Dungeon getGameDungeon(){
 		return gameDungeon;
+	}
+	public static void setNumTimesDug(int newNumTimesDug){
+		numTimesDug = newNumTimesDug;
 	}
 }

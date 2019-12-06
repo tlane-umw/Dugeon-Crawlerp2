@@ -10,7 +10,7 @@ class Player extends Creature{
 	//instance variables
 	Scanner s = new Scanner(System.in);
 	private String answer;
-	private static int numDigs = 0;
+	private int numDigs;
 	private static int currentPlayerBoard = 1;
 	private static int numEnemiesDefeated = 0;
 	private boolean itemExistence;
@@ -31,6 +31,7 @@ class Player extends Creature{
 		this.row = 1;
 		this.column = 8;
 		this.board = 1;
+		numDigs = 0;
 
 	}
 
@@ -64,7 +65,7 @@ class Player extends Creature{
 	 *dig a hole.
 	 *@param numDigs The updated number of times that a player has dug a hole using their shovel.
 	*/
-	public static void setNumDigs(int numDigs){
+	public void setNumDigs(int numDigs){
 		numDigs = numDigs;
 	}
 

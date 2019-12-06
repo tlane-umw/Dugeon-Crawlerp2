@@ -140,6 +140,7 @@ class Inventory{
 		this.equippedArmor = newArmor;
 	}
 	public void drop (int voidNum){
+		int trashNuM = voidNum;
 		for (int tyler = 0; tyler < items.size(); tyler++){
 			if(items.get(tyler).getTypeString().equals("Shovel")){
 				items.remove(tyler);
