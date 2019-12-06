@@ -23,6 +23,13 @@ class Inventory{
 		Item dragonball = new Item("Dragonball", 0, 100, 0, ItemType.Other);
 		items.add(dragonball);	
 
+		Item shovel = new Item("Shovel", 5, 5, 5, ItemType.Shovel);
+		items.add(shovel);
+
+		Item starterPotion = new Item("Starter Potion", 5, 5, 5, ItemType.Potion);
+		starterPotion.setHealthPoints(10);
+		items.add(starterPotion);
+
 		equippedWeapon = starterSword;
 		equippedArmor = starterShield;
 
@@ -131,6 +138,21 @@ class Inventory{
 	//method called from drop that passes in the next weapon is users inventory
 	public void setNewEquippedArmor(Item newArmor){
 		this.equippedArmor = newArmor;
+	}
+	public void drop (int voidNum){
+		for (int tyler = 0; tyler < items.size(); tyler++){
+			if(items.get(tyler).getTypeString().equals("Shovel")){
+				items.remove(tyler);
+				System.out.println("You have dropped your shovel because it broke!");
+				try{
+					Thread.sleep(2500);
+				}
+				catch (InterruptedException noMoreShovel){
+
+				}
+				break;
+			}
+		}
 	}
 	//lists all the users items and removes which ever item they choose
 	public void drop(){
@@ -276,6 +298,73 @@ class Inventory{
 			}
 		}
 	}
+	//use a potion to up the players current health
+	public int usePotion(){
+		int currentPotionValue = 0;
+		int userPNum = -1;
+		boolean validPNum = false;
+
+		ArrayList<Item> currentPotions = new ArrayList<Item>();
+		for (int ppp = 0; ppp < items.size(); ppp++){
+			if (items.get(ppp).getType() == ItemType.Potion){
+				currentPotions.add(items.get(ppp));
+			}
+		}
+		if (currentPotions.size() == 0){
+			System.out.println("No current potions you can drink");
+			try{
+				Thread.sleep(2000);
+			}
+			catch(InterruptedException noPotions){
+
+			}
+			validPNum = true;
+			return 0;
+		}
+		else{
+			while(validPNum == false){
+				for (int pp = 0; pp < currentPotions.size(); pp++){
+					System.out.println((pp+1) + " " + currentPotions.get(pp).getName() + " has a health points of " + currentPotions.get(pp).getHealthPoints());
+				}
+
+				System.out.println((currentPotions.size() + 1) + " Cancel");
+				System.out.println("Please enter the number of the potion: ");
+				try {
+					userPNum = input.nextInt();
+
+				}
+				catch(InputMismatchException e){
+					String trash = input.nextLine();
+					validPNum = false;
+				}
+
+				if (userPNum == currentPotions.size() + 1){
+					System.out.println("No potion will be used");
+					validPNum = true;
+					break;
+				}
+				else if ((userPNum > 0) && (userPNum <= (currentPotions.size()))){
+					try{
+						Thread.sleep(3000);
+					}
+					catch (InterruptedException yesWeapon){
+						System.out.println("Interrupted");
+					}
+					validPNum = true;
+					return currentPotions.get(userPNum - 1).getHealthPoints();
+				}
+				//making sure they pick a number on the screen
+				else{
+					System.out.println("Please enter a number you see on the screen.");
+					validPNum = false;
+				}
+			}
+		}
+
+	return currentPotionValue;
+	}
+
+
 	//equips the weapon the user chooses
 	public void equipWeapon(){
 

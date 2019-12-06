@@ -21,6 +21,15 @@ public class ItemGenerator{
 		Item bodyArmor = new Item("Body Armor", 40, 55, 40, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Armor);
 		ArrayList<Item> armorList = new ArrayList<Item>(Arrays.asList(shield, fineSteelShield, bodyArmor));
 
+		//creating the potiential potions for the user
+		Item potion = new Item("Potion", 10, 10, 10, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Potion);
+		potion.setHealthPoints(20);
+		Item superPotion = new Item("Super Potion", 15, 15, 15, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Potion);
+		superPotion.setHealthPoints(30);
+		Item hyperPotion = new Item("Hyper Potion", 20, 20, 20, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Potion);
+		hyperPotion.setHealthPoints(40);
+		ArrayList<Item> potionList = new ArrayList<Item>(Arrays.asList(potion, superPotion, hyperPotion));
+
 		//creating the possible other item types
 		Item key = new Item("Key", 10, 5, 0,   (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Other);
 		Item vase = new Item("Vase", 7, 3, 0, (randomInt.nextInt(15) + 1), (randomInt.nextInt(17) + 1), ItemType.Other);
@@ -28,7 +37,7 @@ public class ItemGenerator{
 		ArrayList<Item> otherList = new ArrayList<Item>(Arrays.asList(key, vase, pokeball));
 
 		//randomly deciding what item the user will get
-		int listPicker = randomInt.nextInt(3);
+		int listPicker = randomInt.nextInt(4);
 		if (listPicker == 0){
 			int weaponPicker = randomInt.nextInt(3);
 			if (weaponPicker == 0){
@@ -51,6 +60,18 @@ public class ItemGenerator{
 			}
 			else{
 				return armorList.get(2);
+			}
+		}
+		else if (listPicker == 2){
+			int potionPicker = randomInt.nextInt(3);
+			if (potionPicker == 0){
+				return potionList.get(0);
+			}
+			else if (potionPicker == 1){
+				return potionList.get(1);
+			}
+			else{
+				return potionList.get(2);
 			}
 		}
 		else{

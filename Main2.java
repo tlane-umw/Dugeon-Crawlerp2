@@ -10,6 +10,7 @@ import java.util.InputMismatchException;
 public class Main2{
 
 	public static Dungeon gameDungeon;
+	public static boolean alreadyDroppedShovel = false;
 
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -61,6 +62,8 @@ public class Main2{
 		System.out.println("O : equip a current weapon in your inventory to your player");
 		System.out.println("T : to drop an item from your inventory");
 		System.out.println("L : list all the items in your inventory");
+		System.out.println("I : dig in your current location with your shovel");
+		System.out.println("N : drink a potion from your inventory to boost your players health");
 		System.out.println("P : Print the commands of the game again");
 		System.out.println("V : Save the game");
 		System.out.println("R : Restore your previously saved gamed");
@@ -115,6 +118,8 @@ public class Main2{
 					System.out.println("O : equip a current weapon in your inventory to your player");
 					System.out.println("T : to drop an item from your inventory");
 					System.out.println("L : list all the items in your inventory");
+					System.out.println("N : drink a potion from your inventory to boost your players health");
+					System.out.println("I : dig in your current location with your shovel");
 					System.out.println("P : Print the commands of the game again");
 					System.out.println("V : Save the game");
 					System.out.println("R : Resote your previously saved game");
@@ -193,6 +198,90 @@ public class Main2{
 				else if (userLetter == 'L'){
 					gameDungeon.dungeonPlayer.getInventory().print();
 				}
+				else if (userLetter == 'N'){
+					int currentPotion = gameDungeon.dungeonPlayer.getInventory().usePotion();
+					if(currentPotion > 0){
+						int currentPlayerHealth = gameDungeon.dungeonPlayer.getHealth();
+						System.out.println("Before you drank your potion you had a health of " + currentPlayerHealth);
+						int newPlayerHealth = currentPlayerHealth + currentPotion;
+						System.out.println("Your new health is " + newPlayerHealth);
+						gameDungeon.dungeonPlayer.setHealth(newPlayerHealth);
+					}
+				}
+				else if (userLetter == 'I'){
+					int currentNumDigs = gameDungeon.dungeonPlayer.getNumDigs();
+					int numDigsLeft = 9 - currentNumDigs;
+					if (currentNumDigs == 9){
+						System.out.println("You cannot dig anymore! You broke your shovel and dropped it!");
+						try{
+							Thread.sleep(2500);
+						}
+						catch (InterruptedException noMoreDigs){
+						}
+						if (alreadyDroppedShovel = false){
+							gameDungeon.dungeonPlayer.getInventory().drop(1);
+							alreadyDroppedShovel = true;
+						}
+					}
+					else{
+						System.out.println("Be sure to use your digs, carefully!");
+						System.out.println("You have currently dug " + (currentNumDigs + 1) + ", you can only dig " + (numDigsLeft - 1) + " more times!");
+						try{
+							Thread.sleep(2500);
+						}
+						catch (InterruptedException numDigsLeftUhOh){
+
+						}
+
+						Item dugUpItem = ItemGenerator.generate();
+						System.out.println("You have dug up a " + dugUpItem.getName() + ".");
+						System.out.println("Would you like to pick it up? Enter 'Y' for yes and 'N' for no.");
+						boolean validDugUp = false;
+						while(validDugUp == false){
+							try{
+								String dugUpItemYesNo = input.nextLine();
+								char dugUpChar = dugUpItemYesNo.charAt(0);
+								System.out.println("You entered a ---- " + dugUpItemYesNo + " ---- whether you wanted to pick up the item");
+								if(dugUpChar == 'N'){
+									System.out.println("You decided to bury the item back in the ground.");
+									try {
+										Thread.sleep(2500);
+									}
+									catch(InterruptedException noPickUpDug){
+
+									}
+									validDugUp = true;
+								}
+								else if (dugUpChar == 'Y'){
+									boolean couldUserAdd = gameDungeon.dungeonPlayer.getInventory().add(dugUpItem);
+									if (couldUserAdd == true){
+										System.out.println("Success! You added this item to your inventory!");
+										break;
+									}
+									validDugUp = true;
+								}
+								else{
+									System.out.println("Not a valid input.");
+									System.out.println("You have found a " + dugUpItem.getName() + ".");
+									System.out.println("Please enter a 'Y' for yes or 'N' for no.");
+									dugUpItemYesNo = input.nextLine();
+									validDugUp = false;
+								}
+							}
+
+							catch(StringIndexOutOfBoundsException noDugOption){
+								System.out.println("Your command was not recognied. Please enter 'Y' or 'N'");
+								validDugUp = false;
+							}
+						}
+						int newNumDigs = currentNumDigs + 1;
+						System.out.println("The player has now dug " + newNumDigs + " times");
+						gameDungeon.dungeonPlayer.setNumDigs(newNumDigs);
+
+					}
+				}
+
+
 				else if ((userLetter == 'W') || (userLetter == 'A') || (userLetter == 'S') || (userLetter == 'D')){
 
 					System.out.println();

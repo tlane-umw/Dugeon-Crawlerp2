@@ -10,6 +10,7 @@ public class Item{
 	private int itemBoard;
 	private int itemRow;
 	private int itemColumn;
+	private int healthPoints;
 
 	//default constructor
 	Item (String name, int weight, int value, int strength, int itemRow, int itemColumn, ItemType type){
@@ -34,6 +35,12 @@ public class Item{
 		this.itemColumn = itemColumn;
 	}
 	//standard get &et methods along with to string
+	public void setHealthPoints(int healthPoints){
+		this.healthPoints = healthPoints;
+	}
+	public int getHealthPoints(){
+		return this.healthPoints;
+	}
 	public void setItemType(ItemType type){
 		this.type = type;
 	}
