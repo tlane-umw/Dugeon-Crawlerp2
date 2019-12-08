@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 /**The SaveRestore class takes in a Dungeon and saves all the neccesary elements. It can also restore a Dungeon from the save file
  * @author Tyler Viacara
  */
-class SaveRestore{
+public class SaveRestore{
 	private static boolean doesFileExist = false;
 	Dungeon dungeon;
 	Random random = new Random();

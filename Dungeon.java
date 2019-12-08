@@ -7,10 +7,10 @@ import java.io.*;
 import java.util.InputMismatchException;
 
 /**
- * the Dungeon class handles the world, which contains all 3 gameboards, the current amount of enemies you have defeated, and where all the enemies and items are on the board in respective ArrayLists. the Dungeon also automatically moves the enemies every other time the user moves
- * @author Chris Papp Tyler Viacara
+ * The Dungeon class handles the world, which contains all 3 gameboards, the current amount of enemies you have defeated, and where all the enemies and items are on the board in respective ArrayLists, the Dungeon also automatically moves the enemies every other time the user moves
+ * @author Tyler Viacara, Chris Papp
  */
-class Dungeon{
+public class Dungeon{
 	private static int numEnemiesDefeated = 0;
 	private static int currentBoard = 1;
 	private World world;
@@ -25,7 +25,7 @@ class Dungeon{
 	private boolean skip = true;
 
 	/**
-	 * constructor that takes in a new player and their symbol. It then creates a new world object containg all three gameboards, sets the enemies in its ArrayList, and then randomly places 4 items on each board.
+	 * constructor that takes in a new player and their symbol, It then creates a new world object containg all three gameboards, sets the enemies in its ArrayList, and then randomly places 4 items on each board.
 	 * @param dungeonPlayer A new player object containg the players health, inventory, current equipped weapon and armor, and their position on the board.
 	 * @param playerSymbol The player symbol for the player.
 	 */
@@ -74,7 +74,7 @@ class Dungeon{
 	}
 
 	/**
-	 * method that moves the enemies every other turn. if skip is false, then the enemies move and skip is assigned true. if skip is true, nothing happens besides skip being assigned false.
+	 * method that moves the enemies every other turn, if skip is false, then the enemies move and skip is assigned true, if skip is true, nothing happens besides skip being assigned false.
 	 */
 	public void moveEnemies(){
 		if (skip == false){
@@ -94,7 +94,7 @@ class Dungeon{
 
 
 	/**
-	 * method that prints the current gameboard depending on what board the user is on. if a space on the board is empty, a '*' is placed there just for printing purposes.
+	 * method that prints the current gameboard depending on what board the user is on, if a space on the board is empty, a '*' is placed there just for printing purposes.
 	 */
 	public void printBoard(){
 		//printing a star in the blank spaces
@@ -112,7 +112,10 @@ class Dungeon{
 	}
 
 	/**
-	 * this method is called when the player picks up an item they have found. not only does the onItem get assigned false, but so does itemExistence. this tells the program that the user is no longer on an item because it is in their inventory. and it lets the Dungeon know the item no longer exists because the user has picked it up.
+	 * this method is called when the player picks up an item they have found,
+	 * not only does the onItem get assigned false, but so does itemExistence,
+	 * this tells the program that the user is no longer on an item because it is in their inventory, 
+	 * and it lets the Dungeon know the item no longer exists because the user has picked it up.
 	 */
 	public void makeFalse(){
 		onItem = false;
@@ -147,7 +150,8 @@ class Dungeon{
 		return this.dungeonPlayer;
 	}
 	/**
-	 * method that sets the new items arrayList. Is only called after restoring a previously saved game.
+	 * method that sets the new items arrayList,
+	 * Is only called after restoring a previously saved game.
 	 * @param newItemsList the new items list that is returned from the save restore file.
 	 */
 	public void setItemsList(ArrayList<Item> newItemsList){
@@ -168,7 +172,8 @@ class Dungeon{
 		return this.world;
 	}
 	/**
-	 * method that sets the new World object. is only called from the saverestore file based on the saved world.
+	 * method that sets the new World object,
+	 * is only called from the saverestore file based on the saved world.
 	 * @param newWorld the new World object called from the Save Restore file with the players, enemies, and all the items location.
 	 */
 	public void setWorld(World newWorld){

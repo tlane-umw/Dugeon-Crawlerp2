@@ -4,7 +4,7 @@ import java.util.*;
  * The inventory class can also add items, drop items, equip new weapons or armors, use a potion, or list all the items the user has
  * @author Tyler Viacara
  */
-class Inventory{
+public class Inventory{
 	Scanner input = new Scanner(System.in);
 
 	//instance variable
@@ -341,6 +341,7 @@ class Inventory{
 	}
 	/**This method prints out all the potions the user currently has in their inventory and asks which one they want to drink.
 	 * The user must enter a valid number or the number of potions plus 1 to cancel and continue
+	 * @return the number of health points the potion has
 	 */
 	public int usePotion(){
 		int currentPotionValue = 0;

@@ -1,7 +1,7 @@
 import java.util.Hashtable;
 import java.util.ArrayList;
 import java.util.Random;
-/**The enemy class handles the enemies type and the damage they can do. The enemies movement is also handled in this class.
+/**The enemy class handles the enemies type and the damage they can do, The enemies movement is also handled in this class.
  * @author Tyler Viacara, Toby Lane
  */
 public class Enemy extends Creature{
@@ -16,7 +16,7 @@ public class Enemy extends Creature{
 	private static int numEnemiesMoved = 0;
 	private static int doesEnemyMoveThisTurn = 0;
 
-	/**This constructor is for the enemies that are created in the fight class. They are assigned a random health and damage
+	/**This constructor is for the enemies that are created in the fight class, They are assigned a random health and damage
 	 * @param type The type of enemy that is being created, which is defined in EnemyType
 	 * @param name The name of the enemy, which  is the same as its type, as a String
 	 * @param health The inital health of the enemy as an integer
@@ -29,7 +29,7 @@ public class Enemy extends Creature{
 		this.damage = damage;
 		this.drop = drop;
 	}
-	/**This constructor is for the Enemy ArrayList in the Dungeon class. Assigning the enemy a board number and a specific location on that board on a specific row and column
+	/**This constructor is for the Enemy ArrayList in the Dungeon class, Assigning the enemy a board number and a specific location on that board on a specific row and column
 	 * @param placeName Just a name assigned in Java to help keep track of what enemies are still alive in the Dungeon
 	 * @param row The row position of the enemy as an integer
 	 * @param column The column position of the enemy as an integer

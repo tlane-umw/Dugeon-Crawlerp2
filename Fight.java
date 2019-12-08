@@ -4,7 +4,7 @@ import java.util.Scanner;
  * The fight method returns true if the player won, and false if the enemy won. If the fight method returns true, another method is called to return the players updated health.
  * @author Tyler Viacara, Toby Lane
  */
-class Fight{
+public class Fight{
 	Scanner s = new Scanner(System.in);
 	private int playerHealth;
 	private Item equippedWeapon;
