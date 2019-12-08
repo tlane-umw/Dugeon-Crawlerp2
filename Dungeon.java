@@ -6,7 +6,9 @@ import java.util.Hashtable;
 import java.io.*;
 import java.util.InputMismatchException;
 
-//instance variables
+/**The Dungeon class handles the world, which contains all 3 gameboards, the current amount of enemies you have defeated, and where all the enemies and items are on the board in respective ArrayLists
+ * @author Tyler Viacara, Chris Papp
+ */
 class Dungeon{
 	private static int numEnemiesDefeated = 0;
 	private static int currentBoard = 1;
@@ -21,7 +23,10 @@ class Dungeon{
 	ArrayList<Item> itemsList = new ArrayList<Item>();
 	private boolean skip = true;
 
-	//constructor with a 2D char array and a new player 
+	/**Constructor that takes in a new player and their symbol. 
+	 * It then creates a new world object containg all three gameboards, sets the enemies in its ArrayList, and then randomly places 4 items on each board.
+	 * @param dungeonPlayer A new player object containg the players health, inventory, current equipped weapon and armor, and their position on the board.
+	 */
 	Dungeon(Player dungeonPlayer, char playerSymbol){
 		this.dungeonPlayer = dungeonPlayer;
 		this.playerSymbol = playerSymbol;
@@ -66,7 +71,9 @@ class Dungeon{
 		}
 	}
 
-	//moving all remaining enemies every other turn
+	/**Method that moves the enemies every other turn. If skip is false, then the enemies move and skip is assigned true.
+	 * If skip is true, nothing happens besides skip being assigned false
+	 */
 	public void moveEnemies(){
 		if (skip == false){
 			for (int z = 0; z < enemyList.size(); z++){
@@ -84,7 +91,9 @@ class Dungeon{
 
 
 
-	//printing the gameboard showing the players location, enemies location, and items locations depending on what board the player is on
+	/**Method that prints the current gameboard depending on what board the user is on.
+	 * If a space on the board is empty, a '*' is placed there just for printing purposes
+	 */
 	public void  printBoard(){
 		//printing a star in the blank spaces
 		world.getCurrentBoard(currentBoard)[dungeonPlayer.getRow()][dungeonPlayer.getColumn()] = playerSymbol;
@@ -100,42 +109,72 @@ class Dungeon{
 		}
 	}
 
-	//making the item dissapear after you pick it up, if you dont the item will reappear and a new item will be created
+	/**This method is called when the player picks up an item they have found. Not only does the onItem get assigned false, but so does itemExistence.
+	 * This tells the program that the user is no longer on an item because it is in their inventory.
+	 * And it lets the Dungeon know the item no longer exists because the user has picked it up.
+	 */
 	public void makeFalse(){
 		onItem = false;
 		itemExistence = false;
 	}
-	//standard getters and setter
+	/**Method that returns the current player object in the dungeon
+	 * @return The current player object that is in the Dungeon
+	 */
 	public Player getDungeonPlayer(){
 		return this.dungeonPlayer;
 	}
-
+	/**Method that returns the current board number the player is on
+	 * @return The current board the player is on as an integer, either 0, 1, or 2
+	 */
 	public int getCurrentBoardNum(){
 		return this.currentBoard;
 	}
+	/**Method that sets the new board number the player is on
+	 * @param newBoard the new board number the player is on as an integer, either 0, 1, or 3
+	 */
 	public void setCurrentBoardNum(int newBoard){
 		this.currentBoard = newBoard;
 	}
+	/**Method that returns the current player object in the dungeon
+         * @return The current player object that is in the Dungeon
+         */
 	public Player getPlayer(){
 		return this.dungeonPlayer;
 	}
+	/**Method that sets the new items arrayList. Is only called after restoring a previously saved game
+	 * @param newItemsList The new items list that is returned from the save restore file
+	 */
 	public void setItemsList(ArrayList<Item> newItemsList){
 		this.itemsList = newItemsList;
 	}
+	/**Method that returns the current Items List the Dungeon has. 
+	 * @return an ArrayList of the current Items that are still in the Dungeon that the user hasn't picked up
+	 */
 	public ArrayList<Item> getItemsList(){
 		return this.itemsList;
 	}
+	/**Method that returns the current World with all three gameboards and the postion of the player, enemies, and items in all three rooms
+	 * @return The latest world object the Dungeon has with the players, enemies, and items locations in all three rooms.
+	 */
 	public World getWorld(){
 		return this.world;
 	}
+	/**Method that sets the new World object. Is only called from the saverestore file based on the saved world
+	 * @param newWorld the new World object called from the Save Restore file with the players, enemies, and all the items location
+	 */
 	public void setWorld(World newWorld){
 		this.world = newWorld;
 	}
+	/**Method that sets the new Enemy ArrayList from the SaveRestore file.
+	 * @param enemyList sets the new Enemy ArrayList in the Dungeon from the SaveRestore file
+	 */
 	public void setEnemyList(ArrayList<Enemy> enemyList){
 		this.enemyList = enemyList;
 	}
+	/**Method that returns the current Enemy ArrayList the Dungeon has.
+	 * @return The current ArrayList the Dungeon has with all the enemies locations
+	 */
 	public ArrayList<Enemy> getEnemyList(){
 		return this.enemyList;
 	}
-
 }

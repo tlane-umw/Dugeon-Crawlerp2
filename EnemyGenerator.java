@@ -1,13 +1,17 @@
 import java.util.Random;
 import java.util.*;
 import java.util.stream.IntStream;
-//This class holds the generate method in order to generate an item. 
+/**This class creates a new enemy at random and returns the newly random enemy
+ * @author Toby Lane
+ */
 public class EnemyGenerator{
-	// It generates a new item using Random numbers and Arrays of items.
-	// It gets its first random number, which decides which item type it is going to be. 
-	// It then generates the name of the item with random numbers. It then uses random numbers to generate a strength, weight, and value.
-	// If it is not a weapon or armor however, it does not have a strength.
-	// Once the item is generated, it returns an item.
+	/**It generates a new item using Random numbers and Arrays of items. 
+	 * It gets its first random number, which decides which item type it is going to be. 
+	 * It then generates the name of the item with random numbers. 
+	 * It then uses random numbers to generate a strength, weight, and value. 
+	 * If it is not a weapon or armor however, it does not have a strength. Once the item is generated, it returns an item.
+	 * @return the newly random created enemy
+	 */
 	public static Enemy generate(){
 		Enemy newOne = null;
 		EnemyType type = null;

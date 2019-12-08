@@ -1,5 +1,9 @@
 import java.util.Scanner;
-//player fights with enemy if they step on an 'E'
+/**
+ * The fight class takes in the players current health, equipped weapon and armor. It then creates a new enemy for the user to fight. 
+ * The fight method returns true if the player won, and false if the enemy won. If the fight method returns true, another method is called to return the players updated health.
+ * @author Tyler Viacara, Toby Lane
+ */
 class Fight{
 	Scanner s = new Scanner(System.in);
 	private int playerHealth;
@@ -10,9 +14,16 @@ class Fight{
 		this.equippedWeapon = equippedWeapon;
 		this.equippedArmor = equippedArmor;
 	}
+	/**Method that is called if the fight method returns true, and returns the players updated health 
+	 *@return playerHealth the new health of the player after the fight
+	 */
 	public int getHealth(){
 		return this.playerHealth;
 	}
+	/**Method that is called if the player comes across an enemy. The user can attack, defend, or charge their attack
+	 * The fight happens in rounds until either the player or enemy health is below 0
+	 * @return true if the player won, false if the enemy won
+	 */
 	public boolean fight(){
 		Enemy dungeonEnemy = EnemyGenerator.generate();
 		boolean playerAlive = true;
