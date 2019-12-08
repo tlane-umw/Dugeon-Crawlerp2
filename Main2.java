@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.InputMismatchException;
+import java.util.*;
 /**This class lets the user interact with the Dungeon. The user can play until they defeat all 6 enemies, quit, save their game, or restore a previously saved game
  * @author Tyler Viacara, Chris Papp
  */
@@ -233,7 +234,9 @@ public class Main2{
 						catch (InterruptedException numDigsLeftUhOh){
 
 						}
-
+						Random randomInt = new Random();
+						int randomNum = randomInt.nextInt(2);
+						if (randomNum == 0){
 						Item dugUpItem = ItemGenerator.generate();
 						System.out.println("You have dug up a " + dugUpItem.getName() + ".");
 						System.out.println("Would you like to pick it up? Enter 'Y' for yes and 'N' for no.");
@@ -272,6 +275,17 @@ public class Main2{
 							catch(StringIndexOutOfBoundsException noDugOption){
 								System.out.println("Your command was not recognied. Please enter 'Y' or 'N'");
 								validDugUp = false;
+							}
+						}
+						}
+						else{
+							System.out.println("Your dig did not yield any results.");
+							System.out.println("Be sure to try again!");
+							try{
+								Thread.sleep(2500);
+							}
+							catch(InterruptedException noItemFound){
+
 							}
 						}
 						numTimesDug++;

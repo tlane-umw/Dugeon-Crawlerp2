@@ -16,7 +16,6 @@ public class Dungeon{
 	private World world;
 	private boolean onItem = false;
 	private boolean itemExistence = false;
-	ArrayList<Enemy> enemy = new ArrayList<Enemy>();
 	Random random = new Random();
 	char playerSymbol;
 	Player dungeonPlayer;

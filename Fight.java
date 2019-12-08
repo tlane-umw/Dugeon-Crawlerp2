@@ -2,7 +2,7 @@ import java.util.Scanner;
 /**
  * The fight class takes in the players current health, equipped weapon and armor. It then creates a new enemy for the user to fight. 
  * The fight method returns true if the player won, and false if the enemy won. If the fight method returns true, another method is called to return the players updated health.
- * @author Tyler Viacara, Toby Lane
+ * @author Tyler Viacara, Toby Lane, and Chris Papp
  */
 public class Fight{
 	Scanner s = new Scanner(System.in);

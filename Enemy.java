@@ -21,7 +21,7 @@ public class Enemy extends Creature{
 	 * @param name The name of the enemy, which  is the same as its type, as a String
 	 * @param health The inital health of the enemy as an integer
 	 * @param damage The damage the enemy does when it attacks as an integer
-	 * @param drop An item that the enemy drops after they are defeated. Was nit implemented up to this point
+	 * @param drop An item that the enemy drops after they are defeated. Was not implemented up to this point
 	 */
 	Enemy(EnemyType type, String name, int health, int damage, Item drop){
 		super(name, health);
