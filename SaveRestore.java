@@ -5,17 +5,26 @@ import java.util.Hashtable;
 import java.io.*;
 import java.util.InputMismatchException;
 
+/**The SaveRestore class takes in a Dungeon and saves all the neccesary elements. It can also restore a Dungeon from the save file
+ * @author Tyler Viacara
+ */
 class SaveRestore{
 	private static boolean doesFileExist = false;
 	Dungeon dungeon;
 	Random random = new Random();
 	File saveFile = new File("saveFile.txt");
-
+	
+	/**Constructor that takes in the current dungeon
+	 * @param dungeon The current dungeon that is passed in
+	 */
 	SaveRestore(Dungeon dungeon){
 		this.dungeon = dungeon;
 	}
 
-	//saving the game
+	/**Method that takes the Dungeon and prints out all of the necessary information to a file
+	 * @param dungeon The current dungeon that is passed in
+	 * @throws FileNotFoundException if there is no previous save file found
+	 */
 	public void save(Dungeon dungeon)throws FileNotFoundException{
 		try{
 			//saving the current player information
@@ -97,7 +106,10 @@ class SaveRestore{
 	}
 
 
-	//restoring the game
+	/**Method that restores the previous Dungeon from a saved text file and sets all the information needed
+	 * @return The Dungeon that is restored from the previously saved text file
+	 * @throws InputMismatchException to go over the delimeters and keep moving through the text file
+	 */
 	public Dungeon restore()throws InputMismatchException {
 		try{
 
@@ -313,6 +325,9 @@ class SaveRestore{
 		}
 		return this.dungeon;
 	}
+	/**Method that checks to see if the save file exists already
+	 * @return true if there is an existing save file. false otherwise
+	 */
 	public  boolean doesSaveFileExist(){
 		return this.doesFileExist;
 	}

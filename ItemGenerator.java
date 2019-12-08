@@ -1,11 +1,16 @@
 import java.lang.*;
 import java.util.*;
 
-//class to generate a random Item
+/**This class generates a new item at random and returns that item
+ * @author Tyler Viacara
+ */
 public class ItemGenerator{
 
 	//static random generator shared between the class
 	private static Random randomInt = new Random();
+	/**Method that creates a new item at random and returns the newly created random item
+	 * @return The newly created random item
+	 */
 	public static Item generate(){
 
 

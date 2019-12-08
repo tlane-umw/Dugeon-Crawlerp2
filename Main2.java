@@ -7,6 +7,9 @@ import java.io.*;
 import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.InputMismatchException;
+/**This class lets the user interact with the Dungeon. The user can play until they defeat all 6 enemies, quit, save their game, or restore a previously saved game
+ * @author Tyler Viacara, Chris Papp
+ */
 public class Main2{
 
 	public static Dungeon gameDungeon;
@@ -307,12 +310,21 @@ public class Main2{
 		}
 
 	}
+	/**Method that sets the new gameDungeon from the SaveRestore file
+	 * @param newDungeon The new Dungeon from the SaveRestore file
+	 */
 	public static void setGameDungeon(Dungeon newDungeon){
 		gameDungeon = newDungeon;
 	}
+	/**Method that returns the current gameDungeon
+	 * @return The current gameDungeon for purposes of saving
+	 */
 	public static Dungeon getGameDungeon(){
 		return gameDungeon;
 	}
+	/**Method that keeps track of how many times the user has used their shovel
+	 * @param newNumTimesDug The new number of times the user has used their shovel
+	 */
 	public static void setNumTimesDug(int newNumTimesDug){
 		numTimesDug = newNumTimesDug;
 	}

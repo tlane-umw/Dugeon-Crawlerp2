@@ -1,10 +1,14 @@
 import java.util.ArrayList;
 
-//world class that stores an arraylist of our 2d char array gameboards
+/**The world class handles all three of the gameboards in an arraylist of gameboard. Also handles setting and getting the correct gameboards
+ * @author Tyler Viacara
+ */
 public class World{
 
 	private ArrayList<GameBoard> world = new ArrayList<GameBoard>();
 
+	/**Default constructor that adds all three of the desired gameboards to the arraylist of gameboards
+	 */
 	public World (){
 		GameBoard gameBoard0 = new GameBoard(0);
 		world.add(gameBoard0);
@@ -17,7 +21,10 @@ public class World{
 
 	}
 
-	//getting and setting the current gameboards depending on what board the player and enemies are on
+	/**Returns the 2D array based on the number that is passed in
+	 * @param num The number of the gameboard you want to get based on the number that is passed in
+	 * @return The 2D array for the corresponding game board in the world arraylist
+	 */
 	public char[][] getCurrentBoard(int num){
 		if (num == 1){
 			return world.get(1).getGameBoard();
@@ -30,7 +37,10 @@ public class World{
 		}
 	}
 
-	//method called to set the new board based on where the enemy or player moves, depending on what board they are on
+	/**Method that sets a new gameboard based on the number passed in and the new 2D gameboard itself
+	 * @param num The number of the board you want to overwrite as an integer
+	 * @param newBoard The new 2D array that you are setting after the player or enemy moves
+	 */
 	public void setNewBoard(int num, char [][] newBoard){
 
 		GameBoard newGameBoard = new GameBoard(newBoard);
