@@ -1,7 +1,8 @@
 import java.util.Scanner;
 import java.util.Hashtable;
 
-/**The creature class is the parent class for enemy and player. It handles location, which includes row column and board, along with their health and name
+/**
+ * The creature class is the parent class for enemy and player. It handles location, which includes row column and board, along with their health and name
  * @author Chris Papp, Tyler Viacara
  */
 public class Creature{
