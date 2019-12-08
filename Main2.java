@@ -216,6 +216,7 @@ public class Main2{
 				else if (userLetter == 'I'){
 					int currentNumDigs = numTimesDug;
 					int numDigsLeft = 9 - numTimesDug;
+					boolean ableToDig = true;
 					if (currentNumDigs == 9){
 						System.out.println("You cannot dig anymore! You broke your shovel and dropped it!");
 						try{
@@ -224,6 +225,16 @@ public class Main2{
 						catch (InterruptedException noMoreDigs){
 						}
 						gameDungeon.dungeonPlayer.getInventory().drop(1);
+						ableToDig = false;
+					}
+					else if ((currentNumDigs + 1 ) == 9){
+						System.out.println("This is the last time you will be able to dig!");
+						try{
+							Thread.sleep(2000);
+						}
+						catch(InterruptedException lastDig){
+
+						}
 					}
 					else{
 						System.out.println("Be sure to use your digs, carefully!");
@@ -234,49 +245,51 @@ public class Main2{
 						catch (InterruptedException numDigsLeftUhOh){
 
 						}
+					}
+					if (ableToDig == true){
 						Random randomInt = new Random();
 						int randomNum = randomInt.nextInt(2);
 						if (randomNum == 0){
-						Item dugUpItem = ItemGenerator.generate();
-						System.out.println("You have dug up a " + dugUpItem.getName() + ".");
-						System.out.println("Would you like to pick it up? Enter 'Y' for yes and 'N' for no.");
-						boolean validDugUp = false;
-						while(validDugUp == false){
-							try{
-								String dugUpItemYesNo = input.nextLine();
-								char dugUpChar = dugUpItemYesNo.charAt(0);
-								if(dugUpChar == 'N'){
-									System.out.println("You decided to bury the item back in the ground.");
-									try {
-										Thread.sleep(2500);
-									}
-									catch(InterruptedException noPickUpDug){
+							Item dugUpItem = ItemGenerator.generate();
+							System.out.println("You have dug up a " + dugUpItem.getName() + ".");
+							System.out.println("Would you like to pick it up? Enter 'Y' for yes and 'N' for no.");
+							boolean validDugUp = false;
+							while(validDugUp == false){
+								try{
+									String dugUpItemYesNo = input.nextLine();
+									char dugUpChar = dugUpItemYesNo.charAt(0);
+									if(dugUpChar == 'N'){
+										System.out.println("You decided to bury the item back in the ground.");
+										try {
+											Thread.sleep(2500);
+										}
+										catch(InterruptedException noPickUpDug){
 
+										}
+										validDugUp = true;
 									}
-									validDugUp = true;
-								}
-								else if (dugUpChar == 'Y'){
-									boolean couldUserAdd = gameDungeon.dungeonPlayer.getInventory().add(dugUpItem);
-									if (couldUserAdd == true){
-										System.out.println("Success! You added this item to your inventory!");
-										break;
+									else if (dugUpChar == 'Y'){
+										boolean couldUserAdd = gameDungeon.dungeonPlayer.getInventory().add(dugUpItem);
+										if (couldUserAdd == true){
+											System.out.println("Success! You added this item to your inventory!");
+											break;
+										}
+										validDugUp = true;
 									}
-									validDugUp = true;
+									else{
+										System.out.println("Not a valid input.");
+										System.out.println("You have found a " + dugUpItem.getName() + ".");
+										System.out.println("Please enter a 'Y' for yes or 'N' for no.");
+										dugUpItemYesNo = input.nextLine();
+										validDugUp = false;
+									}
 								}
-								else{
-									System.out.println("Not a valid input.");
-									System.out.println("You have found a " + dugUpItem.getName() + ".");
-									System.out.println("Please enter a 'Y' for yes or 'N' for no.");
-									dugUpItemYesNo = input.nextLine();
+
+								catch(StringIndexOutOfBoundsException noDugOption){
+									System.out.println("Your command was not recognied. Please enter 'Y' or 'N'");
 									validDugUp = false;
 								}
 							}
-
-							catch(StringIndexOutOfBoundsException noDugOption){
-								System.out.println("Your command was not recognied. Please enter 'Y' or 'N'");
-								validDugUp = false;
-							}
-						}
 						}
 						else{
 							System.out.println("Your dig did not yield any results.");
@@ -288,11 +301,12 @@ public class Main2{
 
 							}
 						}
+
 						numTimesDug++;
 						setNumTimesDug(numTimesDug);
 						gameDungeon.dungeonPlayer.setNumDigs(numTimesDug);
-
 					}
+
 				}
 
 

@@ -30,6 +30,7 @@ public class Fight{
 		boolean enemyAlive = true;
 		boolean didUserWin = false;
 		boolean validInput = false;
+		boolean playerCharging = false;
 		int roundNumber = 1;
 		int playerStrength = equippedWeapon.getStrength();
 		int playerDef = equippedArmor.getStrength();
@@ -40,24 +41,10 @@ public class Fight{
 			validInput = false;
 			System.out.println("Round " + roundNumber + " is about to begin!");
 			System.out.println();
+			char choice = ' ';
 			while(validInput == false){
-				System.out.println("Press H to Attack");
-				System.out.println("Press J to Defend, using a turn, but increasing your defense for the Enemies next attack. You then counterattack for half what they hit you for.");
-				System.out.println("Press K to Charge, wasting a turn, but increasing your attack for the next turn.");
-
-				try{
-
-					Thread.sleep(2000);
-				}
-				catch(InterruptedException g){
-					System.out.println("Interrupted");
-				}
 				//player attacking the enemy
 				System.out.println("The " + dungeonEnemy.getName() + " currently has a health of " + dungeonEnemy.getHealth());
-				System.out.println("What would you like to do?");
-				String choices = s.nextLine();
-				char choice = choices.charAt(0);
-				System.out.println();
 
 				try{
 					Thread.sleep(2000);
@@ -65,31 +52,92 @@ public class Fight{
 				catch (InterruptedException z){
 					System.out.println("Interrupted!");
 				}
-				if(choice == 'H' || choice == 'h'){
-					//getting the amount of damage the enemy will take and subtracting that from their current health
-					int enemyDamage = playerStrength;
-					dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
-					System.out.println("The " + dungeonEnemy.getName() + " took "  + enemyDamage + " damage from the players " + equippedWeapon.getName());
+				System.out.println("Press H to Attack");
+				System.out.println("Press J to Defend, using a turn, but increasing your defense for the Enemies next attack. You then counterattack for half what they hit you for.");
+				System.out.println("Press K to Charge, wasting a turn, but increasing your attack for the next turn.");
+				System.out.println("What would you like to do?");
+				try{
+					String choices = s.nextLine();
+					choice = choices.charAt(0);
 					System.out.println();
-					playerStrength = equippedWeapon.getStrength();
-					//checking if the enemy is still alive
-					if (dungeonEnemy.getHealth() <= 0){
-						didUserWin = true;
-						enemyAlive = false;
-						return true;
-					}
+				}
+				catch(StringIndexOutOfBoundsException nothingEntered){
+					validInput = false;
+				}
+				try{
 
-					//printing the enemies health if it is still alive
+					Thread.sleep(2000);
+				}
+				catch(InterruptedException g){
+					System.out.println("Interrupted");
+				}
+
+				if(choice == 'H' || choice == 'h'){
+					if (playerCharging == false){
+						//getting the amount of damage the enemy will take and subtracting that from their current health
+						int enemyDamage = playerStrength;
+						dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
+						System.out.println("The " + dungeonEnemy.getName() + " took "  + enemyDamage + " damage from the players " + equippedWeapon.getName());
+						System.out.println();
+						playerStrength = equippedWeapon.getStrength();
+						//checking if the enemy is still alive
+						if (dungeonEnemy.getHealth() <= 0){
+							didUserWin = true;
+							enemyAlive = false;
+							return true;
+						}
+
+						//printing the enemies health if it is still alive
+						else{
+							System.out.println("The new enemy health is " + dungeonEnemy.getHealth());
+							System.out.println();
+							try{
+								Thread.sleep(2000);
+							}
+							catch (InterruptedException f){
+								System.out.println("Interruputed!");
+							}
+						}
+
+					}
 					else{
-						System.out.println("The new enemy health is " + dungeonEnemy.getHealth());
+						//getting the amount of damage the enemy will take and subtracting that from their current health
+						int enemyDamage = playerStrength;
+						dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
+						System.out.println("The " + dungeonEnemy.getName() + " took "  + enemyDamage + " damage from the players " + equippedWeapon.getName());
+						System.out.println();
+						playerStrength = equippedWeapon.getStrength();
+						//checking if the enemy is still alive
+						if (dungeonEnemy.getHealth() <= 0){
+							didUserWin = true;
+							enemyAlive = false;
+							return true;
+						}
+
+						//printing the enemies health if it is still alive
+						else{
+							System.out.println("The new enemy health is " + dungeonEnemy.getHealth());
+							System.out.println();
+							try{
+								Thread.sleep(2000);
+							}
+							catch (InterruptedException f){
+								System.out.println("Interruputed!");
+							}
+						}
+
+						playerStrength = equippedWeapon.getStrength();
+						playerCharging = false;
+						System.out.println("After you used your last charged attack, your weapon damage was reset to its original " + playerStrength + " damage.");
 						System.out.println();
 						try{
-							Thread.sleep(2000);
+							Thread.sleep(2500);
 						}
-						catch (InterruptedException f){
-							System.out.println("Interruputed!");
+						catch(InterruptedException weaponDamageReset){
+
 						}
 					}
+
 					//getting players current health before the enemy attacks
 					System.out.println("The player currently has a health of " + playerHealth);
 					System.out.println();
@@ -99,9 +147,10 @@ public class Fight{
 					catch (InterruptedException eee){
 						System.out.println("Interrupted!");
 					}
-
 					//getting the amount of damage the enemy caused based off the players current equipped armor and the enemys damage
 					int playerDamage = ((dungeonEnemy.getDamage()) - (equippedArmor.getStrength()));
+
+
 
 					//checking if the players current armor is stronger than the enemy's attack
 					if (playerDamage <= 0){
@@ -230,7 +279,7 @@ public class Fight{
 							}
 						}
 
-						System.out.println("You counter attacked and did " + enemyDamage);
+						System.out.println("You counter attacked and did " + enemyDamage + " damage to the enemy!");
 						System.out.println();
 						try{
 							Thread.sleep(2000);
@@ -262,22 +311,20 @@ public class Fight{
 
 				else if(choice == 'K' || choice == 'k'){
 					playerStrength += 15;
+					playerCharging = true;
 					//checking if the enemy is still alive
 					if (dungeonEnemy.getHealth() <= 0){
 						didUserWin = true;
 						enemyAlive = false;
 						return true;
 					}
-					//printing the enemies health if it is still alive
-					else{
-						System.out.println("The new enemy health is still " + dungeonEnemy.getHealth());
-						System.out.println();
-						try{
-							Thread.sleep(2000);
-						}
-						catch (InterruptedException f){
-							System.out.println("Interruputed!");
-						}
+					System.out.println("You are charging your attack!");
+					System.out.println("If you attacked next round, your " + equippedWeapon.getName() + " would do " + playerStrength + " in damage!");
+					try{
+						Thread.sleep(2000);
+					}
+					catch(InterruptedException chargingAttack){
+
 					}
 					//getting players current health before the enemy attacks
 					System.out.println("The player currently has a health of " + playerHealth);

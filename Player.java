@@ -290,9 +290,15 @@ public class Player extends Creature{
 			didPlayerWin = playerFight.fight();
 			if(didPlayerWin == true){
 				int getFightHealth = playerFight.getHealth();
-				System.out.println("The player now has a health of " + getFightHealth);
+				System.out.println();
+				System.out.println("The player now has a health of " + getFightHealth + " after the latest fight!");
+				try{
+					Thread.sleep(2500);
+				}
+				catch(InterruptedException wonFight){
+
+				}
 				super.setHealth(getFightHealth);
-				System.out.println(health);
 				newBoard[row][column] = ' ';
 				newBoard[newRow][newColumn] = playerSymbol;
 				//updating the amount of enemies defeated
