@@ -1,8 +1,9 @@
 import java.util.Hashtable;
 import java.util.ArrayList;
 import java.util.Random;
-//The enemy class handles the enemies type and the damage they can do. The enemies movement is also handled in this class.
-//@author Tyler Viacara, Toby Lane
+/**The enemy class handles the enemies type and the damage they can do. The enemies movement is also handled in this class.
+ * @author Tyler Viacara, Toby Lane
+ */
 public class Enemy extends Creature{
 	//instance variables
 	Random random = new Random();

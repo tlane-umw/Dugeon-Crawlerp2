@@ -94,6 +94,7 @@ class Inventory{
 	}
 	/**Method that returns the size of the current Inventory's arraylist
 	 *@return the number of items the user currently has in their inventory as an Integer
+	 */
 	public int getSize(){
 		return items.size();
 	}

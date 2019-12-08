@@ -6,7 +6,8 @@ import java.util.Hashtable;
 import java.io.*;
 import java.util.InputMismatchException;
 
-/**The Dungeon class handles the world, which contains all 3 gameboards, the current amount of enemies you have defeated, and where all the enemies and items are on the board in respective ArrayLists
+/**The Dungeon class handles the world, which contains all 3 gameboards, the current amount of enemies you have defeated, and where all the enemies and items are on the board in respective ArrayLists.
+ * The Dungeon also automatically moves the enemies every other time the user moves
  * @author Tyler Viacara, Chris Papp
  */
 class Dungeon{
@@ -137,7 +138,7 @@ class Dungeon{
 	}
 	/**Method that returns the current player object in the dungeon
          * @return The current player object that is in the Dungeon
-         */
+	 */
 	public Player getPlayer(){
 		return this.dungeonPlayer;
 	}

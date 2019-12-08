@@ -88,13 +88,6 @@ public class Creature{
 	public int getRow(){
 		return this.row;
 	}
-	/**
-	* A method that returns the name of the creature.
-	* @return name The name of the creature as a String.
-	*/
-	public String getName(){
-		return name;
-	}
 	/**Method that returns the current board the creature is on
          * @return The board number the creature is on as an Integer
          */
