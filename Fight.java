@@ -183,6 +183,16 @@ public class Fight{
 						int newPlayerHealth = currentPlayerHealth - playerDamage;
 						playerHealth = newPlayerHealth;
 
+						System.out.println("The enemies initial attack would have done " + dungeonEnemy.getDamage() + " but your " + equippedArmor.getName() + " reduced it to " + playerDamage + "!");
+						System.out.println();
+
+						try{
+							Thread.sleep(2000);
+						}
+						catch(InterruptedException enemyAttack1){
+
+						}
+
 						System.out.println("You took " + playerDamage + " damage from the enemy!");
 						System.out.println();
 						try{
@@ -252,9 +262,18 @@ public class Fight{
 						catch (InterruptedException d){
 							System.out.println("Interrupted!");
 						}
-						int enemyDamage = playerDamage / 2;
-						dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
-						System.out.println("You counter attacked and did " + enemyDamage + " damage to the enemy!");
+
+						System.out.println("The enemy currently has a health of " + dungeonEnemy.getHealth() + ".");
+						System.out.println();
+						try{
+							Thread.sleep(2000);
+						}
+						catch(InterruptedException enemyHealthDefense){
+
+						}
+						int defendDamage = (dungeonEnemy.getDamage() / 2);
+						dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - defendDamage);
+						System.out.println("You counter attacked and did " + defendDamage + " damage to the enemy!");
                                                 System.out.println();
                                                 try{
                                                         Thread.sleep(2000);
@@ -285,7 +304,17 @@ public class Fight{
 						int currentPlayerHealth = playerHealth;
 						int newPlayerHealth = currentPlayerHealth - playerDamage;
 						playerHealth = newPlayerHealth;
-						int enemyDamage = playerDamage / 2;
+						int enemyDamage = (dungeonEnemy.getDamage() / 2);
+	
+						System.out.println("The enemies initial attack would have done " + dungeonEnemy.getDamage() + " but your " + equippedArmor.getName() + " and defending reduced it to " + playerDamage + "!");
+						System.out.println();
+						try{
+							Thread.sleep(2000);
+						}
+						catch(InterruptedException enemyAttack2){
+
+						}
+
 						System.out.println("You took " + playerDamage + " damage from the enemy!");
 						System.out.println();
 						try{
@@ -403,6 +432,16 @@ public class Fight{
 						int currentPlayerHealth = playerHealth;
 						int newPlayerHealth = currentPlayerHealth - playerDamage;
 						playerHealth = newPlayerHealth;
+
+
+						System.out.println("The enemies initial attack would have done " + dungeonEnemy.getDamage() + " but your " + equippedArmor.getName() + " reduced it to " + playerDamage + "!");
+						System.out.println();
+						try{
+							Thread.sleep(2000);
+						}
+						catch(InterruptedException enemyAttack3){
+
+						}
 
 						System.out.println("You took " + playerDamage + " damage from the enemy!");
 						System.out.println();
