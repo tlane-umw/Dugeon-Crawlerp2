@@ -38,11 +38,11 @@ public class Main2{
 		}
 
 		//plot of the game
-		System.out.println("You have accidentally stumbled into a cave, and it locks shut behind you.");
+		System.out.println("You have accidentally stumbled into a very scary dungeon, and it locks shut behind you.");
 		System.out.println("You must defeat all the enemies (6 in total) to free yourself from the dungeon.");
 		System.out.println("Your character is marked by the '@' symbol on the map, starting in the top center.");
 		System.out.println("While items are marked as 'I' and the enemies are marked with 'E'");
-		System.out.println("Navigate through the different rooms marked with 'D', to pick up items and defeat all the enemies!");
+		System.out.println("Navigate through the different rooms marked with 'D', to pick up different items and defeat all the enemies!");
 		System.out.println("Good luck!");
 		try{
 			Thread.sleep(5000);
@@ -212,6 +212,13 @@ public class Main2{
 						int newPlayerHealth = currentPlayerHealth + currentPotion;
 						System.out.println("Your new health is " + newPlayerHealth);
 						gameDungeon.dungeonPlayer.setHealth(newPlayerHealth);
+						try{
+							Thread.sleep(2000);
+						}
+						catch(InterruptedException drankPotion){
+
+						}
+						System.out.println();
 					}
 				}
 				else if (userLetter == 'I'){

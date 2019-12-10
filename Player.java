@@ -298,6 +298,7 @@ public class Player extends Creature{
 				catch(InterruptedException wonFight){
 
 				}
+				System.out.println();
 				super.setHealth(getFightHealth);
 				newBoard[row][column] = ' ';
 				newBoard[newRow][newColumn] = playerSymbol;

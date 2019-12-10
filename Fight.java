@@ -244,6 +244,33 @@ public class Fight{
 						catch (InterruptedException d){
 							System.out.println("Interrupted!");
 						}
+						int enemyDamage = playerDamage / 2;
+						dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
+						System.out.println("You counter attacked and did " + enemyDamage + " damage to the enemy!");
+                                                System.out.println();
+                                                try{
+                                                        Thread.sleep(2000);
+                                                }
+                                                catch (InterruptedException c){
+                                                        System.out.println("Interrupted!");
+                                                }
+                                                //checking if the enemy is still alive
+                                                if (dungeonEnemy.getHealth() <= 0){
+                                                        didUserWin = true;
+                                                        enemyAlive = false;
+                                                        return true;
+                                                }//printing the enemies health if it is still alive
+                                                else{
+                                                        System.out.println("The new enemy health is " + dungeonEnemy.getHealth());
+                                                        System.out.println();
+                                                        try{
+                                                                Thread.sleep(2000);
+                                                        }
+                                                        catch (InterruptedException f){
+                                                                System.out.println("Interruputed!");
+                                                        }
+                                                }
+
 					}
 					//setting the players new health based on the previously calculated enemy damage
 					else{
@@ -252,7 +279,15 @@ public class Fight{
 						playerHealth = newPlayerHealth;
 						int enemyDamage = playerDamage / 2;
 						System.out.println("You took " + playerDamage + " damage from the enemy!");
+						System.out.println();
+						try{
+							Thread.sleep(2000);
+						}
+						catch(InterruptedException noMoreDefense){
+
+						}
 						dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - enemyDamage);
+
 						if (playerHealth <= 0){
 							didUserWin = false;
 							System.out.println("The enemy brutally murdered you!");
@@ -310,7 +345,7 @@ public class Fight{
 				}
 
 				else if(choice == 'K' || choice == 'k'){
-					playerStrength += 15;
+					playerStrength = (playerStrength * 2);
 					playerCharging = true;
 					//checking if the enemy is still alive
 					if (dungeonEnemy.getHealth() <= 0){
