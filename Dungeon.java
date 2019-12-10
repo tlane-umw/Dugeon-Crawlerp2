@@ -90,8 +90,6 @@ public class Dungeon{
 		}
 	}
 
-
-
 	/**
 	 * method that prints the current gameboard depending on what board the user is on, if a space on the board is empty, a '*' is placed there just for printing purposes.
 	 */
@@ -120,6 +118,7 @@ public class Dungeon{
 		onItem = false;
 		itemExistence = false;
 	}
+
 	/**
 	 * method that returns the current player object in the dungeon.
 	 * @return The current player object that is in the Dungeon.
@@ -127,6 +126,7 @@ public class Dungeon{
 	public Player getDungeonPlayer(){
 		return this.dungeonPlayer;
 	}
+
 	/**
 	 * method that returns the current board number the player is on.
 	 * @return the current board the player is on as an integer, either 0, 1, or 2.
@@ -134,6 +134,7 @@ public class Dungeon{
 	public int getCurrentBoardNum(){
 		return this.currentBoard;
 	}
+
 	/**
 	 * method that sets the new board number the player is on.
 	 * @param newBoard the new board number the player is on as an integer, either 0, 1, or 3.
@@ -141,6 +142,7 @@ public class Dungeon{
 	public void setCurrentBoardNum(int newBoard){
 		this.currentBoard = newBoard;
 	}
+
 	/**
 	 * method that returns the current player object in the dungeon.
          * @return the current player object that is in the Dungeon.
@@ -148,6 +150,7 @@ public class Dungeon{
 	public Player getPlayer(){
 		return this.dungeonPlayer;
 	}
+
 	/**
 	 * method that sets the new items arrayList,
 	 * Is only called after restoring a previously saved game.
@@ -156,6 +159,7 @@ public class Dungeon{
 	public void setItemsList(ArrayList<Item> newItemsList){
 		this.itemsList = newItemsList;
 	}
+
 	/**
 	 * method that returns the current Items List the Dungeon has. 
 	 * @return an ArrayList of the current Items that are still in the Dungeon that the user hasn't picked up.
@@ -163,6 +167,7 @@ public class Dungeon{
 	public ArrayList<Item> getItemsList(){
 		return this.itemsList;
 	}
+
 	/**
 	 * method that returns the current World with all three gameboards and the postion of the player, enemies, and items in all three rooms.
 	 * @return the latest world object the Dungeon has with the players, enemies, and items locations in all three rooms.
@@ -170,6 +175,7 @@ public class Dungeon{
 	public World getWorld(){
 		return this.world;
 	}
+
 	/**
 	 * method that sets the new World object,
 	 * is only called from the saverestore file based on the saved world.
@@ -178,6 +184,7 @@ public class Dungeon{
 	public void setWorld(World newWorld){
 		this.world = newWorld;
 	}
+
 	/**
 	 * method that sets the new Enemy ArrayList from the SaveRestore file.
 	 * @param enemyList sets the new Enemy ArrayList in the Dungeon from the SaveRestore file.
@@ -185,6 +192,7 @@ public class Dungeon{
 	public void setEnemyList(ArrayList<Enemy> enemyList){
 		this.enemyList = enemyList;
 	}
+
 	/**
 	 * method that returns the current Enemy ArrayList the Dungeon has.
 	 * @return the current ArrayList the Dungeon has with all the enemies locations.

@@ -45,6 +45,7 @@ public class Inventory{
 	public void setItems(ArrayList<Item> newItems){
 		this.items = newItems;
 	}
+
 	/**This method to see if the newly generated Item object can be added to the users inventory
 	 * checks to make sure the newly created item will not push the users weight past their max limit
 	 * if true the Item is added to the users inventory and the total weight will reflect the newly added item
@@ -80,24 +81,28 @@ public class Inventory{
 			return true;
 		}
 	}
+
 	/**Method that removes an item based on the number passed in
 	 * @param i the integer value for the corresponding arraylist that the user wants to drop
 	 */
 	public void remove(int i){
 		items.remove(i);
 	}
+
 	/**Method that returns this inventorys max weight
 	 *@return The max weight the players inventory has as an integer
 	 */
 	public int getMaxWeight(){
 		return this.maxWeight;
 	}
+
 	/**Method that returns the size of the current Inventory's arraylist
 	 *@return the number of items the user currently has in their inventory as an Integer
 	 */
 	public int getSize(){
 		return items.size();
 	}
+
 	/**Method that gets a specific item from the users inventory arraylist of items
 	 * @param z the number of the item you want to get from the arrayList of items
 	 * @return the item that has been selected
@@ -105,6 +110,7 @@ public class Inventory{
 	public Item getItem(int z){
 		return items.get(z);
 	}
+
 	/**This method returns the players current equipped weapon
 	 * @return the current equipped weapon the player has (item)
 	 */
@@ -119,7 +125,6 @@ public class Inventory{
 		return this.equippedArmor;
 	}
 
-
 	/**Method that goes through each item in the users arraylist of items and returns the total weight as an integer
 	 *@return the weight for all the items in the users inventory summed up
 	 */
@@ -130,6 +135,7 @@ public class Inventory{
 		}
 		return combinedWeight;
 	}
+
 	/**Method that prints out every item in the users inventory in a readable format.
 	 * Has a check to print a message telling the user they have no items if their inventory is empty
 	 */
@@ -174,6 +180,7 @@ public class Inventory{
 	public void setNewEquippedArmor(Item newArmor){
 		this.equippedArmor = newArmor;
 	}
+
 	/**This method is called from by main once the user has reached the limits for the amount of times they have used their shovel.
 	 * @param voidNum just a number to seperate the two different drop methods
 	 */
@@ -193,6 +200,7 @@ public class Inventory{
 			}
 		}
 	}
+
 	/**This method prints out all of the items in the user's inventory and allows them to pick which one to drop
 	 *The user can enter 0 to cancel, or a number on the screen to drop an item. The user cannot continue until they enter a 0 or a number on the screen
 	 */
@@ -339,6 +347,7 @@ public class Inventory{
 			}
 		}
 	}
+
 	/**This method prints out all the potions the user currently has in their inventory and asks which one they want to drink.
 	 * The user must enter a valid number or the number of potions plus 1 to cancel and continue
 	 * @return the number of health points the potion has
@@ -407,7 +416,6 @@ public class Inventory{
 
 	return currentPotionValue;
 	}
-
 
 	/**This method prints out all of the weapons the user currently has in their inventory and asks which one they want to equip.
 	 * The user must eneter a valid number to either equip a new weapon or cancel
@@ -479,14 +487,15 @@ public class Inventory{
 			}
 		}
 
-
 	}
+
 	/**This method takes in the equippedWeapon from the save file and sets it in the players inventory
 	 * @param restoreEquippedWeapon Takes the saved equipped weapon and sets it to the players current equipped weapon
 	 */
 	public void restoreEquippedWeapon(Item restoreEquippedWeapon){
 		this.equippedWeapon = restoreEquippedWeapon;
 	}
+
 	/**This method takes in the equippedArmor from the saveFile and sets it in the players inventory
 	 * @param restoreEquippedArmor Takes the saved equipped armor and sets it to the players current equipped armor
 	 */

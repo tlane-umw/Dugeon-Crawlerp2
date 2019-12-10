@@ -20,19 +20,15 @@ public enum EnemyType{
 	/**Method that checks to see if the name of another enemy matches our enemy
 	 * @param otherName The name of the enemy you are checking if it matches
 	 * @return True if the names match, otherwise false
-	 */
-	 
+	 */	 
 	public boolean equalsName(String otherName){
 		return name.equals(otherName);
 	}
+
 	/**Method that returns the type as a String
 	 * @return The type of the enemy as a string
 	 */
-	 
-	public String toString(){
+	 public String toString(){
 		return this.name;
 	}
-	
-	
-
 }

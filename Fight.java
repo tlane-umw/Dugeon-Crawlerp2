@@ -9,17 +9,25 @@ public class Fight{
 	private int playerHealth;
 	private Item equippedWeapon;
 	private Item equippedArmor;
+
+	/**Constructor that takes in the players current health, along with their current equipped weapon and armor
+	 * @param playerHealth The players current health as an integer
+	 * @param equippedWeapon The weapon item the player currently has attached at the time of the fight
+	 * @param equippedArmor The armor item the player currently has attached at the time of the fight
+	 */
 	public Fight(int playerHealth, Item equippedWeapon, Item equippedArmor){
 		this.playerHealth = playerHealth;
 		this.equippedWeapon = equippedWeapon;
 		this.equippedArmor = equippedArmor;
 	}
+
 	/**Method that is called if the fight method returns true, and returns the players updated health 
 	 *@return playerHealth the new health of the player after the fight
 	 */
 	public int getHealth(){
 		return this.playerHealth;
 	}
+
 	/**Method that is called if the player comes across an enemy. The user can attack, defend, or charge their attack
 	 * The fight happens in rounds until either the player or enemy health is below 0
 	 * @return true if the player won, false if the enemy won

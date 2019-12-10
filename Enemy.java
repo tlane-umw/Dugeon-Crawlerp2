@@ -29,6 +29,7 @@ public class Enemy extends Creature{
 		this.damage = damage;
 		this.drop = drop;
 	}
+
 	/**This constructor is for the Enemy ArrayList in the Dungeon class, Assigning the enemy a board number and a specific location on that board on a specific row and column
 	 * @param placeName Just a name assigned in Java to help keep track of what enemies are still alive in the Dungeon
 	 * @param row The row position of the enemy as an integer
@@ -39,6 +40,7 @@ public class Enemy extends Creature{
 		super(placeName, row, column, board);
 
 	}
+
 	/**Method that returns the place holder name for the Dungeon's enemy ArrayList
 	 * @return The place holder name for the Dungeon's Enemy ArrayList as a String
 	 */
@@ -52,6 +54,7 @@ public class Enemy extends Creature{
 	public EnemyType getType(){
 		return type;
 	}
+
 	/**Method that returns the damage the enemy does when it attacks as an integer
 	 * @return The amount of damage the Enemy does when it attacks as an integer
 	 */

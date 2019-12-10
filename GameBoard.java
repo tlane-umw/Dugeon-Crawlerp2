@@ -85,6 +85,7 @@ public class GameBoard{
 		this.gameBoard = updatedGameBoard;
 
 	}
+
 	/**Constructor that takes in an integer, and creates a new gameboard object based on the number that is passed in
 	 * @param num The integer number of the gameboard object that you want to be created. 0 is the first room, 1 is the middle, and 2 is on the right
 	 */
@@ -99,12 +100,14 @@ public class GameBoard{
 			this.gameBoard = gameBoard2;
 		}
 	}
+
 	/**Method that returns the current gameboard depending on what board the enemy or player is on
 	 * @return The current gameboard as it stands depending on what board the enemy or player is on
 	 */
 	public char[][] getGameBoard(){
 		return this.gameBoard;
 	}
+
 	/**Method that sets the new gameboard based on the one that is passed in
 	 * @param newGameBoard The new 2D array gameboard after the player or enemy has moved
 	 */
@@ -113,7 +116,3 @@ public class GameBoard{
 	}
 
 }
-
-
-
-

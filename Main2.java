@@ -359,18 +359,21 @@ public class Main2{
 		}
 
 	}
+
 	/**Method that sets the new gameDungeon from the SaveRestore file
 	 * @param newDungeon The new Dungeon from the SaveRestore file
 	 */
 	public static void setGameDungeon(Dungeon newDungeon){
 		gameDungeon = newDungeon;
 	}
+
 	/**Method that returns the current gameDungeon
 	 * @return The current gameDungeon for purposes of saving
 	 */
 	public static Dungeon getGameDungeon(){
 		return gameDungeon;
 	}
+
 	/**Method that keeps track of how many times the user has used their shovel
 	 * @param newNumTimesDug The new number of times the user has used their shovel
 	 */

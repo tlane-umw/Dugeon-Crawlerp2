@@ -37,6 +37,7 @@ public class SecretLocations{
 		}
 
 	}
+
 	/**Method that returns true if the players location matches one of the hole locations, false otherwise
 	 * @param holePlayer The current player to get their current location and what board they are on
 	 */
