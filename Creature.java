@@ -22,6 +22,12 @@ public class Creature{
 		this.health = health;
 
 	}
+	Creature(int row, int column, int health, String name){
+		this.row = row;
+		this.column = column;
+		this.health = health;
+		this.name = name;
+	}
 	/** Constructor that takes in the name of the creature as a string, and their position on a specific board as an int
 	 * @param name The name of the creature as a string.
 	 * @param row The int position of the creature in the row

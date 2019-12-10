@@ -26,10 +26,10 @@ public class Player extends Creature{
 	 *@param playerSymbol The symbol for the player on the board.
 	*/
 	public Player(String name, int health, char playerSymbol){
-		super(name, health);
+		super(1, 8, health, name);
 		this.playerSymbol = playerSymbol;
-		this.row = 1;
-		this.column = 8;
+		//this.row = 1;
+		//this.column = 8;
 		this.board = 1;
 		numDigs = 0;
 
@@ -160,11 +160,11 @@ public class Player extends Creature{
 		}   
 		return newBoard;
 	} 
-
+	/*
 	/**
 	 *Returns what column the player is currently on in the current game board.
 	 *@return The column that the player is currently on.
-	*/
+	*
 	public int getColumn(){
 		return this.column;
 	}
@@ -172,7 +172,7 @@ public class Player extends Creature{
 	/**
 	 *Returns what row the player is currently on in the current game board.
 	 *@return The row that the player is currently on.
-	*/
+	*
 	public int getRow(){
 		return this.row;
 	}
@@ -180,7 +180,7 @@ public class Player extends Creature{
 	/**
 	 *Provides the player class with the most updated version of the current players row in the current game board.
 	 *@param row The row that the player is currently on.
-	*/
+	*
 	public void setRow(int row){
 		this.row = row;
 	}
@@ -188,10 +188,11 @@ public class Player extends Creature{
 	/**
 	 *Provides the player class with the most updated version of the current players column in the current game board.
 	 *@param column The column that the player is currently on.
-	*/
+	*
 	public void setColumn(int column){
 		this.column = column;
 	}
+	*/
 
 	/**
 	 *Returns the most updated version of which board the player is currently on.
@@ -220,11 +221,11 @@ public class Player extends Creature{
 	*/
 	public char[][] displacement(int change, boolean choice, char[][] newBoard, Dungeon displacementDungeon){
 		if(choice == true){
-			newColumn = column + change;
-			newRow = row;
+			newColumn = this.getColumn() + change;
+			newRow = this.getRow();
 		} else {
-			newColumn = column;
-			newRow = row + change;
+			newColumn = this.getColumn();
+			newRow = this.getRow() + change;
 		}
 		//Prevents the player from running into the wall.
 		if ((newBoard[newRow][newColumn] == '|') || (newBoard[newRow][newColumn] == '-')){
@@ -250,26 +251,26 @@ public class Player extends Creature{
 				System.out.println("You entered a door into a new room!");
 				if (currentPlayerBoard == 1){
 					if ((newColumn < 10)){
-						newBoard[row][column] = ' ';
+						newBoard[this.getRow()][this.getColumn()] = ' ';
 						currentPlayerBoard = 0;
 						newRow = 10;
 						newColumn = 18;
 					}
 					else{
-						newBoard[row][column] = ' ';
+						newBoard[this.getRow()][this.getColumn()] = ' ';
 						currentPlayerBoard = 2;
 						newRow = 10;
 						newColumn = 1;
 					}
 				}
 				else if (currentPlayerBoard == 2){
-					newBoard[row][column] = ' ';
+					newBoard[this.getRow()][this.getColumn()] = ' ';
 					currentPlayerBoard = 1;
 					newRow = 10;
 					newColumn = 18;
 				}
 				else{
-					newBoard[row][column] = ' ';
+					newBoard[this.getRow()][this.getColumn()] = ' ';
 					currentPlayerBoard = 1;
 					newRow = 10;
 					newColumn = 1;
@@ -279,7 +280,7 @@ public class Player extends Creature{
 		}
 		//What happens when the player steps on an item.
 		else if (newBoard[newRow][newColumn] == 'I') {
-			newBoard[row][column] = ' ';
+			newBoard[this.getRow()][this.getColumn()] = ' ';
 			newBoard[newRow][newColumn] = playerSymbol;
 			itemExistence = itemQuestion(displacementDungeon, newRow, newColumn);
 		}
@@ -300,7 +301,7 @@ public class Player extends Creature{
 				}
 				System.out.println();
 				super.setHealth(getFightHealth);
-				newBoard[row][column] = ' ';
+				newBoard[this.getRow()][this.getColumn()] = ' ';
 				newBoard[newRow][newColumn] = playerSymbol;
 				//updating the amount of enemies defeated
 				numEnemiesDefeated = numEnemiesDefeated + 1;
@@ -371,16 +372,16 @@ public class Player extends Creature{
 		}
 		//checking to see if the user picked up the item or not, and assigning the board accordingly
 		else if (itemExistence == true){
-			newBoard[row][column] = 'I';
+			newBoard[this.getRow()][this.getColumn()] = 'I';
 			newBoard[newRow][newColumn] = playerSymbol;
 			itemExistence = false;
 		}
 		else {
-			newBoard[row][column] = ' ';
+			newBoard[this.getRow()][this.getColumn()] = ' ';
 			newBoard[newRow][newColumn] = playerSymbol;
 		}   
-		row = newRow;
-		column = newColumn;
+		this.setRow(newRow);
+		this.setColumn(newColumn);
 
 		return newBoard;
 	}
