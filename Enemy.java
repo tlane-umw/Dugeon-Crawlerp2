@@ -1,6 +1,6 @@
 import java.util.Hashtable;
 import java.util.ArrayList;
-importjava.util.Random;
+import java.util.Random;
 /**The enemy class handles the enemies type and the damage they can do, The enemies movement is also handled in this class.
  * @author Tyler Viacara, Toby Lane
  */
