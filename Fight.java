@@ -168,7 +168,7 @@ public class Fight{
 						catch (InterruptedException y){
 							System.out.println("Interrupted");
 						}
-						System.out.println("The players " + equippedArmor.getName() + " completely negated the enemy's attack!");
+						System.out.println("The enemy would have done " + dungeonEnemy.getDamage() + " in damage, but your " + equippedArmor.getName() + " completely negated the enemy's attack!");
 						System.out.println();
 						try{
 							Thread.sleep(2000);
@@ -183,7 +183,7 @@ public class Fight{
 						int newPlayerHealth = currentPlayerHealth - playerDamage;
 						playerHealth = newPlayerHealth;
 
-						System.out.println("The enemies initial attack would have done " + dungeonEnemy.getDamage() + " but your " + equippedArmor.getName() + " reduced it to " + playerDamage + "!");
+						System.out.println("The enemies initial attack would have done " + dungeonEnemy.getDamage() + " in damage, but your " + equippedArmor.getName() + " reduced it to " + playerDamage + "!");
 						System.out.println();
 
 						try{
@@ -254,7 +254,8 @@ public class Fight{
 						catch (InterruptedException y){
 							System.out.println("Interrupted");
 						}
-						System.out.println("The players " + equippedArmor.getName() + " completely negated the enemy's attack!");
+						
+						System.out.println("The enemy would have done " + dungeonEnemy.getDamage() + " in damage, but your " + equippedArmor.getName() + " and defending completely negated the enemy's attack!");
 						System.out.println();
 						try{
 							Thread.sleep(2000);
@@ -271,7 +272,7 @@ public class Fight{
 						catch(InterruptedException enemyHealthDefense){
 
 						}
-						int defendDamage = (dungeonEnemy.getDamage() / 2);
+						int defendDamage = (dungeonEnemy.getDamage() / 3);
 						dungeonEnemy.setHealth((dungeonEnemy.getHealth()) - defendDamage);
 						System.out.println("You counter attacked and did " + defendDamage + " damage to the enemy!");
                                                 System.out.println();
@@ -304,9 +305,9 @@ public class Fight{
 						int currentPlayerHealth = playerHealth;
 						int newPlayerHealth = currentPlayerHealth - playerDamage;
 						playerHealth = newPlayerHealth;
-						int enemyDamage = (dungeonEnemy.getDamage() / 2);
+						int enemyDamage = (dungeonEnemy.getDamage() / 3);
 	
-						System.out.println("The enemies initial attack would have done " + dungeonEnemy.getDamage() + " but your " + equippedArmor.getName() + " and defending reduced it to " + playerDamage + "!");
+						System.out.println("The enemies initial attack would have done " + dungeonEnemy.getDamage() + " in damage,  but your " + equippedArmor.getName() + " and defending reduced it to " + playerDamage + "!");
 						System.out.println();
 						try{
 							Thread.sleep(2000);
@@ -418,7 +419,7 @@ public class Fight{
 						catch (InterruptedException y){
 							System.out.println("Interrupted");
 						}
-						System.out.println("The players " + equippedArmor.getName() + " completely negated the enemy's attack!");
+						System.out.println("The enemy would have done " + dungeonEnemy.getDamage() + "in damage, but your " + equippedArmor.getName() + " completely negated the enemy's attack!");
 						System.out.println();
 						try{
 							Thread.sleep(2000);
@@ -434,7 +435,7 @@ public class Fight{
 						playerHealth = newPlayerHealth;
 
 
-						System.out.println("The enemies initial attack would have done " + dungeonEnemy.getDamage() + " but your " + equippedArmor.getName() + " reduced it to " + playerDamage + "!");
+						System.out.println("The enemies initial attack would have done " + dungeonEnemy.getDamage() + " in damage, but your " + equippedArmor.getName() + " reduced it to " + playerDamage + "!");
 						System.out.println();
 						try{
 							Thread.sleep(2000);
