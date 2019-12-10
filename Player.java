@@ -11,12 +11,11 @@ public class Player extends Creature{
 	Scanner s = new Scanner(System.in);
 	private String answer;
 	private int numDigs;
-	private static int currentPlayerBoard = 1;
 	private static int numEnemiesDefeated = 0;
 	private boolean itemExistence;
 	private String name;
 	private Inventory userInventory = new Inventory (250);
-	private int value, health, count, row, column, board, newColumn, newRow;
+	private int value, count, newColumn, newRow;
 	private char playerSymbol;
 
 	/**
@@ -26,13 +25,9 @@ public class Player extends Creature{
 	 *@param playerSymbol The symbol for the player on the board.
 	*/
 	public Player(String name, int health, char playerSymbol){
-		super(1, 8, health, name);
+		super(1, 8, 1, health, name);
 		this.playerSymbol = playerSymbol;
-		//this.row = 1;
-		//this.column = 8;
-		this.board = 1;
 		numDigs = 0;
-
 	}
 
 	/**
@@ -94,7 +89,7 @@ public class Player extends Creature{
 			int currentItemColumn = currentDungeonItems.get(yy).getItemColumn();
 			int currentItemBoard = currentDungeonItems.get(yy).getItemBoard();
 			if ((currentItemRow == tempRow) && (currentItemColumn == tempColumn)){
-				if (currentItemBoard == this.currentPlayerBoard){
+				if (currentItemBoard == this.getBoard()){
 					System.out.println("You have stumbled onto a " + currentDungeonItems.get(yy).getName() + ".");
 					System.out.println("Here is some information about the item: ");
 					System.out.println(currentDungeonItems.get(yy).toString());
@@ -160,55 +155,7 @@ public class Player extends Creature{
 		}   
 		return newBoard;
 	} 
-	/*
-	/**
-	 *Returns what column the player is currently on in the current game board.
-	 *@return The column that the player is currently on.
-	*
-	public int getColumn(){
-		return this.column;
-	}
 	
-	/**
-	 *Returns what row the player is currently on in the current game board.
-	 *@return The row that the player is currently on.
-	*
-	public int getRow(){
-		return this.row;
-	}
-
-	/**
-	 *Provides the player class with the most updated version of the current players row in the current game board.
-	 *@param row The row that the player is currently on.
-	*
-	public void setRow(int row){
-		this.row = row;
-	}
-	
-	/**
-	 *Provides the player class with the most updated version of the current players column in the current game board.
-	 *@param column The column that the player is currently on.
-	*
-	public void setColumn(int column){
-		this.column = column;
-	}
-	*/
-
-	/**
-	 *Returns the most updated version of which board the player is currently on.
-	 *@return The board that the player is currently on.
-	*/
-	public int getCurrentPlayerBoard(){
-		return this.currentPlayerBoard;
-	}
-
-	/**
-	 *Provides the player class with the most updated version of which game board the player is currently on at the moment.
-	 *@param newPlayerBoard Which board the player is currently on at the moment.
-	*/
-	public void setCurrentPlayerBoard(int newPlayerBoard){
-		this.currentPlayerBoard = newPlayerBoard;
-	}
 
 	/**
 	 *The displacement method takes an integer for the displacement of the player and a boolean for the direction (moving in the x direction or y direction) and the old board. 
@@ -249,29 +196,29 @@ public class Player extends Creature{
 			else{
 				//If the player chooses to enter the room, the new players location in the new room is determined by which room the player is currently in and which side of the room that player is currently on. The player will now appear right next to the door in the new room.
 				System.out.println("You entered a door into a new room!");
-				if (currentPlayerBoard == 1){
+				if (this.getBoard() == 1){
 					if ((newColumn < 10)){
 						newBoard[this.getRow()][this.getColumn()] = ' ';
-						currentPlayerBoard = 0;
+						this.setBoard(0);
 						newRow = 10;
 						newColumn = 18;
 					}
 					else{
 						newBoard[this.getRow()][this.getColumn()] = ' ';
-						currentPlayerBoard = 2;
+						this.setBoard(2);
 						newRow = 10;
 						newColumn = 1;
 					}
 				}
-				else if (currentPlayerBoard == 2){
+				else if (this.getBoard() == 2){
 					newBoard[this.getRow()][this.getColumn()] = ' ';
-					currentPlayerBoard = 1;
+					this.setBoard(1);
 					newRow = 10;
 					newColumn = 18;
 				}
 				else{
 					newBoard[this.getRow()][this.getColumn()] = ' ';
-					currentPlayerBoard = 1;
+					this.setBoard(1);
 					newRow = 10;
 					newColumn = 1;
 

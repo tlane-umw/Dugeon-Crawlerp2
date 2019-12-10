@@ -182,7 +182,7 @@ public class Main2{
 						catch(InterruptedException restore1){
 							System.out.println("Interrupted!");
 						}
-						int savedPlayerBoard = gameDungeon.dungeonPlayer.getCurrentPlayerBoard();
+						int savedPlayerBoard = gameDungeon.dungeonPlayer.getBoard();
 						gameDungeon.setCurrentBoardNum(savedPlayerBoard);
 						System.out.println(".... Success! We were able to load your game.");
 						System.out.println("Get ready to jump back into your game! Good luck!");
@@ -343,7 +343,7 @@ public class Main2{
 
 					gameDungeon.getWorld().setNewBoard(currentBoardNum, newBoard);
 
-					gameDungeon.setCurrentBoardNum(gameDungeon.getPlayer().getCurrentPlayerBoard());
+					gameDungeon.setCurrentBoardNum(gameDungeon.getPlayer().getBoard());
 
 					gameDungeon.moveEnemies();
 				}
