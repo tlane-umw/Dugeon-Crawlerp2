@@ -61,7 +61,7 @@ public class Player extends Creature{
 	 *@param numDigs The updated number of times that a player has dug a hole using their shovel.
 	*/
 	public void setNumDigs(int numDigs){
-		numDigs = numDigs;
+		this.numDigs = numDigs;
 	}
 
 	/**

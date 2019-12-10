@@ -35,6 +35,7 @@ public class SaveRestore{
 			output.println(dungeon.getPlayer().getColumn());
 			output.println(dungeon.getPlayer().getBoard());
 			output.println(dungeon.getPlayer().getNumEnemiesDefeated());
+			output.println(dungeon.getPlayer().getNumDigs());
 
 			//saving the players current equipped weapon
 			output.println(dungeon.getPlayer().getInventory().getEquippedWeapon().getName());
@@ -121,6 +122,7 @@ public class SaveRestore{
 			dungeon.dungeonPlayer.setColumn(input.nextInt());
 			dungeon.dungeonPlayer.setBoard(input.nextInt());
 			dungeon.getPlayer().setNewNumEnemiesDefeated(input.nextInt());
+			dungeon.getPlayer().setNumDigs(input.nextInt());
 
 			//removing any possible items in player inventory
 			for (int y = 0; y < dungeon.getPlayer().getInventory().getSize(); y++){

@@ -14,9 +14,6 @@ import java.util.*;
 public class Main2{
 
 	public static Dungeon gameDungeon;
-	//public static boolean alreadyDroppedShovel = false;
-	public static int numTimesDug = 0;
-
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 
@@ -222,8 +219,8 @@ public class Main2{
 					}
 				}
 				else if (userLetter == 'I'){
-					int currentNumDigs = numTimesDug;
-					int numDigsLeft = 9 - numTimesDug;
+					int currentNumDigs = gameDungeon.dungeonPlayer.getNumDigs();
+					int numDigsLeft = 9 - gameDungeon.dungeonPlayer.getNumDigs();
 					boolean ableToDig = true;
 					boolean userFindTunnel = holeLocations.secrettunnel(gameDungeon.dungeonPlayer);
 					if (userFindTunnel == true){
@@ -323,9 +320,8 @@ public class Main2{
 								}
 							}
 
-							numTimesDug++;
-							setNumTimesDug(numTimesDug);
-							gameDungeon.dungeonPlayer.setNumDigs(numTimesDug);
+							currentNumDigs = currentNumDigs + 1;
+							setNumTimesDug(currentNumDigs);
 						}
 					}
 				}
@@ -378,6 +374,6 @@ public class Main2{
 	 * @param newNumTimesDug The new number of times the user has used their shovel
 	 */
 	public static void setNumTimesDug(int newNumTimesDug){
-		numTimesDug = newNumTimesDug;
+		gameDungeon.dungeonPlayer.setNumDigs(newNumTimesDug);
 	}
 }

@@ -43,7 +43,7 @@ public class SecretLocations{
 	 */
 	public boolean secrettunnel(Player holePlayer){
 		for (int i = 0; i < holeList.size(); i++)
-			if (holeList.get(i).getBoard() == holePlayer.getCurrentPlayerBoard()){
+			if (holeList.get(i).getBoard() == holePlayer.getBoard()){
 				if((holeList.get(i).getRow() == holePlayer.getRow()) && (holeList.get(i).getColumn() == holePlayer.getColumn())){
 					return true;
 				}
