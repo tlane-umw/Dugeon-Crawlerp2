@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**The inventory class handles the users items information, their max weight, and the equipped armor/weapon they have
- * The inventory class can also add items, drop items, equip new weapons or armors, use a potion, or list all the items the user has
+ * The inventory class can also add items, drop items, equip new weapons or armors, use a potion, or list all the items the user has.
  * @author Tyler Viacara
  */
 public class Inventory{

@@ -1,4 +1,4 @@
-/**The Item class handles the properties of the specific item, as well as their position on the current board it is on
+/**The Item class handles the properties of the specific item, as well as their position on the current board it is on.
  * @author Tyler Viacara, Chris Papp
  */
 public class Item{

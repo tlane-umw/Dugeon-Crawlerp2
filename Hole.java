@@ -1,4 +1,4 @@
-/**The Hole class is the locations of the secret locations in the Dungeon. If the player digs in a location of a hole, they exit the Dungeon and beat the game.
+/**The Hole class is the locations of the secret locations in the Dungeon, if the player digs in a location of a hole, they exit the Dungeon and beat the game.
  * @author Tyler Viacara
  */
 public class Hole{

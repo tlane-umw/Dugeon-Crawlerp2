@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Hashtable;
 /**
- *The player class takes care of all activity and action related to the player, except for the fight method, which is handled in the Fight class. This class has access to the players location(row, column, current board), the players inventory, the players name, the players health.
+ *The player class takes care of all activity and action related to the player, except for the fight method, which is handled in the Fight class, This class has access to the players location(row, column, current board), the players inventory, the players name, the players health.
  *@author Chris Papp, Tyler Viacara
  */
 public class Player extends Creature{

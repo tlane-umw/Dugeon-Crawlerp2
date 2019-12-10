@@ -1,4 +1,4 @@
-/**This class sets up the possible ENUM types the enemy can be
+/**This class sets up the possible ENUM types the enemy can be.
  * @author Toby Lane
  */
 public enum EnemyType{

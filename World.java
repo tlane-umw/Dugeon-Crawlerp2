@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-/**The world class handles all three of the gameboards in an arraylist of gameboard. Also handles setting and getting the correct gameboards
+/**The world class handles all three of the gameboards in an arraylist of gameboard, also handles setting and getting the correct gameboards.
  * @author Tyler Viacara
  */
 public class World{

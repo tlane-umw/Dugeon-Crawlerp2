@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-/**This class handles making the three 2D array rooms, and getting and setting the current or new game boards
+/**This class handles making the three 2D array rooms, and getting and setting the current or new game boards.
  * @author Tyler Viacara
  */
 public class GameBoard{

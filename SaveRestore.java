@@ -5,7 +5,7 @@ import java.util.Hashtable;
 import java.io.*;
 import java.util.InputMismatchException;
 
-/**The SaveRestore class takes in a Dungeon and saves all the neccesary elements. It can also restore a Dungeon from the save file
+/**The SaveRestore class takes in a Dungeon and saves all the neccesary elements, It can also restore a Dungeon from the save file.
  * @author Tyler Viacara
  */
 public class SaveRestore{

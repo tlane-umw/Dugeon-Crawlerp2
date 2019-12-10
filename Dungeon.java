@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.InputMismatchException;
 
 /**
- * The Dungeon class handles the world, which contains all 3 gameboards, the current amount of enemies you have defeated, and where all the enemies and items are on the board in respective ArrayLists, the Dungeon also automatically moves the enemies every other time the user moves
+ * The Dungeon class handles the world, which contains all 3 gameboards, the current amount of enemies you have defeated, and where all the enemies and items are on the board in respective ArrayLists, the Dungeon also automatically moves the enemies every other time the user moves.
  * @author Tyler Viacara, Chris Papp
  */
 public class Dungeon{

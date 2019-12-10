@@ -1,7 +1,7 @@
 import java.lang.*;
 import java.util.*;
 
-/**This class generates a new item at random and returns that item
+/**This class generates a new item at random and returns that item.
  * @author Tyler Viacara
  */
 public class ItemGenerator{

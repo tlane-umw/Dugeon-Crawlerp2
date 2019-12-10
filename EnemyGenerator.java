@@ -1,7 +1,7 @@
 import java.util.Random;
 import java.util.*;
 import java.util.stream.IntStream;
-/**This class creates a new enemy at random and returns the newly random enemy
+/**This class creates a new enemy at random and returns the newly random enemy.
  * @author Toby Lane
  */
 public class EnemyGenerator{

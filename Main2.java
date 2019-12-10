@@ -8,7 +8,7 @@ import java.util.Hashtable;
 import java.util.Enumeration;
 import java.util.InputMismatchException;
 import java.util.*;
-/**This class lets the user interact with the Dungeon. The user can play until they defeat all 6 enemies, quit, save their game, or restore a previously saved game
+/**This class lets the user interact with the Dungeon, the user can play until they defeat all 6 enemies, find a secret tunnel out, quit, save their game, or restore a previously saved game.
  * @author Tyler Viacara, Chris Papp
  */
 public class Main2{

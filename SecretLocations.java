@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-/**The secret locations class is only responsible for keeping an ArrayList of the Hole locations. And if the user digs in one of those locations, then they will exit the Dungeon.
+/**The secret locations class is only responsible for keeping an ArrayList of the Hole locations, and if the user digs in one of those locations, then they will exit the Dungeon.
  * @author Tyler Viacara
  */
 public class SecretLocations{
@@ -40,6 +40,7 @@ public class SecretLocations{
 
 	/**Method that returns true if the players location matches one of the hole locations, false otherwise
 	 * @param holePlayer The current player to get their current location and what board they are on
+	 * @return True if the player is on a secret tunnel location, false otherwise
 	 */
 	public boolean secrettunnel(Player holePlayer){
 		for (int i = 0; i < holeList.size(); i++)
